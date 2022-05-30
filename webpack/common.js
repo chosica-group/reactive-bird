@@ -1,0 +1,44 @@
+const path = require('path');
+const { distPath, rootPath, srcPath } = require('./path');
+const Dotenv = require('dotenv-webpack');
+
+module.exports = {
+  context: process.cwd(),
+  entry: {
+    main: path.resolve(srcPath, 'index.tsx'),
+  },
+  output: {
+    path: distPath,
+    filename: '[name].js',
+    publicPath: '/',
+    assetModuleFilename: 'static/images/[name][ext]',
+  },
+  resolve: {
+    // TODO добавить алиасы при необходимости
+    alias: {},
+    extensions: ['.tsx', '.ts', '.js'],
+    symlinks: false,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+      {
+        test: /\.svg$/,
+        use: '@svgr/webpack',
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        type: 'asset/resource',
+      },
+    ],
+  },
+  plugins: [
+    new Dotenv({
+      path: path.resolve(rootPath, '.env'),
+      allowEmptyValues: false,
+    }),
+  ],
+};
