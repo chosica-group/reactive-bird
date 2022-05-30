@@ -1,0 +1,19 @@
+{
+  "name": "flappy-bird",
+  "version": "1.0.0",
+  "description": "flappy-bird game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chosica-group/flappy-bird.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chosica-group/flappy-bird/issues"
+  },
+  "homepage": "https://github.com/chosica-group/flappy-bird#readme"
+}
