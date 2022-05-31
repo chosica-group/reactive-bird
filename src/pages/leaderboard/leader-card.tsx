@@ -9,7 +9,7 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
-  width: '400px',
+  width: '100%',
 }));
 
 type TProps = {
@@ -29,6 +29,7 @@ const ResultText = styled(Typography)(({ theme }) => ({
 }));
 
 const BadgeWrap = styled(Badge)(() => ({
+  width: '100%',
   '& span.BaseBadge-badge': {
     top: 5,
     left: 5,

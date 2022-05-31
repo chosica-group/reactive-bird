@@ -1,7 +1,7 @@
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import type { ComponentType } from 'react';
 
-const theme = createTheme({});
+import { theme } from './theme';
 
 export const withTheme = (Component: ComponentType) => () =>
   (
