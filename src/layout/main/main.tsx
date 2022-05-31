@@ -4,8 +4,10 @@ import { Container } from '@mui/material';
 import { AppBar } from './app-bar';
 
 export const MainLayout: FC = ({ children }) => (
-  <div>
+  <>
     <AppBar />
-    <Container fixed>{children}</Container>
-  </div>
+    <Container fixed sx={{ paddingTop: 1 }}>
+      {children}
+    </Container>
+  </>
 );
