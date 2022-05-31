@@ -1,12 +1,12 @@
 import { ErrorBoundary } from 'components/error-boundary';
 import { MainLayout } from 'layout/main';
 import { withProviders } from 'providers';
-import { LeaderboardPage } from 'pages/leaderboard';
+import { StartGamePage } from 'pages/start-game';
 
 export const App = withProviders(() => (
   <ErrorBoundary>
     <MainLayout>
-      <LeaderboardPage />
+      <StartGamePage />
     </MainLayout>
   </ErrorBoundary>
 ));
