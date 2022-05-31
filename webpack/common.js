@@ -14,8 +14,9 @@ module.exports = {
     assetModuleFilename: 'static/images/[name][ext]',
   },
   resolve: {
-    // TODO добавить алиасы при необходимости
-    alias: {},
+    alias: {
+      components:  path.join(srcPath, 'components'),
+    },
     extensions: ['.tsx', '.ts', '.js'],
     symlinks: false,
   },
