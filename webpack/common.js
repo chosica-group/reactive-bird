@@ -20,6 +20,7 @@ module.exports = {
       providers: path.join(srcPath, 'providers'),
       pages: path.join(srcPath, 'pages'),
       utils: path.join(srcPath, 'utils'),
+      store: path.join(srcPath, 'store'),
     },
     extensions: ['.tsx', '.ts', '.js'],
     symlinks: false,
