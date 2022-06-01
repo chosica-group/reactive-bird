@@ -1,3 +1,3 @@
 export default {
-    apiUrl: 'ya-praktikum.tech/api/v2'
+    apiUrl: 'https://ya-praktikum.tech/api/v2'
 };

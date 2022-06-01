@@ -7,6 +7,7 @@ import { MobileLogo } from 'layout/main/app-bar/mobile-logo';
 import { User } from 'layout/main/app-bar/user';
 import { MobileMenu } from './mobile-menu';
 import { DesktopMenu } from './desktop-menu';
+import { authService } from '../../../services/auth.service';
 
 const pages = ['Лидеры', 'Форум'];
 
@@ -17,6 +18,21 @@ export const AppBar = () => {
   };
 
   const handleCloseUserMenu = () => {
+    authService.signup({
+      first_name: 'ALex',
+      second_name: 'Smolik',
+      login: 'leshutic2',
+      email: 'test83233@test.com',
+      password: 'Alex1234',
+      phone: '11111111'
+    }).then(res => {
+      console.log(res);
+    });
+
+    // authService.signin({ login: 'leshutic', password: 'Aleks1234' }).then(res => {
+    //   console.log(res);
+    // })
+
     setAnchorElUser(null);
   };
 

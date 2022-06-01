@@ -16,39 +16,66 @@ export interface SignupParams {
     phone: string
 }
 
+interface SignUpRes {
+    id: number;
+}
+
+export interface UserModel {
+    avatar: string | null;
+    display_name: string | null;
+    email: string;
+    first_name: string;
+    id: number;
+    login: string;
+    phone: string | null;
+    second_name: string;
+}
+
+const defaultParams = {
+    credentials: 'include' as RequestCredentials,
+    headers: { 'Content-Type': 'application/json' },
+}
+
 class AuthService {
     signin = (params: SigninParams) => {
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(params)
+            body: JSON.stringify(params),
+            ...defaultParams
         };
 
-        return fetch(`${authUrl}/signin`, requestOptions)
-            .then(res => console.log(res));
+        return fetch(`${authUrl}/signin`, requestOptions);
     }
 
-    signup = (params: SignupParams) => {
+    signup = (params: SignupParams): Promise<SignUpRes> => {
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(params)
+            body: JSON.stringify(params),
+            ...defaultParams
         };
 
         return fetch(`${authUrl}/signup`, requestOptions)
-            .then(res => console.log(res));
+            .then(res => res.json());
     }
 
-    logout = () => {
-        const requestOptions = { method: 'POST' };
+    logout = (): Promise<boolean> => {
+        const requestOptions = {
+            method: 'POST',
+            ...defaultParams
+        };
 
         return fetch(`${authUrl}/logout`, requestOptions)
-            .then(res => console.log(res));
+            .then(() => true);
     }
 
-    getUserInfo = () => {
-        return fetch(`${authUrl}/user`)
-            .then(res => console.log(res));
+    getUserInfo = (): Promise<UserModel> => {
+        const requestOptions = {
+            method: 'GET',
+            ...defaultParams
+        };
+
+        return fetch(`${authUrl}/user`, requestOptions)
+            .then(res => res.json());
     }
 }
 
