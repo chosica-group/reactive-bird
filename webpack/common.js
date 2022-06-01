@@ -15,7 +15,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      components:  path.join(srcPath, 'components'),
+      components: path.join(srcPath, 'components'),
     },
     extensions: ['.tsx', '.ts', '.js'],
     symlinks: false,
