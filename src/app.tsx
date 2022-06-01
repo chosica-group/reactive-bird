@@ -4,6 +4,6 @@ import { withProviders } from 'providers';
 
 export const App = withProviders(() => (
   <ErrorBoundary>
-    <MainLayout></MainLayout>
+    <MainLayout />
   </ErrorBoundary>
 ));
