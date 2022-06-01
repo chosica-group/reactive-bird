@@ -1,4 +1,9 @@
-import { Badge, Paper, styled, Typography, Avatar as AvatarMui } from '@mui/material';
+import { Badge, Paper, styled, Typography, Avatar as AvatarMui, Box } from '@mui/material';
+
+export const Container = styled(Box)(() => ({
+  width: '400px',
+  margin: '0 auto',
+}));
 
 export const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.grey.A100,

@@ -25,7 +25,7 @@ export const LeaderCard = ({ avatar, name, rating, time, result }: TProps) => (
     badgeContent={rating}
   >
     <Item>
-      <Box display="flex" flexDirection="row">
+      <Box display="flex" flexDirection="row" alignItems="center">
         <Avatar alt={name} src={avatar} />
         <Box ml={1}>
           <Typography variant="h6" textAlign="left" color="black">

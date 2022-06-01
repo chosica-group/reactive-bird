@@ -1,25 +1,20 @@
 import { FlutterDash as AppIcon } from '@mui/icons-material';
-import { Typography } from '@mui/material';
+import { LinkLogo } from 'layout/main/app-bar/components/styled';
 
 export const DesktopLogo = () => (
   <>
     <AppIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-    <Typography
+    <LinkLogo
       variant="h6"
       noWrap
       component="a"
       href="/"
       sx={{
-        mr: 2,
         display: { xs: 'none', md: 'flex' },
-        fontFamily: 'monospace',
-        fontWeight: 700,
-        letterSpacing: '.3rem',
-        color: 'inherit',
-        textDecoration: 'none',
       }}
+      mr={2}
     >
       Flappy Bird
-    </Typography>
+    </LinkLogo>
   </>
 );
