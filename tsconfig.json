@@ -9,7 +9,7 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-
+    "importsNotUsedAsValues": "error",
     "strict": true,
 
     "importHelpers": true,
