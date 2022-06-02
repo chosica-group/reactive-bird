@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-// eslint-disable-next-line import/extensions
-import DICT_PATTERNS from '../utils/validationDict.ts';
+import type { PatternsDict } from 'utils/validation/validationDict';
+import { DICT_PATTERNS } from 'utils/validation/validationDict';
 import type { SignupData, CardInput } from './type';
 import './Card.css';
 
@@ -16,42 +16,44 @@ export const CardComponent = (props: CardInput[]) => {
   const [formData, setFormData] = useState<SignupData>({});
   const [disabledBtn, setDisabledBtn] = useState(false);
   const [apiError, setApiError] = useState('');
-
   const handleClick = (e) => {
     console.log(e);
     // router redirect
   };
   // _validateInput(key, value)
-
-  const handleBlur = (e) => {
-    const input: any = e.target;
-    const currentInput = DICT_PATTERNS[input.name];
-    const isValidInput = currentInput.regexp.test(input.value);
-
-    if (!isValidInput) {
-      setErrorText((prevState) => ({ ...prevState, [input.name]: currentInput.errorText }));
-      setDisabledBtn(true);
+  const handleBlur = (e: MouseEvent<HTMLInputElement>) => {
+    const input = e.target as HTMLInputElement;
+    if (input) {
+      const currentInput: PatternsDict | undefined = DICT_PATTERNS[input.name];
+      let isValidInput = false;
+      if (currentInput) {
+        isValidInput = currentInput.regexp.test(input.value);
+        if (!isValidInput) {
+          setErrorText((prevState) => ({ ...prevState, [input.name]: currentInput.errorText }));
+          setDisabledBtn(true);
+        }
+      }
     }
   };
 
-  const handleFocus = (e) => {
-    const input: any = e.target;
+  const handleFocus = (e: MouseEvent<HTMLInputElement>) => {
+    const input = e.target as HTMLInputElement;
     setErrorText((prevState) => ({ ...prevState, [input.name]: '' }));
     setDisabledBtn(false);
   };
 
-  const handleChange = (e) => {
-    const input: any = e.target;
+  const handleChange = (e: MouseEvent<HTMLInputElement>) => {
+    const input = e.target as HTMLInputElement;
     setFormData((prevState) => ({ ...prevState, [input.name]: input.value }));
   };
 
-  const validateInput = (input) => {
+  const checkNeedError = (input) => {
     if (errorText[input.name] && errorText[input.name].length > 1) return true;
     if (errorText[input.name]) return true;
     return false;
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e: PointerEvent) => {
     e.preventDefault();
     if (Object.keys(formData).length < props.inputs.length) {
       props.inputs.forEach((inputData) => {
@@ -94,7 +96,7 @@ export const CardComponent = (props: CardInput[]) => {
               onChange={handleChange}
               onFocus={handleFocus}
               fullWidth
-              error={validateInput(input)}
+              error={checkNeedError(input)}
               name={input.name}
               type={input.type}
               helperText={errorText[input.name] || ' '}
