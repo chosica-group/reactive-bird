@@ -16,7 +16,7 @@ export const CardComponent = (props: CardInput[]) => {
   const [formData, setFormData] = useState<SignupData>({});
   const [disabledBtn, setDisabledBtn] = useState(false);
   const [apiError, setApiError] = useState('');
-  const handleClick = (e) => {
+  const handleClick = (e: MouseEvent<HTMLInputElement>) => {
     console.log(e);
     // router redirect
   };
