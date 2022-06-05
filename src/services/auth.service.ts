@@ -1,6 +1,6 @@
 import config from './config';
 
-const authUrl = `${config.apiUrl}/auth`;
+const authUrl = `${config.API_URL}/auth`;
 
 export interface SigninParams {
   login: string;
@@ -37,44 +37,42 @@ const defaultParams = {
   headers: { 'Content-Type': 'application/json' },
 };
 
-class AuthService {
-  signin = (params: SigninParams) => {
-    const requestOptions = {
-      method: 'POST',
-      body: JSON.stringify(params),
-      ...defaultParams,
-    };
-
-    return fetch(`${authUrl}/signin`, requestOptions);
+const signin = (params: SigninParams) => {
+  const requestOptions = {
+    method: 'POST',
+    body: JSON.stringify(params),
+    ...defaultParams,
   };
 
-  signup = (params: SignupParams): Promise<SignUpRes> => {
-    const requestOptions = {
-      method: 'POST',
-      body: JSON.stringify(params),
-      ...defaultParams,
-    };
+  return fetch(`${authUrl}/signin`, requestOptions);
+};
 
-    return fetch(`${authUrl}/signup`, requestOptions).then((res) => res.json());
+const signup = (params: SignupParams): Promise<SignUpRes> => {
+  const requestOptions = {
+    method: 'POST',
+    body: JSON.stringify(params),
+    ...defaultParams,
   };
 
-  logout = (): Promise<boolean> => {
-    const requestOptions = {
-      method: 'POST',
-      ...defaultParams,
-    };
+  return fetch(`${authUrl}/signup`, requestOptions).then((res) => res.json()) as Promise<SignUpRes>;
+};
 
-    return fetch(`${authUrl}/logout`, requestOptions).then(() => true);
+const logout = (): Promise<boolean> => {
+  const requestOptions = {
+    method: 'POST',
+    ...defaultParams,
   };
 
-  getUserInfo = (): Promise<UserModel> => {
-    const requestOptions = {
-      method: 'GET',
-      ...defaultParams,
-    };
+  return fetch(`${authUrl}/logout`, requestOptions).then(() => true);
+};
 
-    return fetch(`${authUrl}/user`, requestOptions).then((res) => res.json());
+const getUserInfo = (): Promise<UserModel> => {
+  const requestOptions = {
+    method: 'GET',
+    ...defaultParams,
   };
-}
 
-export const authService = new AuthService();
+  return fetch(`${authUrl}/user`, requestOptions).then((res) => res.json()) as Promise<UserModel>;
+};
+
+export { signin, signup, logout, getUserInfo };
