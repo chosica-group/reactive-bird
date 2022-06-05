@@ -1,28 +1,32 @@
-import { useState, MouseEvent } from 'react';
+import { useState, FocusEvent, SyntheticEvent } from 'react';
+// import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import type { PatternsDict } from 'utils/validation/validationDict';
 import { DICT_PATTERNS } from 'utils/validation/validationDict';
-import type { SignupData, CardInput } from './type';
+import { authService, SignupParams } from '../../../../services/auth.service';
+import type { SignupData, CardInput, Props } from './type';
 import './Card.css';
 
-export const CardComponent = (props: CardInput[]) => {
+export const CardComponent = (props: Props) => {
+  const { inputs } = props;
+  // const navigate = useNavigate();
   const btnNameSubmit = 'Зарегистрироваться';
   const btnNameGoLogin = 'У меня есть аккаунт';
   const btnNameTitle = 'Регистрация';
-  const [errorText, setErrorText] = useState({});
+  const [errorText, setErrorText] = useState<SignupData>({});
   const [formData, setFormData] = useState<SignupData>({});
   const [disabledBtn, setDisabledBtn] = useState(false);
-  const [apiError, setApiError] = useState('');
-  const handleClick = (e: MouseEvent<HTMLInputElement>) => {
-    console.log(e);
-    // router redirect
+  const [apiError, setApiError] = useState<string>('');
+
+  const handlerGoToSighInPage = () => {
+    // navigate('../login', { replace: true });
   };
-  // _validateInput(key, value)
-  const handleBlur = (e: MouseEvent<HTMLInputElement>) => {
-    const input = e.target as HTMLInputElement;
+
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+    const input = e.target;
     if (input) {
       const currentInput: PatternsDict | undefined = DICT_PATTERNS[input.name];
       let isValidInput = false;
@@ -36,27 +40,41 @@ export const CardComponent = (props: CardInput[]) => {
     }
   };
 
-  const handleFocus = (e: MouseEvent<HTMLInputElement>) => {
-    const input = e.target as HTMLInputElement;
+  const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
+    const input = e.target;
     setErrorText((prevState) => ({ ...prevState, [input.name]: '' }));
     setDisabledBtn(false);
   };
 
-  const handleChange = (e: MouseEvent<HTMLInputElement>) => {
-    const input = e.target as HTMLInputElement;
+  const handleChange = (e: FocusEvent<HTMLInputElement>) => {
+    const input = e.target;
     setFormData((prevState) => ({ ...prevState, [input.name]: input.value }));
   };
 
-  const checkNeedError = (input) => {
-    if (errorText[input.name] && errorText[input.name].length > 1) return true;
+  const checkNeedError = (input: CardInput) => {
     if (errorText[input.name]) return true;
     return false;
   };
 
-  const handleFormSubmit = (e: PointerEvent) => {
+  const sendData = async (obj: SignupParams) => {
+    try {
+      const answer = await authService.signup(obj);
+      console.log(answer, 'answer');
+      if (answer.reason) {
+        setApiError(answer.reason);
+      }
+      // navigate('../mainpage', { replace: true });
+    } catch (err) {
+      setApiError('что-то пошло не так');
+      console.log(err);
+      // throw new Error(err); // тут тоже какой-то тип требует
+    }
+  };
+
+  const handleFormSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    if (Object.keys(formData).length < props.inputs.length) {
-      props.inputs.forEach((inputData) => {
+    if (Object.keys(formData).length < inputs.length) {
+      inputs.forEach((inputData) => {
         if (!formData[inputData.name]) {
           setErrorText((prevState) => ({ ...prevState, [inputData.name]: 'Обязательное поле' }));
           setDisabledBtn(true);
@@ -71,15 +89,9 @@ export const CardComponent = (props: CardInput[]) => {
       setDisabledBtn(true);
     } else {
       delete formData.passwordRepeat;
-      try {
-        // const userData = await authController.signUp(formData)
-        // router.go('/messenger')
-      } catch (err) {
-        if (err.reason) {
-          setApiError(err.reason);
-        }
-        console.log(err);
-      }
+      const obj = formData as SignupParams;
+      // eslint-disable-next-line no-void
+      void sendData(obj);
     }
   };
 
@@ -88,7 +100,7 @@ export const CardComponent = (props: CardInput[]) => {
       <CardContent>
         <form>
           <h1>{btnNameTitle}</h1>
-          {props.inputs.map((input, i) => (
+          {inputs.map((input: CardInput, i: number) => (
             <TextField
               key={i}
               variant="standard"
@@ -108,7 +120,7 @@ export const CardComponent = (props: CardInput[]) => {
           <Button variant="outlined" fullWidth onClick={handleFormSubmit} disabled={disabledBtn}>
             {btnNameSubmit}
           </Button>
-          <Button size="small" variant="text" fullWidth onClick={handleClick}>
+          <Button size="small" variant="text" fullWidth onClick={handlerGoToSighInPage}>
             {btnNameGoLogin}
           </Button>
         </form>

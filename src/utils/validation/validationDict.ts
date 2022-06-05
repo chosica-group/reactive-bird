@@ -4,7 +4,7 @@ export interface PatternsDict {
 }
 
 interface DictionaryWithRegex {
-  [key: string]: PatternsDict
+  [key: string]: PatternsDict;
 }
 
 export const DICT_PATTERNS: DictionaryWithRegex = {
