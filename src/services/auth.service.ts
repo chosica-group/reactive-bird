@@ -71,7 +71,7 @@ const getUserInfo = (): Promise<UserModel> => {
     method: 'GET',
     ...defaultParams,
   };
-
+  console.log('hhhh');
   return fetch(`${authUrl}/user`, requestOptions).then((res) => res.json()) as Promise<UserModel>;
 };
 

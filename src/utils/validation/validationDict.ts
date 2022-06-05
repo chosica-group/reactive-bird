@@ -21,16 +21,16 @@ export const DICT_PATTERNS: DictionaryWithRegex = {
     errorText: 'латиница или кириллица, первая буква заглавная',
   },
   second_name: {
-    regexp: /^[A-Z][A-Za-zа-я]{3,19}$/,
+    regexp: /^[A-ZА-Я][a-zа-я]{3,19}$/,
     errorText: 'латиница или кириллица, первая буква заглавная',
   },
   display_name: {
-    regexp: /^[A-Z][A-Za-zа-я]{3,19}$/,
+    regexp: /^[A-ZА-Я][a-zа-я]{3,19}$/,
     errorText: 'латиница или кириллица, первая буква заглавная',
   },
   phone: {
     regexp: /^[+]?[\d]{10,15}/,
-    errorText: 'введите телефон',
+    errorText: 'введите телефон - 10-15 символов',
   },
   avatar: {
     regexp: /^(?!\s*$).+/,
@@ -47,13 +47,5 @@ export const DICT_PATTERNS: DictionaryWithRegex = {
   passwordRepeat: {
     regexp: /^(?=.*[A-Za-zА-Яа-я])(?=.*\d)[А-Яа-яA-Za-z\d]{8,40}$/,
     errorText: 'от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра',
-  },
-  message: {
-    regexp: /^(?!\s*$).+/,
-    errorText: 'введите сообщение',
-  },
-  search_message: {
-    regexp: /^[a-zа-я0-9-_]{3,20}$/i,
-    errorText: '',
   },
 };

@@ -6,8 +6,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import type { PatternsDict } from 'utils/validation/validationDict';
 import { DICT_PATTERNS } from 'utils/validation/validationDict';
-import { authService, SignupParams } from '../../../../services/auth.service';
-import type { SignupData, CardInput, Props } from './type';
+import { signup, SignupParams } from '../../../../services/auth.service';
+import type { CardInput, Props } from './type';
 import './Card.css';
 
 export const CardComponent = (props: Props) => {
@@ -16,8 +16,8 @@ export const CardComponent = (props: Props) => {
   const btnNameSubmit = 'Зарегистрироваться';
   const btnNameGoLogin = 'У меня есть аккаунт';
   const btnNameTitle = 'Регистрация';
-  const [errorText, setErrorText] = useState<SignupData>({});
-  const [formData, setFormData] = useState<SignupData>({});
+  const [errorText, setErrorText] = useState<{ [key: string]: string }>({}); // никак не могу понять как использовать SignupData - keyof CardInput отдает только строку, как и typeof
+  const [formData, setFormData] = useState<{ [key: string]: string }>({}); // никак не могу понять как использовать SignupData
   const [disabledBtn, setDisabledBtn] = useState(false);
   const [apiError, setApiError] = useState<string>('');
 
@@ -44,6 +44,7 @@ export const CardComponent = (props: Props) => {
     const input = e.target;
     setErrorText((prevState) => ({ ...prevState, [input.name]: '' }));
     setDisabledBtn(false);
+    if (apiError !== '') setApiError('');
   };
 
   const handleChange = (e: FocusEvent<HTMLInputElement>) => {
@@ -58,8 +59,7 @@ export const CardComponent = (props: Props) => {
 
   const sendData = async (obj: SignupParams) => {
     try {
-      const answer = await authService.signup(obj);
-      console.log(answer, 'answer');
+      const answer = await signup(obj);
       if (answer.reason) {
         setApiError(answer.reason);
       }
@@ -88,8 +88,9 @@ export const CardComponent = (props: Props) => {
       setErrorText((prevState) => ({ ...prevState, passwordRepeat: 'Пароль не совпадает' }));
       setDisabledBtn(true);
     } else {
-      delete formData.passwordRepeat;
-      const obj = formData as SignupParams;
+      const dataToSend = { ...formData };
+      delete dataToSend.passwordRepeat;
+      const obj = dataToSend as unknown as SignupParams;
       // eslint-disable-next-line no-void
       void sendData(obj);
     }
@@ -111,6 +112,7 @@ export const CardComponent = (props: Props) => {
               error={checkNeedError(input)}
               name={input.name}
               type={input.type}
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               helperText={errorText[input.name] || ' '}
               label={input.label}
               required
