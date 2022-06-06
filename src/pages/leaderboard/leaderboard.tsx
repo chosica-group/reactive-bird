@@ -1,6 +1,5 @@
 import { Stack, Typography } from '@mui/material';
-import { LeaderCard } from './components/leader-card';
-import { Container } from './components/styled';
+import { Container, LeaderCard } from './components';
 
 const mockData = [
   {
