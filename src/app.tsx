@@ -9,11 +9,11 @@ import { SignUpPage } from 'pages/sugnup';
 import { getUserInfo } from './services/auth.service';
 
 const CheckUserInSystem = () => {
-  const [userLogged, setUserLogged] = useState(true);
+  const [userLogged, setUserLogged] = useState<boolean>();
   const getUser = async () => {
     try {
       await getUserInfo();
-      setUserLogged(true);
+      setUserLogged(false);
     } catch (e) {
       setUserLogged(false);
       console.log(e, 'e');
@@ -30,14 +30,14 @@ const CheckUserInSystem = () => {
     </ErrorBoundary>
   ) : (
     <ErrorBoundary>
-      <BrowserRouter>
-        <Routes>
-          <WelcomeLayout>
+      <WelcomeLayout>
+        <BrowserRouter>
+          <Routes>
             <Route path="/" element={<WelcomePage />} />
             <Route path="/signup" element={<SignUpPage />} />
-          </WelcomeLayout>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </WelcomeLayout>
     </ErrorBoundary>
   );
 };

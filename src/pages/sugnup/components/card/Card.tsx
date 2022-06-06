@@ -1,5 +1,5 @@
 import { useState, FocusEvent, SyntheticEvent } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import TextField from '@mui/material/TextField';
@@ -12,7 +12,7 @@ import './Card.css';
 
 export const CardComponent = (props: Props) => {
   const { inputs } = props;
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const btnNameSubmit = 'Зарегистрироваться';
   const btnNameGoLogin = 'У меня есть аккаунт';
   const btnNameTitle = 'Регистрация';
@@ -22,7 +22,7 @@ export const CardComponent = (props: Props) => {
   const [apiError, setApiError] = useState<string>('');
 
   const handlerGoToSighInPage = () => {
-    // navigate('../login', { replace: true });
+    navigate('../', { replace: true });
   };
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
