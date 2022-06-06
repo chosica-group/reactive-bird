@@ -66,7 +66,6 @@ export const CardComponent = (props: Props) => {
       // navigate('../mainpage', { replace: true });
     } catch (err) {
       setApiError('что-то пошло не так');
-      console.log(err);
       // throw new Error(err); // тут тоже какой-то тип требует
     }
   };
