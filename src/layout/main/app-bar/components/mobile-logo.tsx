@@ -10,7 +10,7 @@ export const MobileLogo = () => (
       component="a"
       href="/"
       sx={{
-        display: { xs: 'none', md: 'flex' },
+        display: { xs: 'flex', md: 'none' },
       }}
       mr={2}
     >
