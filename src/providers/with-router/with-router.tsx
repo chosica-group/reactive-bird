@@ -1,21 +1,42 @@
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import type { ComponentType } from 'react';
-import { SignUpPage } from '../../pages/sugnup/index';
-import { WelcomePage } from '../../pages/welcome-page';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import type { ComponentType } from 'react';
+// import { withAuth } from 'providers/with-auth';
+import { LeaderboardPage } from 'pages/leaderboard/index';
+import { StartGamePage } from 'pages/start-game/index';
+import { WelcomePage } from 'pages/welcome-page/index';
+import { SignUpPage } from 'pages/sugnup/index';
+import { ErrorBoundary } from 'components/error-boundary';
+import { MainLayout } from 'layout/main';
+import { PublicLayout } from 'layout/public-layout/index';
 
-const NoUser = () => (
-  <Route>
-    <Route path="/" element={<SignUpPage />} />
-  </Route>
-);
+// const userInSystem = withAuth();
+const userInSystem = true;
 
-const User = () => (
-  <Router>
-    <Route path="/" element={<WelcomePage />} />
-  </Router>
-);
-
-export const withRouter =
-  (Component: ComponentType, isUser = true) =>
-  () =>
-    !isUser ? NoUser() : User();
+export const withRouter = () => {
+  if (userInSystem) {
+    return (
+      <ErrorBoundary>
+        <MainLayout>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/leaderboard" element={<LeaderboardPage />} />
+              <Route path="/gamestart" element={<StartGamePage />} />
+            </Routes>
+          </BrowserRouter>
+        </MainLayout>
+      </ErrorBoundary>
+    );
+  }
+  return (
+    <ErrorBoundary>
+      <PublicLayout>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<WelcomePage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+          </Routes>
+        </BrowserRouter>
+      </PublicLayout>
+    </ErrorBoundary>
+  );
+};
