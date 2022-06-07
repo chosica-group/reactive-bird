@@ -3,19 +3,19 @@ import { ErrorBoundary } from 'components/error-boundary';
 import { MainLayout } from 'layout/main';
 import { PublicLayout } from 'layout/public-layout/index';
 import { useState } from 'react';
-import { WelcomePage } from 'pages/welcome-page';
+import { WelcomePage } from 'pages/welcome-page/index';
 import { LeaderboardPage } from 'pages/leaderboard/index';
 import { withProviders } from 'providers';
-import { SignUpPage } from 'pages/sugnup';
+import { SignUpPage } from 'pages/sugnup/index';
 import { StartGamePage } from 'pages/start-game/index';
-import { getUserInfo } from 'services/auth.service';
+import { getUserInfo } from './services/auth.service';
 
 const CheckUserInSystem = () => {
   const [userLogged, setUserLogged] = useState<boolean>();
   const getUser = async () => {
     try {
       await getUserInfo();
-      setUserLogged(true);
+      setUserLogged(false);
     } catch (e) {
       setUserLogged(false);
     }
@@ -30,7 +30,7 @@ const CheckUserInSystem = () => {
       <MainLayout>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<MainLayout />} />
+            {/* <Route path="/" element={<MainLayout />} /> */}
             <Route path="/leaderboard" element={<LeaderboardPage />} />
             {/* не поняла как добавить обработчик клика на выход из профиля... */}
             <Route path="/gamestart" element={<StartGamePage />} />
