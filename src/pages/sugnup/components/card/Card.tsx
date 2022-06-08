@@ -22,7 +22,7 @@ export const CardComponent = (props: Props) => {
   const [apiError, setApiError] = useState<string>('');
 
   const handlerGoToSighInPage = () => {
-    navigate('../', { replace: true });
+    navigate('/', { replace: true });
   };
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
@@ -63,7 +63,7 @@ export const CardComponent = (props: Props) => {
       if (answer.reason) {
         setApiError(answer.reason);
       }
-      // navigate('../mainpage', { replace: true });
+      // navigate('/mainpage', { replace: true });
     } catch (err) {
       setApiError('что-то пошло не так');
       // throw new Error(err); // тут тоже какой-то тип требует

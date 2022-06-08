@@ -8,7 +8,7 @@ import { ColorButton } from './styled';
 export const InfoAboutProject = () => {
   const navigate = useNavigate();
   const goToSignupPage = () => {
-    navigate('../signup', { replace: true });
+    navigate('/signup', { replace: true });
   };
   return (
     <Card style={{ backgroundColor: '#1976d2', maxWidth: '700px' }} className="infocard">
