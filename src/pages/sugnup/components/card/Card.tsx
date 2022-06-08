@@ -7,7 +7,7 @@ import type { PatternsDict } from 'utils/validation/validationDict';
 import { DICT_PATTERNS } from 'utils/validation/validationDict';
 import { signup, SignupParams } from '../../../../services/auth.service';
 import type { CardInput, Props } from './type';
-import './Card.css';
+import './card.css';
 
 export const CardComponent = (props: Props) => {
   const { inputs } = props;
