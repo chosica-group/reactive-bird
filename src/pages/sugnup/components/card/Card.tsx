@@ -83,8 +83,8 @@ export const CardComponent = (props: Props) => {
       const dataToSend = { ...formData };
       delete dataToSend.passwordRepeat;
       const obj = dataToSend as unknown as SignupParams;
-      // eslint-disable-next-line no-void
-      void sendData(obj);
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      sendData(obj); // тут по другому не вышло
     }
   };
 
