@@ -1,8 +1,7 @@
-import './InfoAboutProject.css';
+import './info-about-project.css';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-// import { CardActionArea } from '@mui/material';
 import { ColorButton } from './styled';
 
 export const InfoAboutProject = () => (
