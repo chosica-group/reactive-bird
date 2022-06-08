@@ -1,5 +1,4 @@
 import { useState, FocusEvent, SyntheticEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import TextField from '@mui/material/TextField';
@@ -12,7 +11,6 @@ import './Card.css';
 
 export const CardComponent = (props: Props) => {
   const { inputs } = props;
-  const navigate = useNavigate();
   const btnNameSubmit = 'Зарегистрироваться';
   const btnNameGoLogin = 'У меня есть аккаунт';
   const btnNameTitle = 'Регистрация';
@@ -20,10 +18,6 @@ export const CardComponent = (props: Props) => {
   const [formData, setFormData] = useState<{ [key: string]: string }>({}); // никак не могу понять как использовать SignupData
   const [disabledBtn, setDisabledBtn] = useState(false);
   const [apiError, setApiError] = useState<string>('');
-
-  const handlerGoToSighInPage = () => {
-    navigate('../', { replace: true });
-  };
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     const input = e.target;
@@ -63,7 +57,6 @@ export const CardComponent = (props: Props) => {
       if (answer.reason) {
         setApiError(answer.reason);
       }
-      // navigate('../mainpage', { replace: true });
     } catch (err) {
       setApiError('что-то пошло не так');
       // throw new Error(err); // тут тоже какой-то тип требует
@@ -121,7 +114,7 @@ export const CardComponent = (props: Props) => {
           <Button variant="outlined" fullWidth onClick={handleFormSubmit} disabled={disabledBtn}>
             {btnNameSubmit}
           </Button>
-          <Button size="small" variant="text" fullWidth onClick={handlerGoToSighInPage}>
+          <Button size="small" variant="text" fullWidth>
             {btnNameGoLogin}
           </Button>
         </form>
