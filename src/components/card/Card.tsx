@@ -5,15 +5,14 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import type { PatternsDict } from 'utils/validation/validationDict';
 import { DICT_PATTERNS } from 'utils/validation/validationDict';
-import { signup, SignupParams } from '../../../../services/auth.service';
+import { signin, signup, SignupParams } from '../../services/auth.service';
 import type { CardInput, Props } from './type';
 import './card.css';
 
 export const CardComponent = (props: Props) => {
   const { inputs } = props;
-  const btnNameSubmit = 'Зарегистрироваться';
-  const btnNameGoLogin = 'У меня есть аккаунт';
-  const btnNameTitle = 'Регистрация';
+  const { cardTitlesConfig } = props;
+  const { isForSignUp } = props;
   const [errorText, setErrorText] = useState<{ [key: string]: string }>({}); // никак не могу понять как использовать SignupData - keyof CardInput отдает только строку, как и typeof
   const [formData, setFormData] = useState<{ [key: string]: string }>({}); // никак не могу понять как использовать SignupData
   const [disabledBtn, setDisabledBtn] = useState(false);
@@ -47,13 +46,12 @@ export const CardComponent = (props: Props) => {
   };
 
   const checkNeedError = (input: CardInput) => {
-    if (errorText[input.name]) return true;
-    return false;
+    return !!errorText[input.name];
   };
 
   const sendData = async (obj: SignupParams) => {
     try {
-      const answer = await signup(obj);
+      const answer = await (isForSignUp ? signup(obj) : signin(obj));
       if (answer.reason) {
         setApiError(answer.reason);
       }
@@ -92,7 +90,7 @@ export const CardComponent = (props: Props) => {
     <Card className="card__card-box">
       <CardContent>
         <form>
-          <h1>{btnNameTitle}</h1>
+          <h1>{cardTitlesConfig.title}</h1>
           {inputs.map((input: CardInput, i: number) => (
             <TextField
               key={i}
@@ -112,10 +110,10 @@ export const CardComponent = (props: Props) => {
           ))}
           <span className="card__error-message">{apiError}</span>
           <Button variant="outlined" fullWidth onClick={handleFormSubmit} disabled={disabledBtn}>
-            {btnNameSubmit}
+            {cardTitlesConfig.submitName}
           </Button>
           <Button size="small" variant="text" fullWidth>
-            {btnNameGoLogin}
+            {cardTitlesConfig.additionalBtnName}
           </Button>
         </form>
       </CardContent>

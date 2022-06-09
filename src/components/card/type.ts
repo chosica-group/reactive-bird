@@ -10,6 +10,12 @@ export type StringObject = {
 
 export type Props = {
   inputs: CardInput[];
+  isForSignUp: boolean;
+  cardTitlesConfig: {
+    title: string;
+    submitName: string;
+    additionalBtnName: string;
+  }
 };
 
 export type SignupData = {

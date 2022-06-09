@@ -1,4 +1,4 @@
-import { CardComponent } from './components/card/index';
+import { CardComponent } from '../../components/card/index';
 import './signup-page.css';
 
 const inputs = [
@@ -11,8 +11,14 @@ const inputs = [
   { name: 'passwordRepeat', label: 'Пароль (еще раз)', type: 'password' },
 ];
 
+const cardTitlesConfig = {
+  title: 'Регистрация',
+  submitName: 'Зарегистрироваться',
+  additionalBtnName: 'У меня есть аккаунт'
+}
+
 export const SignUpPage = () => (
   <div className="signup-page">
-    <CardComponent inputs={inputs} />
+    <CardComponent inputs={inputs} cardTitlesConfig={cardTitlesConfig} isForSignUp={true} />
   </div>
 );
