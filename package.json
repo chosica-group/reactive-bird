@@ -38,7 +38,6 @@
   },
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
-    "@rtk-query/codegen-openapi": "^1.0.0-alpha.1",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.17",
