@@ -1,4 +1,4 @@
-import { Badge, Paper, styled, Typography, Avatar as AvatarMui, Box } from '@mui/material';
+import { Avatar as AvatarMui, Badge, Box, Paper, Typography, styled } from '@mui/material';
 
 export const Container = styled(Box)(() => ({
   width: '400px',

@@ -1,6 +1,6 @@
+import { MouseEvent, useState } from 'react';
 import { Box, IconButton, Menu, MenuItem, Typography } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
-import { MouseEvent, useState } from 'react';
 
 type TProps = {
   pages: string[];
