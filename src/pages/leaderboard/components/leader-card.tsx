@@ -1,9 +1,8 @@
 import { Box, Typography } from '@mui/material';
-import { AccessTime as TimeIcon, CurrencyBitcoin as CoinIcon } from '@mui/icons-material';
-
+import { CurrencyBitcoin as CoinIcon, AccessTime as TimeIcon } from '@mui/icons-material';
 import { getSecondTime } from 'utils/get-second-time';
 import { numWord } from 'utils/num-word';
-import { Item, ResultText, BadgeWrap, Avatar } from './styled';
+import { Avatar, BadgeWrap, Item, ResultText } from './styled';
 
 type TProps = {
   rating: number;
