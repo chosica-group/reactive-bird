@@ -11,11 +11,13 @@
   "importOrderSeparation": false,
   "importOrderSortSpecifiers": true,
   "importOrder": [
-    "react",
-    "@reduxjs/toolkit",
-    "@mui/material",
-    "@mui/icons-material",
+    "^react$",
+    "^@reduxjs/toolkit$",
+    "^@mui/material",
+    "^@mui/icons-material",
     "<THIRD_PARTY_MODULES>",
-    "^[./]"
+    "^[./]()",
+    "^[../]",
+    "^[../../]"
   ]
 }
