@@ -1,4 +1,4 @@
-import { styled, Paper, Box } from '@mui/material';
+import { Box, Paper, styled } from '@mui/material';
 
 export const PaperGame = styled(Paper)(() => ({
   width: '100%',

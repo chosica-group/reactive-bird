@@ -1,13 +1,13 @@
-import { useState, FocusEvent, SyntheticEvent } from 'react';
+import { FocusEvent, SyntheticEvent, useState } from 'react';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import type { PatternsDict } from 'utils/validation/validationDict';
 import { DICT_PATTERNS } from 'utils/validation/validationDict';
-import { signup, SignupParams } from '../../../../services/auth.service';
-import type { CardInput, Props } from './type';
+import { SignupParams, signup } from '../../../../services/auth.service';
 import './card.css';
+import type { CardInput, Props } from './type';
 
 export const CardComponent = (props: Props) => {
   const { inputs } = props;
