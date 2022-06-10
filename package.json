@@ -29,7 +29,8 @@
     "@reduxjs/toolkit": "^1.8.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-redux": "^8.0.2"
+    "react-redux": "^8.0.2",
+    "react-router-dom": "^6.3.0"
   },
   "engines": {
     "node": "16.15.0"
@@ -43,6 +44,7 @@
     "circular-dependency-plugin": "^5.2.2",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
+    "@types/react-router-dom": "^5.3.3",
     "dotenv": "^16.0.1",
     "dotenv-webpack": "^7.1.0",
     "eslint": "^8.16.0",

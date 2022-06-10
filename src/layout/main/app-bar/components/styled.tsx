@@ -10,4 +10,4 @@ export const LinkLogo = styled(Typography)(() => ({
   letterSpacing: '.3rem',
   color: 'inherit',
   textDecoration: 'none',
-}));
+})) as typeof Typography;
