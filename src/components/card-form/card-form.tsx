@@ -1,18 +1,17 @@
-import { useState, FocusEvent, SyntheticEvent } from 'react';
+import { FocusEvent, SyntheticEvent, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import type { PatternsDict } from 'utils/validation/validationDict';
 import { DICT_PATTERNS } from 'utils/validation/validationDict';
-import { signin, signup, SignupParams } from '../../services/auth.service';
-import type { CardInput, Props } from './type';
-import './card.css';
+import type { CardFormProps, CardInput } from './card-form.type';
+import './card-form.css';
 
-export const CardComponent = (props: Props) => {
+export const CardFormComponent = (props: CardFormProps) => {
   const { inputs } = props;
   const { cardTitlesConfig } = props;
-  const { isForSignUp } = props;
+  const { submitBtnEvent } = props;
   const [errorText, setErrorText] = useState<{ [key: string]: string }>({}); // никак не могу понять как использовать SignupData - keyof CardInput отдает только строку, как и typeof
   const [formData, setFormData] = useState<{ [key: string]: string }>({}); // никак не могу понять как использовать SignupData
   const [disabledBtn, setDisabledBtn] = useState(false);
@@ -49,9 +48,9 @@ export const CardComponent = (props: Props) => {
     return !!errorText[input.name];
   };
 
-  const sendData = async (obj: SignupParams) => {
+  const sendData = async (obj: any) => {
     try {
-      const answer = await (isForSignUp ? signup(obj) : signin(obj));
+      const answer = await submitBtnEvent(obj);
       if (answer.reason) {
         setApiError(answer.reason);
       }
@@ -80,9 +79,8 @@ export const CardComponent = (props: Props) => {
     } else {
       const dataToSend = { ...formData };
       delete dataToSend.passwordRepeat;
-      const obj = dataToSend as unknown as SignupParams;
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      sendData(obj); // тут по другому не вышло
+      sendData(dataToSend); // тут по другому не вышло
     }
   };
 

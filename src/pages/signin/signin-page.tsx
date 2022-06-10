@@ -1,5 +1,6 @@
 import './signin-page.css';
-import { CardComponent } from "components/card";
+import { CardFormComponent } from 'components/card-form';
+import { signin } from 'services/auth.service';
 
 const inputs = [
   { name: 'login', label: 'Логин', type: 'text' },
@@ -13,7 +14,7 @@ const cardTitlesConfig = {
 }
 
 export const SignInPage = () => (
-  <div className="signin-page">
-    <CardComponent inputs={inputs} cardTitlesConfig={cardTitlesConfig} isForSignUp={false} />
+  <div className="card-form-wrapper">
+    <CardFormComponent inputs={inputs} cardTitlesConfig={cardTitlesConfig} submitBtnEvent={signin} />
   </div>
 );

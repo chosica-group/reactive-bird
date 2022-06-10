@@ -16,12 +16,12 @@ export interface SignupParams {
   phone: string;
 }
 
-interface SignUpRes {
+export interface SignUpRes {
   reason?: string;
   id: number;
 }
 
-interface SignInRes {
+export interface SignInRes {
   reason?: string;
 }
 

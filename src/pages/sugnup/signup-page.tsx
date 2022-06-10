@@ -1,5 +1,6 @@
-import { CardComponent } from '../../components/card/index';
+import { CardFormComponent } from 'components/card-form';
 import './signup-page.css';
+import { signup, SignUpRes } from 'services/auth.service';
 
 const inputs = [
   { name: 'email', label: 'Почта', type: 'email' },
@@ -18,7 +19,7 @@ const cardTitlesConfig = {
 }
 
 export const SignUpPage = () => (
-  <div className="signup-page">
-    <CardComponent inputs={inputs} cardTitlesConfig={cardTitlesConfig} isForSignUp={true} />
+  <div className="card-form-wrapper">
+    <CardFormComponent inputs={inputs} cardTitlesConfig={cardTitlesConfig} submitBtnEvent={signup as () => Promise<SignUpRes>} />
   </div>
 );
