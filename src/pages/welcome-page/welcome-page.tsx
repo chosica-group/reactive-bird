@@ -1,8 +1,8 @@
 import { InfoAboutProject } from './components/info-about-project/index';
-import './welcome-page.css';
+import css from './welcome-page.css';
 
 export const WelcomePage = () => (
-  <div className="main-page">
+  <div className={css.mainPage}>
     <InfoAboutProject />
   </div>
 );
