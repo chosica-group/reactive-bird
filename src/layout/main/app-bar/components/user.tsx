@@ -7,8 +7,9 @@ type TProps = {
   handleCloseUserMenu: () => void;
 };
 
-const settings = ['Profile', 'Logout'];
+const settings = ['Профиль', 'Выйти'];
 
+// TODO Добавить аватар пользователя
 export const User = ({ handleOpenUserMenu, anchorElUser, handleCloseUserMenu }: TProps) => (
   <Box sx={{ flexGrow: 0 }}>
     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

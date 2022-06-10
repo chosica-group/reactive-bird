@@ -1,7 +1,5 @@
-import type { FC } from 'react';
-
-import { Box, Stack, Typography } from '@mui/material';
-import { LeaderCard } from './leader-card';
+import { Stack, Typography } from '@mui/material';
+import { Container, LeaderCard } from './components';
 
 const mockData = [
   {
@@ -27,13 +25,13 @@ const mockData = [
   },
 ];
 
-export const LeaderboardPage: FC = () => (
-  <Box sx={{ width: '400px' }} ml="auto" mr="auto">
+export const LeaderboardPage = () => (
+  <Container>
     <Typography variant="h1">Рекорды</Typography>
     <Stack spacing={2} alignItems="center">
       {mockData.map((user, index) => (
         <LeaderCard key={index} {...user} />
       ))}
     </Stack>
-  </Box>
+  </Container>
 );
