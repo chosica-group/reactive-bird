@@ -9,7 +9,8 @@
     "build:analyze": "webpack --config webpack/prod.js --env ANALYZE",
     "lint": "eslint src",
     "fix": "eslint src --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -63,6 +64,8 @@
     "fork-ts-checker-notifier-webpack-plugin": "^6.0.0",
     "fork-ts-checker-webpack-plugin": "^7.2.11",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.1",
     "postcss": "^8.4.14",
     "postcss-loader": "^7.0.0",
     "prettier": "^2.6.2",
@@ -77,5 +80,8 @@
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.9.0",
     "webpack-merge": "^5.8.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md,html}": ["eslint --fix", "prettier --write", "git add ."]
   }
 }
