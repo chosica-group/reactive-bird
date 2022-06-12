@@ -1,15 +1,18 @@
 import { FocusEvent, SyntheticEvent, useState } from 'react';
 // eslint-disable-next-line prettier/prettier
-import { useNavigate } from 'react-router-dom'; // линтер просто удаляла строку
-import { DICT_PATTERNS } from 'utils/validation/validationDict'; // линтер просто удаляла строку
+import { TextField } from '@mui/material';
+// линтер просто удаляла строку
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 // eslint-disable-next-line prettier/prettier
-import { TextField } from '@mui/material'; // линтер просто удаляла строку
+import { useNavigate } from 'react-router-dom';
+// линтер просто удаляла строку
+import { DICT_PATTERNS } from 'utils/validation/validationDict';
+// линтер просто удаляла строку
 import type { PatternsDict } from 'utils/validation/validationDict';
 import { SignupParams, signup } from '../../../../services/auth.service';
-// import './card.css';
+import './card.css';
 import type { CardInput, Props } from './type';
 
 export const CardComponent = (props: Props) => {
