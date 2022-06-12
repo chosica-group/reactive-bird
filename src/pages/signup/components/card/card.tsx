@@ -1,10 +1,11 @@
 import { FocusEvent, SyntheticEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { DICT_PATTERNS } from 'utils/validation/validationDict';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import TextField from '@mui/material/TextField';
 import type { PatternsDict } from 'utils/validation/validationDict';
-import { DICT_PATTERNS } from 'utils/validation/validationDict';
 import { SignupParams, signup } from '../../../../services/auth.service';
 import './card.css';
 import type { CardInput, Props } from './type';
@@ -14,18 +15,16 @@ export const CardComponent = (props: Props) => {
   const btnNameSubmit = 'Зарегистрироваться';
   const btnNameGoLogin = 'У меня есть аккаунт';
   const btnNameTitle = 'Регистрация';
+  const navigate = useNavigate();
   const [errorText, setErrorText] = useState<{ [key: string]: string }>({}); // никак не могу понять как использовать SignupData - keyof CardInput отдает только строку, как и typeof
   const [formData, setFormData] = useState<{ [key: string]: string }>({}); // никак не могу понять как использовать SignupData
   const [disabledBtn, setDisabledBtn] = useState(false);
   const [apiError, setApiError] = useState<string>('');
 
-<<<<<<< HEAD:src/pages/sugnup/components/card/Card.tsx
   const handlerGoToSighInPage = () => {
     navigate('/', { replace: true });
   };
 
-=======
->>>>>>> development:src/pages/signup/components/card/card.tsx
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     const input = e.target;
     if (input) {
@@ -63,11 +62,9 @@ export const CardComponent = (props: Props) => {
       const answer = await signup(obj);
       if (answer.reason) {
         setApiError(answer.reason);
+      } else {
+        handlerGoToSighInPage();
       }
-<<<<<<< HEAD:src/pages/sugnup/components/card/Card.tsx
-      // navigate('/mainpage', { replace: true });
-=======
->>>>>>> development:src/pages/signup/components/card/card.tsx
     } catch (err) {
       setApiError('что-то пошло не так');
       // throw new Error(err); // тут тоже какой-то тип требует

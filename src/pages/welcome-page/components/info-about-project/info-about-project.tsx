@@ -1,11 +1,8 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-<<<<<<< HEAD:src/pages/welcome-page/components/infoAboutProject/InfoAboutProject.tsx
 import { useNavigate } from 'react-router-dom';
-=======
 import './info-about-project.css';
->>>>>>> development:src/pages/welcome-page/components/info-about-project/info-about-project.tsx
 import { ColorButton } from './styled';
 
 export const InfoAboutProject = () => {

@@ -4,7 +4,7 @@
   "description": "flappy-bird game",
   "main": "src/index.tsx",
   "scripts": {
-    "start": "webpack server --config webpack/dev.js",
+    "dev": "webpack server --config webpack/dev.js",
     "build": "webpack --config webpack/prod.js",
     "build:analyze": "webpack --config webpack/prod.js --env ANALYZE",
     "lint": "eslint src",

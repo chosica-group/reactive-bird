@@ -1,12 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import type { ComponentType } from 'react';
+import { MainLayout } from 'layout/main';
+import { PublicLayout } from 'layout/public-layout';
 // import { withAuth } from 'providers/with-auth';
 import { LeaderboardPage } from 'pages/leaderboard/index';
+import { SignUpPage } from 'pages/signup/index';
 import { StartGamePage } from 'pages/start-game/index';
 import { WelcomePage } from 'pages/welcome-page/index';
-import { SignUpPage } from 'pages/signup/index';
-import { MainLayout } from 'layout/main';
-import { PublicLayout } from 'layout/public-layout/index';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 // const userInSystem = withAuth();
 const userInSystem = true;
