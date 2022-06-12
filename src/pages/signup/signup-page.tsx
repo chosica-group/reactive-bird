@@ -1,5 +1,6 @@
 import { CardComponent } from './components/card/index';
-import css from './signup-page.css';
+
+// import css from './signup-page.css';
 
 const inputs = [
   { name: 'email', label: 'Почта', type: 'email' },
@@ -11,8 +12,14 @@ const inputs = [
   { name: 'passwordRepeat', label: 'Пароль (еще раз)', type: 'password' },
 ];
 
+// export const SignUpPage = () => (
+//   <div className={css.signupPage}>
+//     <CardComponent inputs={inputs} />
+//   </div>
+// );
+
 export const SignUpPage = () => (
-  <div className={css.signupPage}>
+  <div>
     <CardComponent inputs={inputs} />
   </div>
 );
