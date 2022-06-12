@@ -1,4 +1,4 @@
-import { styled, Typography } from '@mui/material';
+import { Typography, styled } from '@mui/material';
 
 /**
  * добавил as typeof Typography, т.к. были ошибки типизации
@@ -10,4 +10,4 @@ export const LinkLogo = styled(Typography)(() => ({
   letterSpacing: '.3rem',
   color: 'inherit',
   textDecoration: 'none',
-}));
+})) as typeof Typography;

@@ -1,18 +1,16 @@
-import { useState, FocusEvent, SyntheticEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FocusEvent, SyntheticEvent, useState } from 'react';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import type { PatternsDict } from 'utils/validation/validationDict';
 import { DICT_PATTERNS } from 'utils/validation/validationDict';
-import { signup, SignupParams } from '../../../../services/auth.service';
+import { SignupParams, signup } from '../../../../services/auth.service';
+import './card.css';
 import type { CardInput, Props } from './type';
-import './Card.css';
 
 export const CardComponent = (props: Props) => {
   const { inputs } = props;
-  const navigate = useNavigate();
   const btnNameSubmit = 'Зарегистрироваться';
   const btnNameGoLogin = 'У меня есть аккаунт';
   const btnNameTitle = 'Регистрация';
@@ -21,10 +19,13 @@ export const CardComponent = (props: Props) => {
   const [disabledBtn, setDisabledBtn] = useState(false);
   const [apiError, setApiError] = useState<string>('');
 
+<<<<<<< HEAD:src/pages/sugnup/components/card/Card.tsx
   const handlerGoToSighInPage = () => {
     navigate('/', { replace: true });
   };
 
+=======
+>>>>>>> development:src/pages/signup/components/card/card.tsx
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     const input = e.target;
     if (input) {
@@ -63,7 +64,10 @@ export const CardComponent = (props: Props) => {
       if (answer.reason) {
         setApiError(answer.reason);
       }
+<<<<<<< HEAD:src/pages/sugnup/components/card/Card.tsx
       // navigate('/mainpage', { replace: true });
+=======
+>>>>>>> development:src/pages/signup/components/card/card.tsx
     } catch (err) {
       setApiError('что-то пошло не так');
       // throw new Error(err); // тут тоже какой-то тип требует
@@ -90,8 +94,8 @@ export const CardComponent = (props: Props) => {
       const dataToSend = { ...formData };
       delete dataToSend.passwordRepeat;
       const obj = dataToSend as unknown as SignupParams;
-      // eslint-disable-next-line no-void
-      void sendData(obj);
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      sendData(obj); // тут по другому не вышло
     }
   };
 
@@ -121,7 +125,7 @@ export const CardComponent = (props: Props) => {
           <Button variant="outlined" fullWidth onClick={handleFormSubmit} disabled={disabledBtn}>
             {btnNameSubmit}
           </Button>
-          <Button size="small" variant="text" fullWidth onClick={handlerGoToSighInPage}>
+          <Button size="small" variant="text" fullWidth>
             {btnNameGoLogin}
           </Button>
         </form>
