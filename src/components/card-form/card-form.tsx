@@ -8,7 +8,7 @@ import { DICT_PATTERNS } from 'utils/validation/validationDict';
 import type { CardFormProps, CardInput } from './card-form.type';
 import './card-form.css';
 
-export const CardFormComponent = (props: CardFormProps) => {
+export const CardFormComponent = <TParams, TResponse>(props: CardFormProps<TParams, TResponse>) => {
   const { inputs } = props;
   const { cardTitlesConfig } = props;
   const { submitBtnEvent } = props;
@@ -48,9 +48,9 @@ export const CardFormComponent = (props: CardFormProps) => {
     return !!errorText[input.name];
   };
 
-  const sendData = async (obj: any) => {
+  const sendData = async (obj: TParams) => {
     try {
-      const answer = await submitBtnEvent(obj);
+      const answer: TResponse = await submitBtnEvent(obj);
       if (answer.reason) {
         setApiError(answer.reason);
       }

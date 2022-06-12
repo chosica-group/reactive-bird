@@ -1,5 +1,3 @@
-import type { SigninParams, SignInRes, SignupParams, SignUpRes } from 'services/auth.service';
-
 export type CardInput = {
   type: string;
   name: string;
@@ -10,14 +8,14 @@ export type StringObject = {
   [key: string]: string;
 };
 
-export type CardFormProps = {
+export type CardFormProps<TParams, TResponse> = {
   inputs: CardInput[];
   cardTitlesConfig: {
     title: string;
     submitName: string;
     additionalBtnName: string;
   },
-  submitBtnEvent: (data: SignupParams | SigninParams) => Promise<SignUpRes | SignInRes>; // TODO: нужно понять как сделать этот метод универсальным
+  submitBtnEvent: (data: TParams) => Promise<TResponse>;
 };
 
 export type SignupData = {
