@@ -1,14 +1,22 @@
 import { MainLayout } from 'layout/main';
 import { PublicLayout } from 'layout/public-layout';
-// import { withAuth } from 'providers/with-auth';
 import { LeaderboardPage } from 'pages/leaderboard/index';
 import { SignUpPage } from 'pages/signup/index';
 import { StartGamePage } from 'pages/start-game/index';
 import { WelcomePage } from 'pages/welcome-page/index';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { getUserInfo } from '../../services/auth.service';
 
-// const userInSystem = withAuth();
-const userInSystem = true;
+let userInSystem: boolean | undefined;
+
+export const withAuth = async () => {
+  try {
+    await getUserInfo();
+    userInSystem = true;
+  } catch (e) {
+    userInSystem = false;
+  }
+};
 
 export const withRouter = () => {
   if (userInSystem) {

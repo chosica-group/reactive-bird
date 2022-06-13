@@ -9,7 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import { TextField } from '@mui/material'; // линтер просто удаляла строку
 import type { PatternsDict } from 'utils/validation/validationDict';
 import { SignupParams, signup } from '../../../../services/auth.service';
-// import './card.css';
+import './card.css';
 import type { CardInput, Props } from './type';
 
 export const CardComponent = (props: Props) => {
