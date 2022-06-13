@@ -2,12 +2,12 @@ import config from './config';
 
 const authUrl = `${config.API_URL}/auth`;
 
-export interface SigninParams {
+export type SigninParams = {
   login: string;
   password: string;
 }
 
-export interface SignupParams {
+export type SignupParams = {
   first_name: string;
   second_name: string;
   login: string;
@@ -16,16 +16,16 @@ export interface SignupParams {
   phone: string;
 }
 
-export interface SignUpRes {
+export type SignUpRes = {
   reason?: string;
   id: number;
 }
 
-export interface SignInRes {
+export type SignInRes = {
   reason?: string;
 }
 
-export interface UserModel {
+export type UserModel = {
   avatar: string | null;
   display_name: string | null;
   email: string;
