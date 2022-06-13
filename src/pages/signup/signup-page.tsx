@@ -1,5 +1,4 @@
 import { CardComponent } from './components/card/index';
-
 import css from './signup-page.css';
 
 const inputs = [
@@ -17,4 +16,3 @@ export const SignUpPage = () => (
     <CardComponent inputs={inputs} />
   </div>
 );
-
