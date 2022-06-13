@@ -1,5 +1,5 @@
-import { Avatar, Box, IconButton, Menu, MenuItem, Typography } from '@mui/material';
 import type { MouseEvent } from 'react';
+import { Avatar, Box, IconButton, Menu, MenuItem, Typography } from '@mui/material';
 
 type TProps = {
   handleOpenUserMenu: (event: MouseEvent<HTMLElement>) => void;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { MouseEvent } from 'react';
-import { Container, Toolbar, AppBar as AppBarMui } from '@mui/material';
-import { DesktopLogo, User, MobileLogo, MobileMenu, DesktopMenu } from './components';
+import { AppBar as AppBarMui, Container, Toolbar } from '@mui/material';
+import { DesktopLogo, DesktopMenu, MobileLogo, MobileMenu, User } from './components';
 
 const pages = ['Лидеры', 'Форум'];
 
