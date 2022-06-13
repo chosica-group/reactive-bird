@@ -13,24 +13,24 @@ const userInSystem = true;
 export const withRouter = () => {
   if (userInSystem) {
     return (
-      <MainLayout>
-        <BrowserRouter>
+      <BrowserRouter>
+        <MainLayout>
           <Routes>
             <Route path="/leaderboard" element={<LeaderboardPage />} />
             <Route path="/gamestart" element={<StartGamePage />} />
           </Routes>
-        </BrowserRouter>
-      </MainLayout>
+        </MainLayout>
+      </BrowserRouter>
     );
   }
   return (
-    <PublicLayout>
-      <BrowserRouter>
+    <BrowserRouter>
+      <PublicLayout>
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/signup" element={<SignUpPage />} />
         </Routes>
-      </BrowserRouter>
-    </PublicLayout>
+      </PublicLayout>
+    </BrowserRouter>
   );
 };
