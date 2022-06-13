@@ -1,5 +1,6 @@
 import { CardComponent } from './components/card/index';
-import './signup-page.css';
+
+// import './signup-page.css';
 
 const inputs = [
   { name: 'email', label: 'Почта', type: 'email' },

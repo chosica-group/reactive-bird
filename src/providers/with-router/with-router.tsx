@@ -5,18 +5,17 @@ import { SignUpPage } from 'pages/signup/index';
 import { StartGamePage } from 'pages/start-game/index';
 import { WelcomePage } from 'pages/welcome-page/index';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { getUserInfo } from '../../services/auth.service';
 
-let userInSystem: boolean | undefined;
+const userInSystem = false;
 
-export const withAuth = async () => {
-  try {
-    await getUserInfo();
-    userInSystem = true;
-  } catch (e) {
-    userInSystem = false;
-  }
-};
+// export const withAuth = async () => { // это не ненужный код а пример ( тут будет чтото типа того )
+//   try {
+//     await getUserInfo();
+//     return true;
+//   } catch (e) {
+//     return false;
+//   }
+// };
 
 export const withRouter = () => {
   if (userInSystem) {
@@ -25,7 +24,7 @@ export const withRouter = () => {
         <MainLayout>
           <Routes>
             <Route path="/leaderboard" element={<LeaderboardPage />} />
-            <Route path="/gamestart" element={<StartGamePage />} />
+            <Route path="/game" element={<StartGamePage />} />
           </Routes>
         </MainLayout>
       </BrowserRouter>
@@ -37,6 +36,7 @@ export const withRouter = () => {
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          {/* <Route path="/login" element={<SignInPage />} /> */}
         </Routes>
       </PublicLayout>
     </BrowserRouter>

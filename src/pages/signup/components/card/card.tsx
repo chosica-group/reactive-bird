@@ -1,15 +1,15 @@
 import { FocusEvent, SyntheticEvent, useState } from 'react';
 // eslint-disable-next-line prettier/prettier
-import { useNavigate } from 'react-router-dom'; // линтер просто удаляла строку
-import { DICT_PATTERNS } from 'utils/validation/validationDict'; // линтер просто удаляла строку
+import { useNavigate } from 'react-router-dom'; // линтер просто удалял строку
+import { DICT_PATTERNS } from 'utils/validation/validationDict'; // линтер просто удалял строку
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 // eslint-disable-next-line prettier/prettier
-import { TextField } from '@mui/material'; // линтер просто удаляла строку
+import { TextField } from '@mui/material'; // линтер просто удалял строку
 import type { PatternsDict } from 'utils/validation/validationDict';
 import { SignupParams, signup } from '../../../../services/auth.service';
-import './card.css';
+// import './card.css';
 import type { CardInput, Props } from './type';
 
 export const CardComponent = (props: Props) => {
@@ -47,6 +47,11 @@ export const CardComponent = (props: Props) => {
     setErrorText((prevState) => ({ ...prevState, [input.name]: '' }));
     setDisabledBtn(false);
     if (apiError !== '') setApiError('');
+  };
+
+  const handleGoOtherPage = () => {
+    // to do проверка что это за страница
+    navigate('/login', { replace: true });
   };
 
   const handleChange = (e: FocusEvent<HTMLInputElement>) => {
@@ -124,7 +129,7 @@ export const CardComponent = (props: Props) => {
           <Button variant="outlined" fullWidth onClick={handleFormSubmit} disabled={disabledBtn}>
             {btnNameSubmit}
           </Button>
-          <Button size="small" variant="text" fullWidth>
+          <Button size="small" variant="text" fullWidth onClick={handleGoOtherPage}>
             {btnNameGoLogin}
           </Button>
         </form>
