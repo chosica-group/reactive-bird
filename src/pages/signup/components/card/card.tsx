@@ -1,15 +1,10 @@
 import { FocusEvent, SyntheticEvent, useState } from 'react';
-// eslint-disable-next-line prettier/prettier
 import { TextField } from '@mui/material';
-// линтер просто удалял строку
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-// eslint-disable-next-line prettier/prettier
 import { useNavigate } from 'react-router-dom';
-// линтер просто удалял строку
 import { DICT_PATTERNS } from 'utils/validation/validationDict';
-// линтер просто удалял строку
 import type { PatternsDict } from 'utils/validation/validationDict';
 import { SignupParams, signup } from '../../../../services/auth.service';
 import './card.css';
