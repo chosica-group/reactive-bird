@@ -5,7 +5,7 @@
   "main": "src/index.tsx",
   "scripts": {
     "dev": "webpack server --config webpack/dev.js",
-    "start": "npm run build && node src/express.js",
+    "start": "npm run build && node express.js",
     "build": "webpack --config webpack/prod.js",
     "build:analyze": "webpack --config webpack/prod.js --env ANALYZE",
     "lint": "eslint src",

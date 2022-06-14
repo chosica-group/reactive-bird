@@ -10,6 +10,6 @@ function serveIndev(req, res) {
 }
 
 app.get('*', serveIndev);
-app.listen(process.env.PROD_SERVER_PORT || PORT, () => {
-  console.log(`Running on port ${PORT}`);
+app.listen(process.env.PORT || PORT, () => { // хероку тут берет свой PORT из своего env
+  console.log(`Running`);
 });
