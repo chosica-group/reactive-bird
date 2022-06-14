@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import type { MouseEvent } from 'react';
-import { Container, Toolbar, AppBar as AppBarMui } from '@mui/material';
-import { DesktopLogo, User, MobileLogo, MobileMenu, DesktopMenu } from './components';
+import { AppBar as AppBarMui, Container, Stack, Toolbar } from '@mui/material';
+import { FullscreenBtn } from 'components/fullscreen-btn';
+import { DesktopLogo, DesktopMenu, MobileLogo, MobileMenu, User } from './components';
 
 const pages = ['Лидеры', 'Форум'];
 
@@ -27,11 +28,14 @@ export const AppBar = () => {
 
           <DesktopMenu handleCloseNavMenu={handleCloseUserMenu} pages={pages} />
 
-          <User
-            anchorElUser={anchorElUser}
-            handleCloseUserMenu={handleCloseUserMenu}
-            handleOpenUserMenu={handleOpenUserMenu}
-          />
+          <Stack direction="row" spacing={1}>
+            <FullscreenBtn element={document.documentElement} />
+            <User
+              anchorElUser={anchorElUser}
+              handleCloseUserMenu={handleCloseUserMenu}
+              handleOpenUserMenu={handleOpenUserMenu}
+            />
+          </Stack>
         </Toolbar>
       </Container>
     </AppBarMui>

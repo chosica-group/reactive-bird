@@ -8,11 +8,17 @@
   "semi": true,
   "trailingComma": "all",
   "arrowParens": "always",
-  "importOrderSeparation": true,
+  "importOrderSeparation": false,
   "importOrderSortSpecifiers": true,
+  "endOfLine": "auto",
   "importOrder": [
+    "^react$",
+    "^@reduxjs/toolkit$",
+    "^@mui/material",
+    "^@mui/icons-material",
     "<THIRD_PARTY_MODULES>",
-    "^[./]"
-  ],
-  "endOfLine": "auto"
+    "^[./]()",
+    "^[../]",
+    "^[../../]"
+  ]
 }
