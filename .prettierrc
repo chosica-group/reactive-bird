@@ -13,5 +13,6 @@
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
     "^[./]"
-  ]
+  ],
+  "endOfLine": "auto"
 }

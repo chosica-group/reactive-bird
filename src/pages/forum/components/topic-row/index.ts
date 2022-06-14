@@ -1,1 +1,1 @@
-export { TopicRow }  from './topic-row';
+export { TopicRow } from './topic-row';
