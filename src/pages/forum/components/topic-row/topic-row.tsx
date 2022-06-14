@@ -3,7 +3,7 @@ import './topic-row.css';
 import { AddCircleRounded } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
 
-interface TProps {
+type TProps = {
   title: string,
   subTopicsCount: number,
   answersCount: number
@@ -12,7 +12,7 @@ interface TProps {
 export const TopicRow = (data: TProps) => (
   <><Grid item xs={8} zeroMinWidth>
     <Typography noWrap component="div" className='grid-item title-item'>
-      <p className='title'>{data.title}</p>
+      <p className='grid-item__title'>{data.title}</p>
     </Typography>
   </Grid>
   <Grid item xs={1.6} zeroMinWidth>

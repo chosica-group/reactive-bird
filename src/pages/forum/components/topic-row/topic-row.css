@@ -4,10 +4,6 @@ p {
   text-align: center;
 }
 
-.title {
-  cursor: pointer;
-}
-
 .add-icon {
   margin-left: auto;
   cursor: pointer;
@@ -17,6 +13,10 @@ p {
 .grid-item {
   padding: 10px;
   border-radius: 22px;
+}
+
+.grid-item__title {
+  cursor: pointer;
 }
 
 .grid-item.title-item {
