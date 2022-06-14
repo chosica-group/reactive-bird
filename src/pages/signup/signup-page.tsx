@@ -1,18 +1,11 @@
-import { CardComponent } from './components/card/index';
-import css from './signup-page.css';
-
-const inputs = [
-  { name: 'email', label: 'Почта', type: 'email' },
-  { name: 'login', label: 'Логин', type: 'text' },
-  { name: 'first_name', label: 'Имя', type: 'text' },
-  { name: 'second_name', label: 'Фамилия', type: 'text' },
-  { name: 'phone', label: 'Телефон', type: 'text' },
-  { name: 'password', label: 'Пароль', type: 'password' },
-  { name: 'passwordRepeat', label: 'Пароль (еще раз)', type: 'password' },
-];
+import { CardFormComponent } from 'components/card-form';
+import './signup-page.css';
+import { SignupForm } from './components/signup-form';
 
 export const SignUpPage = () => (
-  <div className={css.signupPage}>
-    <CardComponent inputs={inputs} />
+  <div className="card-form-wrapper">
+    <CardFormComponent>
+      <SignupForm></SignupForm>
+    </CardFormComponent>
   </div>
 );

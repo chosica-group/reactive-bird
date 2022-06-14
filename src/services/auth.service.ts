@@ -2,12 +2,12 @@ import config from './config';
 
 const authUrl = `${config.API_URL}/auth`;
 
-export interface SigninParams {
+export type SigninParams = {
   login: string;
   password: string;
 }
 
-export interface SignupParams {
+export type SignupParams = {
   first_name: string;
   second_name: string;
   login: string;
@@ -16,12 +16,16 @@ export interface SignupParams {
   phone: string;
 }
 
-interface SignUpRes {
+export type SignUpRes = {
   reason?: string;
   id: number;
 }
 
-export interface UserModel {
+export type SignInRes = {
+  reason?: string;
+}
+
+export type UserModel = {
   avatar: string | null;
   display_name: string | null;
   email: string;
@@ -37,14 +41,14 @@ const defaultParams = {
   headers: { 'Content-Type': 'application/json' },
 };
 
-const signin = (params: SigninParams) => {
+const signin = (params: SigninParams): Promise<SignInRes> => {
   const requestOptions = {
     method: 'POST',
     body: JSON.stringify(params),
     ...defaultParams,
   };
 
-  return fetch(`${authUrl}/signin`, requestOptions);
+  return fetch(`${authUrl}/signin`, requestOptions).then(res => res.status === 200 ? { reason: '' } : res.json());
 };
 
 const signup = (params: SignupParams): Promise<SignUpRes> => {
@@ -54,7 +58,7 @@ const signup = (params: SignupParams): Promise<SignUpRes> => {
     ...defaultParams,
   };
 
-  return fetch(`${authUrl}/signup`, requestOptions).then((res) => res.json()) as Promise<SignUpRes>;
+  return fetch(`${authUrl}/signup`, requestOptions).then(res => res.json());
 };
 
 const logout = (): Promise<boolean> => {
@@ -71,7 +75,7 @@ const getUserInfo = (): Promise<UserModel> => {
     method: 'GET',
     ...defaultParams,
   };
-  return fetch(`${authUrl}/user`, requestOptions).then((res) => res.json()) as Promise<UserModel>;
+  return fetch(`${authUrl}/user`, requestOptions).then(res => res.json());
 };
 
 export { signin, signup, logout, getUserInfo };
