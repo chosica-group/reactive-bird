@@ -1,12 +1,11 @@
+import type { ComponentType } from 'react';
 import { MainLayout } from 'layout/main';
 import { PublicLayout } from 'layout/public-layout';
-import { LeaderboardPage } from 'pages/leaderboard/index';
 import { SignUpPage } from 'pages/signup/index';
-import { StartGamePage } from 'pages/start-game/index';
 import { WelcomePage } from 'pages/welcome-page/index';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-const userInSystem = false;
+const userInSystem = true;
 
 // export const withAuth = async () => { // это не ненужный код а пример ( тут будет чтото типа того )
 //   try {
@@ -17,14 +16,33 @@ const userInSystem = false;
 //   }
 // };
 
-export const withRouter = () => {
+export const withRouter = (Component: ComponentType) => () => {
+  if (userInSystem) {
+    return (
+      <BrowserRouter>
+        <MainLayout>
+          <Component />
+        </MainLayout>
+      </BrowserRouter>
+    );
+  }
+  return (
+    <BrowserRouter>
+      <PublicLayout>
+        <Component />
+      </PublicLayout>
+    </BrowserRouter>
+  );
+};
+
+export const AuthExample = () => {
   if (userInSystem) {
     return (
       <BrowserRouter>
         <MainLayout>
           <Routes>
-            <Route path="/leaderboard" element={<LeaderboardPage />} />
-            <Route path="/game" element={<StartGamePage />} />
+            {/* <Route path="/leaderboard" element={<LeaderboardPage />} />
+            <Route path="/game" element={<StartGamePage />} /> */}
           </Routes>
         </MainLayout>
       </BrowserRouter>
