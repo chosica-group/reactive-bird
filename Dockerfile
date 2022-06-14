@@ -1,5 +1,4 @@
-FROM ubuntu:latest
-FROM node:16.15.0
+FROM node:16-alpine
 WORKDIR /var/www
 COPY package*.json ./
 RUN npm install
