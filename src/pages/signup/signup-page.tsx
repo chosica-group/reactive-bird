@@ -5,7 +5,7 @@ import { SignupForm } from './components/signup-form';
 export const SignUpPage = () => (
   <div className="card-form-wrapper">
     <CardFormComponent>
-      <SignupForm></SignupForm>
+      <SignupForm />
     </CardFormComponent>
   </div>
 );
