@@ -1,10 +1,10 @@
-import TextField from '@mui/material/TextField';
+import { FocusEvent, useState } from 'react';
 import Button from '@mui/material/Button';
-import { DICT_PATTERNS, PatternsDict } from 'utils/validation/validationDict';
-import { useState, FocusEvent } from 'react';
-import type { SigninParams } from '../../../../services/auth.service';
+import TextField from '@mui/material/TextField';
 import type { CardInput } from 'components/card-form/card-form.type';
 import type { SignFormValue } from 'pages/signup/components/signup-form/signup-form.type';
+import { DICT_PATTERNS, PatternsDict } from 'utils/validation/validationDict';
+import type { SigninParams } from '../../../../services/auth.service';
 import { signup } from '../../../../services/auth.service';
 
 const inputs: CardInput[] = [
@@ -56,11 +56,9 @@ export const SignupForm = () => {
     if (apiError !== '') {
       setApiError('');
     }
-  }
-
-  const checkNeedError = (input: CardInput) => {
-    return !!errorText[input.name];
   };
+
+  const checkNeedError = (input: CardInput) => !!errorText[input.name];
 
   const handleFormSubmit = () => {
     if (Object.keys(formData).length < inputs.length) {
@@ -79,15 +77,17 @@ export const SignupForm = () => {
       setDisabledBtn(true);
     } else {
       const dataToSend = { ...formData, passwordRepeat: undefined };
-      delete dataToSend['passwordRepeat'];
+      delete dataToSend.passwordRepeat;
 
-      signup(dataToSend).then(res => {
-        if (res.reason) {
-          setApiError(res.reason);
-        }
-      }).catch(() => {
-        setApiError('что-то пошло не так');
-      });
+      signup(dataToSend)
+        .then((res) => {
+          if (res.reason) {
+            setApiError(res.reason);
+          }
+        })
+        .catch(() => {
+          setApiError('что-то пошло не так');
+        });
     }
   };
 
@@ -120,4 +120,4 @@ export const SignupForm = () => {
       </Button>
     </form>
   );
-}
+};
