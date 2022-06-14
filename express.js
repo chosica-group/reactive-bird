@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static(`${__dirname}/dist`));
 function serveIndev(req, res) {
@@ -10,6 +10,6 @@ function serveIndev(req, res) {
 }
 
 app.get('*', serveIndev);
-app.listen(process.env.PORT || PORT, () => { // хероку тут берет свой PORT из своего env
-  console.log(`Running`);
+app.listen(PORT, () => { // хероку тут берет свой PORT из своего env
+  console.log(`Running on ${PORT}`);
 });
