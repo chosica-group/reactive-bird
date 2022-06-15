@@ -18,7 +18,7 @@ export type SignupParams = {
 
 export type SignUpRes = {
   reason?: string;
-  id: number;
+  id?: number;
 };
 
 export type SignInRes = {
