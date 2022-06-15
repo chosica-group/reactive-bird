@@ -21,6 +21,7 @@ module.exports = {
       pages: path.join(srcPath, 'pages'),
       utils: path.join(srcPath, 'utils'),
       store: path.join(srcPath, 'store'),
+      services: path.join(srcPath, 'services'),
     },
     extensions: ['.tsx', '.ts', '.js'],
     symlinks: false,
