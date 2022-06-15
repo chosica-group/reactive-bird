@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Typography, Box, Skeleton, Button } from '@mui/material';
-import { Progress, Rules, PaperGame } from './components';
+import { useEffect, useState } from 'react';
+import { Box, Button, Skeleton, Typography } from '@mui/material';
+import { PaperGame, Progress, Rules } from './components';
 
 export const StartGamePage = () => {
   const [progress, setProgress] = useState(10);

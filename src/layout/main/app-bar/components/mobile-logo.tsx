@@ -1,5 +1,5 @@
 import { FlutterDash as AppIcon } from '@mui/icons-material';
-import { LinkLogo } from 'layout/main/app-bar/components/styled';
+import { LinkLogo } from './styled';
 
 export const MobileLogo = () => (
   <>
