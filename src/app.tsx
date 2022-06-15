@@ -1,4 +1,4 @@
-import { WelcomePage } from 'pages/welcome-page';
+import { AppRouter } from 'components/router/router';
 import { withProviders } from 'providers';
 
-export const App = withProviders(WelcomePage);
+export const App = withProviders(() => AppRouter());
