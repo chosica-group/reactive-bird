@@ -20,6 +20,8 @@ module.exports = {
       providers: path.join(srcPath, 'providers'),
       pages: path.join(srcPath, 'pages'),
       utils: path.join(srcPath, 'utils'),
+      store: path.join(srcPath, 'store'),
+      services: path.join(srcPath, 'services'),
     },
     extensions: ['.tsx', '.ts', '.js'],
     symlinks: false,
@@ -28,7 +30,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.svg$/,
