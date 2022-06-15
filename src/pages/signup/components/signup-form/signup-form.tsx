@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import type { CardInput } from 'components/card-form/card-form.type';
 import type { SignFormValue } from 'pages/signup/components/signup-form/signup-form.type';
+import { useNavigate } from 'react-router-dom';
 import { DICT_PATTERNS, PatternsDict } from 'utils/validation/validationDict';
 import type { SigninParams } from '../../../../services/auth.service';
 import { signup } from '../../../../services/auth.service';
@@ -18,6 +19,7 @@ const inputs: CardInput[] = [
 ];
 
 export const SignupForm = () => {
+  const navigate = useNavigate();
   const [errorText, setErrorText] = useState<{ [key: string]: string }>({});
   const [formData, setFormData] = useState<SignFormValue>({} as SignFormValue);
   const [disabledBtn, setDisabledBtn] = useState(false);
@@ -45,6 +47,10 @@ export const SignupForm = () => {
   const handleChange = (e: FocusEvent<HTMLInputElement>) => {
     const input = e.target;
     setFormData((prevState) => ({ ...prevState, [input.name]: input.value }));
+  };
+
+  const goToSigninPage = () => {
+    navigate('/login', { replace: true });
   };
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
@@ -115,7 +121,7 @@ export const SignupForm = () => {
       <Button variant="outlined" fullWidth onClick={handleFormSubmit} disabled={disabledBtn}>
         Зарегистрироваться
       </Button>
-      <Button size="small" variant="text" fullWidth>
+      <Button size="small" variant="text" fullWidth onClick={goToSigninPage}>
         У меня есть аккаунт
       </Button>
     </form>

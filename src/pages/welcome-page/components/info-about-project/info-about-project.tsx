@@ -10,6 +10,9 @@ export const InfoAboutProject = () => {
   const goToSignupPage = () => {
     navigate('/signup', { replace: true });
   };
+  const goToSigninPage = () => {
+    navigate('/login', { replace: true });
+  };
   return (
     <Card style={{ backgroundColor: '#1976d2', maxWidth: '700px' }} className="infocard">
       <CardContent>
@@ -20,7 +23,9 @@ export const InfoAboutProject = () => {
           в рамках учебного проекта в ЯП
         </Typography>
         <div className="infocard__actions">
-          <ColorButton className="infocard__action-btn">Вход в аккаунт</ColorButton>
+          <ColorButton className="infocard__action-btn" onClick={goToSigninPage}>
+            Вход в аккаунт
+          </ColorButton>
           <div style={{ margin: '10px' }} />
           <ColorButton className="infocard__action-btn" onClick={goToSignupPage}>
             Регистрация
