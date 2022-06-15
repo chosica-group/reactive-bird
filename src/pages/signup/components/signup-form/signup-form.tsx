@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { Button } from '@mui/material';
 import { Form } from 'components/form';
 import type { TFormInputs } from 'components/form';
 import { signup } from 'services/auth.service';
-import type { SignUpRes, SignupParams } from 'services/auth.service';
+import type { SignupParams } from 'services/auth.service';
 
 type TSubmitWithPassRepeat = SignupParams & {
   passwordRepeat: string;
@@ -19,26 +20,33 @@ const inputs: TFormInputs<TSubmitWithPassRepeat> = [
 ];
 
 export const SignupForm = () => {
-  const onSubmit = async ({
+  const [apiError, setApiError] = useState<string | undefined>();
+
+  const onSubmit = ({
     passwordRepeat,
     ...data
-  }: TSubmitWithPassRepeat): Promise<SignUpRes> => {
-    if (passwordRepeat !== data.password) {
-      return {
-        reason: 'Пароль не совпадает',
-      };
+  }: TSubmitWithPassRepeat): { reason: string } | void => {
+    if (passwordRepeat === data.password) {
+      signup(data)
+        .then((res) => {
+          setApiError(res.reason);
+        })
+        .catch(() => {
+          setApiError('что-то пошло не так');
+        });
+    } else {
+      setApiError('Пароль не совпадает');
     }
-
-    return signup(data);
   };
 
   return (
     <>
-      <Form<TSubmitWithPassRepeat, SignUpRes>
+      <Form<TSubmitWithPassRepeat>
         title="Регистрация"
         inputs={inputs}
         onSubmit={onSubmit}
         submitText="Зарегистрироваться"
+        error={apiError}
       />
       <Button size="small" variant="text" fullWidth>
         У меня есть аккаунт

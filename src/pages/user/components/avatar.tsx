@@ -2,10 +2,7 @@ import { useRef } from 'react';
 import type { ChangeEvent } from 'react';
 import { Avatar as AvatarMui, Box, Button, styled } from '@mui/material';
 import { Upload as UploadIcon } from '@mui/icons-material';
-
-type TProps = {
-  avatar: string;
-};
+import { useChangeAvatarUserMutation, useGetUserQuery } from 'services/user';
 
 const UploadButton = styled(Button)`
   position: absolute;
@@ -16,18 +13,23 @@ const UploadButton = styled(Button)`
   border-radius: 24px;
 `;
 
-export const Avatar = ({ avatar }: TProps) => {
+export const Avatar = () => {
   const ref = useRef<HTMLInputElement>(null);
+  const { data: { avatar } = {} } = useGetUserQuery();
+  const [changeAvatar] = useChangeAvatarUserMutation();
 
   const onClick = () => {
     ref.current?.click();
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    // TODO отправить файл
-    // @ts-ignore
-    const file = event.target?.files[0];
-    console.log(file);
+    const file = event.target?.files && event.target?.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('avatar', file);
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      changeAvatar(formData);
+    }
   };
 
   return (

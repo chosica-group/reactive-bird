@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import type { FocusEvent, ReactNode } from 'react';
-import { Button, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { DICT_PATTERNS, PatternsDict } from 'utils/validation/validationDict';
 
-type TBaseResponse = { reason?: string };
 type TBaseData = Record<string, unknown>;
 
 export type TFormInputs<TForm extends TBaseData> = Array<
@@ -18,21 +18,25 @@ export type TFormInputs<TForm extends TBaseData> = Array<
   }[keyof TForm]
 >;
 
-type TProps<TForm extends TBaseData, TResponse extends TBaseResponse> = {
+type TProps<TForm extends TBaseData> = {
   data?: TForm;
   inputs: TFormInputs<TForm>;
-  onSubmit: (data: TForm) => Promise<TResponse>;
+  onSubmit: (data: TForm) => void;
   title?: string;
   submitText: string;
+  error?: string;
+  isLoading?: boolean;
 };
 
-export const Form = <TForm extends TBaseData, TResponse extends TBaseResponse>({
+export const Form = <TForm extends TBaseData>({
   title,
   data,
   inputs,
   onSubmit,
   submitText,
-}: TProps<TForm, TResponse>) => {
+  error,
+  isLoading,
+}: TProps<TForm>) => {
   const initialData = useMemo<TForm>(
     () => data || inputs.reduce<TForm>((acc, { name }) => ({ ...acc, [name]: '' }), {} as TForm),
     [data, inputs],
@@ -40,7 +44,7 @@ export const Form = <TForm extends TBaseData, TResponse extends TBaseResponse>({
   const [formData, setFormData] = useState<TForm>(initialData);
   const [errorText, setErrorText] = useState<Partial<TForm>>({});
   const [disabledBtn, setDisabledBtn] = useState(false);
-  const [apiError, setApiError] = useState<string>('');
+  const [showError, setShowError] = useState(false);
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     const input = e.target;
@@ -73,9 +77,7 @@ export const Form = <TForm extends TBaseData, TResponse extends TBaseResponse>({
     setErrorText((prevState) => ({ ...prevState, [input.name]: '' }));
     setDisabledBtn(false);
 
-    if (apiError !== '') {
-      setApiError('');
-    }
+    setShowError(false);
   };
 
   const handleFormSubmit = () => {
@@ -87,15 +89,8 @@ export const Form = <TForm extends TBaseData, TResponse extends TBaseResponse>({
         }
       });
     } else {
-      onSubmit(formData)
-        .then((res) => {
-          if (res.reason) {
-            setApiError(res.reason);
-          }
-        })
-        .catch(() => {
-          setApiError('что-то пошло не так');
-        });
+      setShowError(true);
+      onSubmit(formData);
     }
   };
 
@@ -116,12 +111,19 @@ export const Form = <TForm extends TBaseData, TResponse extends TBaseResponse>({
           helperText={(errorText[input.name] as ReactNode) || ' '}
           label={input.label}
           required
+          value={formData[input.name.toString()]}
         />
       ))}
-      <span className="card__error-message">{apiError}</span>
-      <Button variant="outlined" fullWidth onClick={handleFormSubmit} disabled={disabledBtn}>
+      {showError && error && <span style={{ color: 'red' }}>{error}</span>}
+      <LoadingButton
+        variant="outlined"
+        fullWidth
+        onClick={handleFormSubmit}
+        disabled={disabledBtn}
+        loading={isLoading}
+      >
         {submitText}
-      </Button>
+      </LoadingButton>
     </form>
   );
 };
