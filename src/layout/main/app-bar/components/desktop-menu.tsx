@@ -1,30 +1,28 @@
 import { Box, Button } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
+type TPages = {
+  text: string;
+  path: string;
+};
+
 type TProps = {
   handleCloseNavMenu: () => void;
-  pages: string[];
-};
-const makePath = (pageName: string): string => {
-  const pageText = pageName.toLowerCase();
-  switch (pageText) {
-    case 'форум':
-      return 'forum';
-    case 'лидеры':
-      return 'leaderboard';
-    default:
-      return '/';
-  }
+  pages: TPages[];
 };
 
 export const DesktopMenu = ({ handleCloseNavMenu, pages }: TProps) => (
   <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
     {pages.map((page) => (
-      <NavLink to={makePath(page)} key={page}>
-        <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
-          {page}
-        </Button>
-      </NavLink>
+      <Button
+        key={page.text}
+        onClick={handleCloseNavMenu}
+        sx={{ my: 2, color: 'white', display: 'block' }}
+        component={NavLink}
+        to={page.path}
+      >
+        {page.text}
+      </Button>
     ))}
   </Box>
 );

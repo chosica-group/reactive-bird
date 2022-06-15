@@ -1,9 +1,15 @@
 import { MouseEvent, useState } from 'react';
 import { Box, IconButton, Menu, MenuItem, Typography } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
+import { NavLink } from 'react-router-dom';
+
+type TPages = {
+  text: string;
+  path: string;
+};
 
 type TProps = {
-  pages: string[];
+  pages: TPages[];
 };
 
 export const MobileMenu = ({ pages }: TProps) => {
@@ -48,8 +54,15 @@ export const MobileMenu = ({ pages }: TProps) => {
         }}
       >
         {pages.map((page) => (
-          <MenuItem key={page} onClick={handleCloseNavMenu}>
-            <Typography textAlign="center">{page}</Typography>
+          <MenuItem key={page.text} onClick={handleCloseNavMenu}>
+            <Typography
+              textAlign="center"
+              component={NavLink}
+              to={page.path}
+              style={{ textDecoration: 'none', color: 'black' }}
+            >
+              {page.text}
+            </Typography>
           </MenuItem>
         ))}
       </Menu>
