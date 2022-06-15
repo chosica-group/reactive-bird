@@ -1,11 +1,11 @@
 import { CardFormComponent } from 'components/card-form';
-import { SignupForm } from './components/signup-form/index';
-import './signup-page.css';
+import { SigninForm } from './components/signin-form';
+import './signin-page.css';
 
-export const SignUpPage = () => (
+export const SignInPage = () => (
   <div className="card-form-wrapper">
     <CardFormComponent>
-      <SignupForm />
+      <SigninForm />
     </CardFormComponent>
   </div>
 );
