@@ -1,8 +1,9 @@
-import TextField from '@mui/material/TextField';
+import { FocusEvent, useState } from 'react';
 import Button from '@mui/material/Button';
-import { DICT_PATTERNS, PatternsDict } from 'utils/validation/validationDict';
-import { useState, FocusEvent } from 'react';
+import TextField from '@mui/material/TextField';
 import type { CardInput } from 'components/card-form/card-form.type';
+import { useNavigate } from 'react-router-dom';
+import { DICT_PATTERNS, PatternsDict } from 'utils/validation/validationDict';
 import type { SigninParams } from '../../../../services/auth.service';
 import { signin } from '../../../../services/auth.service';
 
@@ -12,6 +13,7 @@ const inputs = [
 ];
 
 export const SigninForm = () => {
+  const navigate = useNavigate();
   const [errorText, setErrorText] = useState<{ [key: string]: string }>({});
   const [formData, setFormData] = useState<SigninParams>({} as SigninParams);
   const [disabledBtn, setDisabledBtn] = useState(false);
@@ -41,6 +43,10 @@ export const SigninForm = () => {
     setFormData((prevState) => ({ ...prevState, [input.name]: input.value }));
   };
 
+  const goToSignupPage = () => {
+    navigate('/signup', { replace: true });
+  };
+
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
     const input = e.target;
 
@@ -67,6 +73,8 @@ export const SigninForm = () => {
         .then((res) => {
           if (res.reason) {
             setApiError(res.reason);
+          } else {
+            navigate('/', { replace: true });
           }
         })
         .catch(() => {
@@ -99,7 +107,7 @@ export const SigninForm = () => {
       <Button variant="outlined" fullWidth onClick={handleFormSubmit} disabled={disabledBtn}>
         Войти
       </Button>
-      <Button size="small" variant="text" fullWidth>
+      <Button size="small" variant="text" fullWidth onClick={goToSignupPage}>
         У вас нет аккаунта? Регистрация
       </Button>
     </form>

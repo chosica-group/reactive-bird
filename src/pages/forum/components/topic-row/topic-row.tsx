@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
-import './topic-row.css';
-import { AddCircleRounded } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
+import { AddCircleRounded } from '@mui/icons-material';
+import './topic-row.css';
 
 type TProps = {
   title: string;
@@ -16,18 +16,18 @@ export const TopicRow = (data: TProps) => {
     <>
       <Grid item xs={8} zeroMinWidth>
         <Typography noWrap component="div" className="grid-item title-item">
-          <p className="grid-item__title">{title}</p>
+          <p className="grid-item__title grid-item__text">{title}</p>
         </Typography>
       </Grid>
       <Grid item xs={1.6} zeroMinWidth>
         <Typography noWrap component="div" className="grid-item count-item">
-          <p>{subTopicsCount}</p>
+          <p className="grid-item__text">{subTopicsCount}</p>
           <AddCircleRounded className="add-icon" />
         </Typography>
       </Grid>
       <Grid item xs={1.3} zeroMinWidth>
         <Typography noWrap component="div" className="grid-item count-item">
-          <p>{answersCount}</p>
+          <p className="grid-item__text">{answersCount}</p>
         </Typography>
       </Grid>
     </>

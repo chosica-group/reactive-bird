@@ -4,7 +4,10 @@ import { AppBar as AppBarMui, Container, Stack, Toolbar } from '@mui/material';
 import { FullscreenBtn } from 'components/fullscreen-btn';
 import { DesktopLogo, DesktopMenu, MobileLogo, MobileMenu, User } from './components';
 
-const pages = ['Лидеры', 'Форум'];
+const pages = [
+  { text: 'Лидеры', path: '/leaderboard' },
+  { text: 'Форум', path: '/forum' },
+];
 
 export const AppBar = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);

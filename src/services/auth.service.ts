@@ -53,9 +53,6 @@ const signin = (params: SigninParams): Promise<SignInRes> => {
   ) as Promise<SignInRes>;
 };
 
-// `·res.status·===·200·?·{·reason:·''·}·:·res.json()`
-// `⏎····res.status·===·200·?·{·reason:·''·}·:·res.json(),⏎··`
-
 const signup = (params: SignupParams): Promise<SignUpRes> => {
   const requestOptions = {
     method: 'POST',
