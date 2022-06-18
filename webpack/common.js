@@ -6,6 +6,7 @@ module.exports = {
   context: process.cwd(),
   entry: {
     main: path.resolve(srcPath, 'index.tsx'),
+    'service-worker': path.resolve(srcPath, 'sw.js'),
   },
   output: {
     path: distPath,
