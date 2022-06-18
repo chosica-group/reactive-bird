@@ -1,0 +1,31 @@
+.grid-item__text {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.add-icon {
+  margin-left: auto;
+  cursor: pointer;
+  color: blue;
+}
+
+.grid-item {
+  padding: 10px;
+  border-radius: 22px;
+}
+
+.grid-item__title {
+  cursor: pointer;
+}
+
+.grid-item.title-item {
+  background-color: white;
+}
+
+.grid-item.count-item {
+  color: white;
+  display: flex;
+  background-color: transparent;
+  border: 1px solid white;
+}

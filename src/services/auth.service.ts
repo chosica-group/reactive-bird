@@ -48,10 +48,9 @@ const signin = (params: SigninParams): Promise<SignInRes> => {
     ...defaultParams,
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return fetch(`${authUrl}/signin`, requestOptions).then((res) =>
     res.status === 200 ? { reason: '' } : res.json(),
-  );
+  ) as Promise<SignInRes>;
 };
 
 const signup = (params: SignupParams): Promise<SignUpRes> => {
@@ -61,8 +60,7 @@ const signup = (params: SignupParams): Promise<SignUpRes> => {
     ...defaultParams,
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return fetch(`${authUrl}/signup`, requestOptions).then((res) => res.json());
+  return fetch(`${authUrl}/signup`, requestOptions).then((res) => res.json()) as Promise<SignUpRes>;
 };
 
 const logout = (): Promise<boolean> => {
@@ -79,8 +77,7 @@ const getUserInfo = (): Promise<UserModel> => {
     method: 'GET',
     ...defaultParams,
   };
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return fetch(`${authUrl}/user`, requestOptions).then((res) => res.json());
+  return fetch(`${authUrl}/user`, requestOptions).then((res) => res.json()) as Promise<UserModel>;
 };
 
 export { signin, signup, logout, getUserInfo };

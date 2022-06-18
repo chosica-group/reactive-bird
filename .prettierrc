@@ -10,6 +10,7 @@
   "arrowParens": "always",
   "importOrderSeparation": false,
   "importOrderSortSpecifiers": true,
+  "endOfLine": "auto",
   "importOrder": [
     "^react$",
     "^@reduxjs/toolkit$",
