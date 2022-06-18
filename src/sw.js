@@ -11,7 +11,7 @@ self.addEventListener('install', async (event) => {
     await cache.addAll(CACHE_URLS)
     console.log(event, 'install');
 });
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', async (event) => {
     console.log(event, 'activate');
     const cacheNames = await caches.keys();
     await Promise.all(
