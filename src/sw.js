@@ -1,15 +1,30 @@
-const STATIC_CACHE_NAME = 's-cfp-app-v1';
-const DYNAMIC_CACHE_NAME = 'd-cfp-app-v1';
+const STATIC_CACHE_NAME = 's-cfp-app-v2';
+const DYNAMIC_CACHE_NAME = 'd-cfp-app-v2';
 const CACHE_URLS = [
+    // '/static/index.html',
+    // '/src/app.tsx',
+    // '/static/offline.html',
+    // '/src/pages/start-game/start-game.tsx',
+    // '/src/layout/main/main.tsx',
+    // '/src/pages/leaderboard/leaderboard.tsx'
+    'index.html',
+    'main.js',
+    'leaderboard',
+    'game',
+    'signup',
+    'login',
     'static/index.html',
     'src/app.tsx',
-    '/offline.html'
-];
+    'static/offline.html',
+    'src/pages/start-game/start-game.tsx',
+    'src/layout/main/main.tsx',
+    'src/pages/leaderboard/leaderboard.tsx'
+    ];
 
 self.addEventListener('install', async (event) => {
+    console.log(event, 'install');
     const cache = await caches.open(STATIC_CACHE_NAME)
     await cache.addAll(CACHE_URLS)
-    console.log(event, 'install');
 });
 self.addEventListener('activate', async (event) => {
     console.log(event, 'activate');
@@ -20,7 +35,7 @@ self.addEventListener('activate', async (event) => {
     )
 });
 self.addEventListener('fetch', (event) => {
-    console.log('fetch', event.request);
+    console.log('fetch', event.request.url);
     const { request } = event;
     const url = new URL(request.url)
     if (url.origin === location.origin) {
@@ -32,6 +47,7 @@ self.addEventListener('fetch', (event) => {
 
 async function cacheFirst(request) {
     const cached = await caches.match(request);
+    console.log(cached, 'cached')
     return cached ?? await fetch(request);
 };
 

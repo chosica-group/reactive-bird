@@ -1,8 +1,0 @@
-{
-  "name": "chosica-flappy-bird",
-  "short_name": "cfp",
-  "theme_color": "#1976d2",
-  "background_color": "#125aa1",
-  "display": "browser",
-  "start_url": "."
-}
