@@ -5,7 +5,7 @@ const authUrl = `${config.API_URL}/auth`;
 export type SigninParams = {
   login: string;
   password: string;
-}
+};
 
 export type SignupParams = {
   first_name: string;
@@ -14,16 +14,16 @@ export type SignupParams = {
   email: string;
   password: string;
   phone: string;
-}
+};
 
 export type SignUpRes = {
   reason?: string;
   id: number;
-}
+};
 
 export type SignInRes = {
   reason?: string;
-}
+};
 
 export type UserModel = {
   avatar: string | null;
@@ -34,7 +34,7 @@ export type UserModel = {
   login: string;
   phone: string | null;
   second_name: string;
-}
+};
 
 const defaultParams = {
   credentials: 'include' as RequestCredentials,
@@ -48,7 +48,9 @@ const signin = (params: SigninParams): Promise<SignInRes> => {
     ...defaultParams,
   };
 
-  return fetch(`${authUrl}/signin`, requestOptions).then(res => res.status === 200 ? { reason: '' } : res.json());
+  return fetch(`${authUrl}/signin`, requestOptions).then((res) =>
+    res.status === 200 ? { reason: '' } : res.json(),
+  ) as Promise<SignInRes>;
 };
 
 const signup = (params: SignupParams): Promise<SignUpRes> => {
@@ -58,7 +60,7 @@ const signup = (params: SignupParams): Promise<SignUpRes> => {
     ...defaultParams,
   };
 
-  return fetch(`${authUrl}/signup`, requestOptions).then(res => res.json());
+  return fetch(`${authUrl}/signup`, requestOptions).then((res) => res.json()) as Promise<SignUpRes>;
 };
 
 const logout = (): Promise<boolean> => {
@@ -75,7 +77,7 @@ const getUserInfo = (): Promise<UserModel> => {
     method: 'GET',
     ...defaultParams,
   };
-  return fetch(`${authUrl}/user`, requestOptions).then(res => res.json());
+  return fetch(`${authUrl}/user`, requestOptions).then((res) => res.json()) as Promise<UserModel>;
 };
 
 export { signin, signup, logout, getUserInfo };

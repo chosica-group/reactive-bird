@@ -1,9 +1,4 @@
-import { MainLayout } from 'layout/main';
+import { AppRouter } from 'components/router/index';
 import { withProviders } from 'providers';
-import { Game } from 'pages/game';
 
-export const App = withProviders(() =>
-  <MainLayout>
-    <Game />
-  </MainLayout>
-);
+export const App = withProviders(() => AppRouter());

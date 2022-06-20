@@ -1,17 +1,19 @@
-import TextField from '@mui/material/TextField';
+import { FocusEvent, useState } from 'react';
 import Button from '@mui/material/Button';
-import { DICT_PATTERNS, PatternsDict } from 'utils/validation/validationDict';
-import { useState, FocusEvent } from 'react';
-import type { SigninParams } from '../../../../services/auth.service';
+import TextField from '@mui/material/TextField';
 import type { CardInput } from 'components/card-form/card-form.type';
+import { useNavigate } from 'react-router-dom';
+import { DICT_PATTERNS, PatternsDict } from 'utils/validation/validationDict';
+import type { SigninParams } from '../../../../services/auth.service';
 import { signin } from '../../../../services/auth.service';
 
 const inputs = [
   { name: 'login', label: 'Логин', type: 'text', required: true },
-  { name: 'password', label: 'Пароль', type: 'password', required: true }
+  { name: 'password', label: 'Пароль', type: 'password', required: true },
 ];
 
 export const SigninForm = () => {
+  const navigate = useNavigate();
   const [errorText, setErrorText] = useState<{ [key: string]: string }>({});
   const [formData, setFormData] = useState<SigninParams>({} as SigninParams);
   const [disabledBtn, setDisabledBtn] = useState(false);
@@ -41,6 +43,10 @@ export const SigninForm = () => {
     setFormData((prevState) => ({ ...prevState, [input.name]: input.value }));
   };
 
+  const goToSignupPage = () => {
+    navigate('/signup', { replace: true });
+  };
+
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
     const input = e.target;
 
@@ -50,11 +56,9 @@ export const SigninForm = () => {
     if (apiError !== '') {
       setApiError('');
     }
-  }
-
-  const checkNeedError = (input: CardInput) => {
-    return !!errorText[input.name];
   };
+
+  const checkNeedError = (input: CardInput) => !!errorText[input.name];
 
   const handleFormSubmit = () => {
     if (Object.keys(formData).length < inputs.length) {
@@ -65,13 +69,17 @@ export const SigninForm = () => {
         }
       });
     } else {
-      signin(formData).then(res => {
-        if (res.reason) {
-          setApiError(res.reason);
-        }
-      }).catch(() => {
-        setApiError('что-то пошло не так');
-      });
+      signin(formData)
+        .then((res) => {
+          if (res.reason) {
+            setApiError(res.reason);
+          } else {
+            navigate('/', { replace: true });
+          }
+        })
+        .catch(() => {
+          setApiError('что-то пошло не так');
+        });
     }
   };
 
@@ -99,9 +107,9 @@ export const SigninForm = () => {
       <Button variant="outlined" fullWidth onClick={handleFormSubmit} disabled={disabledBtn}>
         Войти
       </Button>
-      <Button size="small" variant="text" fullWidth>
+      <Button size="small" variant="text" fullWidth onClick={goToSignupPage}>
         У вас нет аккаунта? Регистрация
       </Button>
     </form>
   );
-}
+};

@@ -1,5 +1,6 @@
 import type { MouseEvent } from 'react';
 import { Avatar, Box, IconButton, Menu, MenuItem, Typography } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 type TProps = {
   handleOpenUserMenu: (event: MouseEvent<HTMLElement>) => void;
@@ -7,7 +8,10 @@ type TProps = {
   handleCloseUserMenu: () => void;
 };
 
-const settings = ['Профиль', 'Выйти'];
+const settings = [
+  { text: 'Профиль', path: 'profile' },
+  { text: 'Выйти', path: 'click' },
+];
 
 // TODO Добавить аватар пользователя
 export const User = ({ handleOpenUserMenu, anchorElUser, handleCloseUserMenu }: TProps) => (
@@ -31,11 +35,24 @@ export const User = ({ handleOpenUserMenu, anchorElUser, handleCloseUserMenu }: 
       open={Boolean(anchorElUser)}
       onClose={handleCloseUserMenu}
     >
-      {settings.map((setting) => (
-        <MenuItem key={setting} onClick={handleCloseUserMenu}>
-          <Typography textAlign="center">{setting}</Typography>
-        </MenuItem>
-      ))}
+      {settings.map((setting) =>
+        setting.path !== 'click' ? (
+          <MenuItem key={setting.text}>
+            <Typography
+              textAlign="center"
+              component={NavLink}
+              to={setting.path}
+              style={{ textDecoration: 'none', color: 'black' }}
+            >
+              {setting.text}
+            </Typography>
+          </MenuItem>
+        ) : (
+          <MenuItem key={setting.text} onClick={handleCloseUserMenu}>
+            <Typography textAlign="center">{setting.text}</Typography>
+          </MenuItem>
+        ),
+      )}
     </Menu>
   </Box>
 );

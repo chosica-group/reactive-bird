@@ -1,10 +1,11 @@
-import TextField from '@mui/material/TextField';
+import { FocusEvent, useState } from 'react';
 import Button from '@mui/material/Button';
-import { DICT_PATTERNS, PatternsDict } from 'utils/validation/validationDict';
-import { useState, FocusEvent } from 'react';
-import type { SigninParams } from '../../../../services/auth.service';
+import TextField from '@mui/material/TextField';
 import type { CardInput } from 'components/card-form/card-form.type';
 import type { SignFormValue } from 'pages/signup/components/signup-form/signup-form.type';
+import { useNavigate } from 'react-router-dom';
+import { DICT_PATTERNS, PatternsDict } from 'utils/validation/validationDict';
+import type { SigninParams } from '../../../../services/auth.service';
 import { signup } from '../../../../services/auth.service';
 
 const inputs: CardInput[] = [
@@ -18,6 +19,7 @@ const inputs: CardInput[] = [
 ];
 
 export const SignupForm = () => {
+  const navigate = useNavigate();
   const [errorText, setErrorText] = useState<{ [key: string]: string }>({});
   const [formData, setFormData] = useState<SignFormValue>({} as SignFormValue);
   const [disabledBtn, setDisabledBtn] = useState(false);
@@ -47,6 +49,10 @@ export const SignupForm = () => {
     setFormData((prevState) => ({ ...prevState, [input.name]: input.value }));
   };
 
+  const goToSigninPage = () => {
+    navigate('/login', { replace: true });
+  };
+
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
     const input = e.target;
 
@@ -56,11 +62,9 @@ export const SignupForm = () => {
     if (apiError !== '') {
       setApiError('');
     }
-  }
-
-  const checkNeedError = (input: CardInput) => {
-    return !!errorText[input.name];
   };
+
+  const checkNeedError = (input: CardInput) => !!errorText[input.name];
 
   const handleFormSubmit = () => {
     if (Object.keys(formData).length < inputs.length) {
@@ -79,15 +83,17 @@ export const SignupForm = () => {
       setDisabledBtn(true);
     } else {
       const dataToSend = { ...formData, passwordRepeat: undefined };
-      delete dataToSend['passwordRepeat'];
+      delete dataToSend.passwordRepeat;
 
-      signup(dataToSend).then(res => {
-        if (res.reason) {
-          setApiError(res.reason);
-        }
-      }).catch(() => {
-        setApiError('что-то пошло не так');
-      });
+      signup(dataToSend)
+        .then((res) => {
+          if (res.reason) {
+            setApiError(res.reason);
+          }
+        })
+        .catch(() => {
+          setApiError('что-то пошло не так');
+        });
     }
   };
 
@@ -115,9 +121,9 @@ export const SignupForm = () => {
       <Button variant="outlined" fullWidth onClick={handleFormSubmit} disabled={disabledBtn}>
         Зарегистрироваться
       </Button>
-      <Button size="small" variant="text" fullWidth>
+      <Button size="small" variant="text" fullWidth onClick={goToSigninPage}>
         У меня есть аккаунт
       </Button>
     </form>
   );
-}
+};
