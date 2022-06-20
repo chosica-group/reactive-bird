@@ -1,4 +1,4 @@
-import { MainLayout } from 'layout/main';
+import { AppRouter } from 'components/router/index';
 import { withProviders } from 'providers';
 
-export const App = withProviders(() => <MainLayout />);
+export const App = withProviders(() => AppRouter());

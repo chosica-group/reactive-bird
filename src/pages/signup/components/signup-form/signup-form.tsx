@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from '@mui/material';
 import { Form } from 'components/form';
 import type { TFormInputs } from 'components/form';
+import { useNavigate } from 'react-router-dom';
 import { signup } from 'services/auth.service';
 import type { SignupParams } from 'services/auth.service';
 
@@ -20,6 +21,7 @@ const inputs: TFormInputs<TSubmitWithPassRepeat> = [
 ];
 
 export const SignupForm = () => {
+  const navigate = useNavigate();
   const [apiError, setApiError] = useState<string | undefined>();
 
   const onSubmit = ({
@@ -39,6 +41,10 @@ export const SignupForm = () => {
     }
   };
 
+  const goToSigninPage = () => {
+    navigate('/login', { replace: true });
+  };
+
   return (
     <>
       <Form<TSubmitWithPassRepeat>
@@ -48,7 +54,7 @@ export const SignupForm = () => {
         submitText="Зарегистрироваться"
         error={apiError}
       />
-      <Button size="small" variant="text" fullWidth>
+      <Button size="small" variant="text" fullWidth onClick={goToSigninPage}>
         У меня есть аккаунт
       </Button>
     </>
