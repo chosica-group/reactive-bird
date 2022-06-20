@@ -1,5 +1,5 @@
-const STATIC_CACHE_NAME = 's-cfp-app-v2';
-const DYNAMIC_CACHE_NAME = 'd-cfp-app-v2';
+const STATIC_CACHE_NAME = 's-cfp-app-v4';
+const DYNAMIC_CACHE_NAME = 'd-cfp-app-v4';
 const CACHE_URLS = [
     // '/static/index.html',
     // '/src/app.tsx',
@@ -13,12 +13,12 @@ const CACHE_URLS = [
     'game',
     'signup',
     'login',
-    'static/index.html',
-    'src/app.tsx',
-    'static/offline.html',
-    'src/pages/start-game/start-game.tsx',
-    'src/layout/main/main.tsx',
-    'src/pages/leaderboard/leaderboard.tsx'
+    // 'static/index.html',
+    // 'src/app.tsx',
+    // 'static/offline.html',
+    // 'src/pages/start-game/start-game.tsx',
+    // 'src/layout/main/main.tsx',
+    // 'src/pages/leaderboard/leaderboard.tsx'
     ];
 
 self.addEventListener('install', async (event) => {
@@ -59,6 +59,6 @@ async function networkFirst(request) {
         return response;
     } catch (e) {
         const cached = await cache.match(request);
-        return cached ?? await caches.match('/offline.html')
+        return cached ?? await caches.match('/offline.html');
     }
 }
