@@ -1,34 +1,59 @@
+import pipe1 from '../../../../assets/images/pipe-1.png';
+import pipe2 from '../../../../assets/images/pipe-2.png';
+import { PipeConstants } from './pipe-constants';
+
+export type PipesPositionsConfig = {
+  y: number;
+  x: number;
+};
+
 export class Pipe {
-  context: CanvasRenderingContext2D;
-  x = 800;
-  firstPipeImg: HTMLImageElement;
-  secondPipeImg: HTMLImageElement;
-  secondPipeFullHeight = 935;
-  secondPipeHeight = 0;
+  private context: CanvasRenderingContext2D;
+  private x = PipeConstants.PIPES_START_X;
+  private readonly firstPipeImg: HTMLImageElement;
+  private readonly secondPipeImg: HTMLImageElement;
+  private secondPipeHeight: number;
 
   constructor(context: CanvasRenderingContext2D) {
     this.context = context;
+    this.secondPipeHeight = Pipe.getRandomIntInclusive();
     this.firstPipeImg = new Image();
     this.secondPipeImg = new Image();
-    this.firstPipeImg.src = 'https://i.postimg.cc/Vv2vScrW/111.png'; // TODO: мб лучше юзать картинки статичные
-    this.secondPipeImg.src = 'https://i.postimg.cc/PJ5YbhqG/222.png';
-    this.secondPipeHeight = this.getRandomIntInclusive();
+    this.firstPipeImg.src = pipe1 as string;
+    this.secondPipeImg.src = pipe2 as string;
   }
 
-  render = () => {
-    this.context.drawImage(this.firstPipeImg, this.x -= 2, 0, 100, this.secondPipeFullHeight - this.secondPipeHeight - 250);
-    this.context.drawImage(this.secondPipeImg, this.x -= 2, this.secondPipeFullHeight - this.secondPipeHeight, 100, this.secondPipeHeight);
+  render = (): PipesPositionsConfig => {
+    this.context.drawImage(
+      this.firstPipeImg,
+      (this.x -= PipeConstants.PIPES_SPEED),
+      0,
+      PipeConstants.PIPES_WIDTH,
+      PipeConstants.PIPE_FULL_HEIGHT - this.secondPipeHeight - PipeConstants.GAP_BETWEEN_PIPES,
+    );
+    this.context.drawImage(
+      this.secondPipeImg,
+      (this.x -= PipeConstants.PIPES_SPEED),
+      PipeConstants.PIPE_FULL_HEIGHT - this.secondPipeHeight,
+      PipeConstants.PIPES_WIDTH,
+      this.secondPipeHeight,
+    );
 
     if (this.x <= -100) {
-      this.x = 800;
-      this.secondPipeHeight = this.getRandomIntInclusive();
+      this.x = PipeConstants.PIPES_START_X;
+      this.secondPipeHeight = Pipe.getRandomIntInclusive();
     }
-  }
 
-  getRandomIntInclusive = () => {
-    const min = Math.ceil(100);
-    const max = Math.floor(500);
+    return {
+      y: PipeConstants.PIPE_FULL_HEIGHT - this.secondPipeHeight - PipeConstants.GAP_BETWEEN_PIPES,
+      x: this.x,
+    };
+  };
+
+  static getRandomIntInclusive = (): number => {
+    const min = Math.ceil(PipeConstants.PIPE_MIN_HEIGHT);
+    const max = Math.floor(PipeConstants.PIPE_MAX_HEIGHT);
 
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  };
 }

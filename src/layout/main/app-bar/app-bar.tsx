@@ -5,6 +5,7 @@ import { FullscreenBtn } from 'components/fullscreen-btn';
 import { DesktopLogo, DesktopMenu, MobileLogo, MobileMenu, User } from './components';
 
 const pages = [
+  { text: 'Игра', path: '/game' },
   { text: 'Лидеры', path: '/leaderboard' },
   { text: 'Форум', path: '/forum' },
 ];

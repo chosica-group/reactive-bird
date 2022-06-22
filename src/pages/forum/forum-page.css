@@ -11,3 +11,10 @@
   max-width: 900px;
   min-width: 500px;
 }
+
+.grid-wrapper__column {
+  text-align: center;
+  margin: 0;
+  color: blue;
+  font-weight: bold;
+}
