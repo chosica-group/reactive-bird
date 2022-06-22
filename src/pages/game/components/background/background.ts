@@ -15,5 +15,5 @@ export class Background {
     if (this.x <= -568) {
       this.x = 0;
     }
-  }
+  };
 }

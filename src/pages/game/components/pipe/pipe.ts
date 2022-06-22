@@ -16,19 +16,31 @@ export class Pipe {
   }
 
   render = () => {
-    this.context.drawImage(this.firstPipeImg, this.x -= 2, 0, 100, this.secondPipeFullHeight - this.secondPipeHeight - 250);
-    this.context.drawImage(this.secondPipeImg, this.x -= 2, this.secondPipeFullHeight - this.secondPipeHeight, 100, this.secondPipeHeight);
+    this.context.drawImage(
+      this.firstPipeImg,
+      (this.x -= 2),
+      0,
+      100,
+      this.secondPipeFullHeight - this.secondPipeHeight - 250,
+    );
+    this.context.drawImage(
+      this.secondPipeImg,
+      (this.x -= 2),
+      this.secondPipeFullHeight - this.secondPipeHeight,
+      100,
+      this.secondPipeHeight,
+    );
 
     if (this.x <= -100) {
       this.x = 800;
       this.secondPipeHeight = this.getRandomIntInclusive();
     }
-  }
+  };
 
   getRandomIntInclusive = () => {
     const min = Math.ceil(100);
     const max = Math.floor(500);
 
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  };
 }

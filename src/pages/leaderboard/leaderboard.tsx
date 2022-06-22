@@ -1,4 +1,6 @@
+// import React, { useEffect, useState } from 'react';
 import { Stack, Typography } from '@mui/material';
+// import { useGetAllLeaderboardQuery } from 'services/leaderboard/index';
 import { Container, LeaderCard } from './components';
 
 const mockData = [

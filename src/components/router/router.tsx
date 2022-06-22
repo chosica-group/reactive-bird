@@ -4,6 +4,7 @@ import { LeaderboardPage } from 'pages/leaderboard/index';
 import { SignInPage } from 'pages/signin/index';
 import { SignUpPage } from 'pages/signup/index';
 import { StartGamePage } from 'pages/start-game';
+import { UserPage } from 'pages/user/index';
 import { WelcomePage } from 'pages/welcome-page/index';
 import { Route, Routes } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ export const AppRouter = () => {
       <MainLayout>
         <Routes>
           <Route path="/game" element={<StartGamePage />} />
+          <Route path="/user" element={<UserPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
         </Routes>
       </MainLayout>

@@ -17,7 +17,7 @@ export const InfoAboutProject = () => {
     <Card style={{ backgroundColor: '#1976d2', maxWidth: '700px' }} className="infocard">
       <CardContent>
         <Typography gutterBottom variant="h4" component="div" style={{ color: 'white' }}>
-          Добро пожаловать на страницу игры Флаппи берд
+          Добро пожаловать на страницу игры Reactive Bird
         </Typography>
         <Typography variant="body2" color="white">
           в рамках учебного проекта в ЯП

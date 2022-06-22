@@ -2,7 +2,7 @@ export class Bird {
   x: number;
   y: number;
   size: number;
-  color: string
+  color: string;
   jumpHeight: number;
   fallHeiht: number;
   shouldJump = false;
@@ -55,22 +55,22 @@ export class Bird {
   }
 
   rotation(ctx: CanvasRenderingContext2D) {
-    let offsetXPosition = this.x + (this.size / 2);
-    let offsetYPosition = this.y + (this.size / 2);
+    const offsetXPosition = this.x + this.size / 2;
+    const offsetYPosition = this.y + this.size / 2;
 
-    ctx.translate(offsetXPosition,offsetYPosition);
-    ctx.rotate(this.spin * Math.PI / 180);
-    ctx.rotate(this.spinIncrement * Math.PI / 180 );
-    ctx.translate(-offsetXPosition,-offsetYPosition);
+    ctx.translate(offsetXPosition, offsetYPosition);
+    ctx.rotate((this.spin * Math.PI) / 180);
+    ctx.rotate((this.spinIncrement * Math.PI) / 180);
+    ctx.translate(-offsetXPosition, -offsetYPosition);
     this.spin += this.spinIncrement;
   }
 
   counterRotation(ctx: CanvasRenderingContext2D) {
-    let offsetXPosition = this.x + (this.size / 2);
-    let offsetYPosition = this.y + (this.size / 2);
+    const offsetXPosition = this.x + this.size / 2;
+    const offsetYPosition = this.y + this.size / 2;
 
-    ctx.translate(offsetXPosition,offsetYPosition);
-    ctx.rotate(-this.spin * Math.PI / 180 );
-    ctx.translate(-offsetXPosition,-offsetYPosition);
+    ctx.translate(offsetXPosition, offsetYPosition);
+    ctx.rotate((-this.spin * Math.PI) / 180);
+    ctx.translate(-offsetXPosition, -offsetYPosition);
   }
 }

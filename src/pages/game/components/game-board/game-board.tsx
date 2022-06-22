@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { Bird } from '../bird';
 import { Background } from '../background';
+import { Bird } from '../bird';
 import { Pipe } from '../pipe';
 
 export type IGameBoard = {
   height: number;
   width: number;
-}
+};
 
 export const GameBoard = ({ height, width }: IGameBoard) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -20,7 +20,7 @@ export const GameBoard = ({ height, width }: IGameBoard) => {
       bird.jumpCounter = 0;
       bird.shouldJump = true;
     }
-  }
+  };
 
   function animate() {
     if (context) {
@@ -34,11 +34,11 @@ export const GameBoard = ({ height, width }: IGameBoard) => {
   }
 
   const startGame = () => {
-    bird = new Bird(150,450,50,'black');
+    bird = new Bird(150, 450, 50, 'black');
   };
 
   useEffect(() => {
-    setContext(canvasRef.current && canvasRef.current.getContext("2d"));
+    setContext(canvasRef.current && canvasRef.current.getContext('2d'));
 
     if (context) {
       bg = new Background(context);
@@ -58,7 +58,7 @@ export const GameBoard = ({ height, width }: IGameBoard) => {
     <canvas
       ref={canvasRef}
       style={{
-        border: "3px solid black",
+        border: '3px solid black',
       }}
       height={height}
       width={width}
