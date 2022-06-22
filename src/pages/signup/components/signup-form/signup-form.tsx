@@ -31,9 +31,10 @@ export const SignupForm = () => {
     if (passwordRepeat === data.password) {
       signup(data)
         .then((res) => {
+          console.log(res, 'rrrr');
           setApiError(res.reason);
         })
-        .catch(() => {
+        .catch((e) => {
           setApiError('что-то пошло не так');
         });
     } else {
