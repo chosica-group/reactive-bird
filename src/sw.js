@@ -1,24 +1,8 @@
-const STATIC_CACHE_NAME = 's-cfp-app-v4';
-const DYNAMIC_CACHE_NAME = 'd-cfp-app-v4';
+const STATIC_CACHE_NAME = 's-cfp-app-v1';
+const DYNAMIC_CACHE_NAME = 'd-cfp-app-v1';
 const CACHE_URLS = [
-    // '/static/index.html',
-    // '/src/app.tsx',
-    // '/static/offline.html',
-    // '/src/pages/start-game/start-game.tsx',
-    // '/src/layout/main/main.tsx',
-    // '/src/pages/leaderboard/leaderboard.tsx'
     'index.html',
     'main.js',
-    'leaderboard',
-    'game',
-    'signup',
-    'login',
-    // 'static/index.html',
-    // 'src/app.tsx',
-    // 'static/offline.html',
-    // 'src/pages/start-game/start-game.tsx',
-    // 'src/layout/main/main.tsx',
-    // 'src/pages/leaderboard/leaderboard.tsx'
     ];
 
 self.addEventListener('install', async (event) => {
@@ -53,6 +37,7 @@ async function cacheFirst(request) {
 
 async function networkFirst(request) {
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
+    console.log(cache, 'networkFirst')
     try {
         const response = await fetch(request)
         await cache.put(request, response.clone());
