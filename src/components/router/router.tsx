@@ -1,8 +1,9 @@
-import { MainLayout } from 'layout/main/index';
-import { PublicLayout } from 'layout/public-layout/index';
-import { LeaderboardPage } from 'pages/leaderboard/index';
-import { SignInPage } from 'pages/signin/index';
-import { SignUpPage } from 'pages/signup/index';
+import { MainLayout } from 'layout/main';
+import { PublicLayout } from 'layout/public-layout';
+import { ForumPage } from 'pages/forum';
+import { LeaderboardPage } from 'pages/leaderboard';
+import { SignInPage } from 'pages/signin';
+import { SignUpPage } from 'pages/signup';
 import { StartGamePage } from 'pages/start-game';
 import { UserPage } from 'pages/user/index';
 import { WelcomePage } from 'pages/welcome-page/index';
@@ -18,6 +19,7 @@ export const AppRouter = () => {
           <Route path="/game" element={<StartGamePage />} />
           <Route path="/user" element={<UserPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
+          <Route path="/forum" element={<ForumPage />} />
         </Routes>
       </MainLayout>
     );

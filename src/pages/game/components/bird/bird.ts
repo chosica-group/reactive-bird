@@ -1,76 +1,115 @@
-export class Bird {
-  x: number;
-  y: number;
-  size: number;
-  color: string;
-  jumpHeight: number;
-  fallHeiht: number;
-  shouldJump = false;
-  jumpCounter = 0;
-  jumpUp: boolean;
-  spin: number;
-  spinIncrement: number;
+import { PipeConstants } from 'pages/game/components/pipe';
+import type { PipesPositionsConfig } from 'pages/game/components/pipe';
+import bird from '../../../../assets/images/bird.png';
+import { BirdConstants } from './bird-constants';
 
-  constructor(x: number, y: number, size: number, color: string) {
-    this.x = x;
-    this.y = y;
-    this.size = size;
-    this.color = color;
-    this.jumpHeight = 6;
-    this.fallHeiht = 4;
+export class Bird {
+  score = 0;
+  jumpCounter = 0;
+  shouldJump = false;
+  private readonly x: number;
+  private y: number;
+  private readonly size: number;
+  private readonly jumpHeight: number;
+  private readonly fallHeight: number;
+  private spin: number;
+  private readonly spinIncrement: number;
+  private ctx: CanvasRenderingContext2D;
+  private readonly bird: HTMLImageElement;
+  private pipeHitChecking = false;
+
+  constructor(ctx: CanvasRenderingContext2D) {
+    this.bird = new Image();
+    this.bird.src = bird as string;
+    this.ctx = ctx;
+    this.y = ctx.canvas.height / 2;
+    this.x = BirdConstants.INDENT_LEFT;
+    this.size = BirdConstants.SIZE;
+    this.jumpHeight = BirdConstants.JUMP_HEIGHT;
+    this.fallHeight = BirdConstants.FALL_HEIGHT;
+    this.spinIncrement = BirdConstants.SPIN_INCREMENT;
     this.shouldJump = false;
     this.jumpCounter = 0;
-    this.jumpUp = true;
     this.spin = 0;
-    this.spinIncrement = 90 / 32;
   }
 
-  draw(ctx: CanvasRenderingContext2D) {
-    this.jump(ctx);
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.size, this.size);
-    if (this.shouldJump) {
-      this.counterRotation(ctx);
+  draw(pipesPositionsConfig: PipesPositionsConfig) {
+    if (
+      pipesPositionsConfig.x <= BirdConstants.START_HIT_X &&
+      pipesPositionsConfig.x >= BirdConstants.END_HIT_X
+    ) {
+      this.pipeHitChecking = true;
+
+      if (this.checkPipeHit(pipesPositionsConfig)) {
+        this.ctx.drawImage(this.bird, this.x, this.y);
+        return true;
+      }
+    } else if (pipesPositionsConfig.x < BirdConstants.END_HIT_X && this.pipeHitChecking) {
+      this.pipeHitChecking = false;
+      this.score += 1;
     }
+
+    this.jump();
+
+    if (this.y >= this.ctx.canvas.height - BirdConstants.BIRD_HEIGHT) {
+      this.ctx.drawImage(this.bird, this.x, this.ctx.canvas.height - BirdConstants.BIRD_HEIGHT);
+
+      return true;
+    }
+
+    this.ctx.drawImage(this.bird, this.x, this.y);
+
+    if (this.shouldJump) {
+      this.counterRotation();
+    }
+
+    return false;
   }
 
-  jump(ctx: CanvasRenderingContext2D) {
+  jump() {
     if (this.shouldJump) {
-      this.jumpCounter++;
+      this.jumpCounter += 1;
 
       if (this.y > this.jumpHeight) {
         this.y -= this.jumpHeight;
       }
 
-      this.rotation(ctx);
+      this.rotation();
 
-      if (this.jumpCounter >= 22) {
-        this.counterRotation(ctx);
+      if (this.jumpCounter >= BirdConstants.BIRD_JUMP_COUNTER) {
+        this.counterRotation();
         this.spin = 0;
         this.shouldJump = false;
       }
-    } else if (this.y < 950) {
-      this.y += this.fallHeiht;
+    } else if (this.y < this.ctx.canvas.height - BirdConstants.BIRD_HEIGHT) {
+      this.y += this.fallHeight;
     }
   }
 
-  rotation(ctx: CanvasRenderingContext2D) {
+  rotation() {
     const offsetXPosition = this.x + this.size / 2;
     const offsetYPosition = this.y + this.size / 2;
 
-    ctx.translate(offsetXPosition, offsetYPosition);
-    ctx.rotate((this.spin * Math.PI) / 180);
-    ctx.rotate((this.spinIncrement * Math.PI) / 180);
-    ctx.translate(-offsetXPosition, -offsetYPosition);
+    this.ctx.translate(offsetXPosition, offsetYPosition);
+    this.ctx.rotate((-this.spin * Math.PI) / 180);
+    this.ctx.rotate((-this.spinIncrement * Math.PI) / 180);
+    this.ctx.translate(-offsetXPosition, -offsetYPosition);
     this.spin += this.spinIncrement;
   }
 
-  counterRotation(ctx: CanvasRenderingContext2D) {
+  counterRotation() {
     const offsetXPosition = this.x + this.size / 2;
     const offsetYPosition = this.y + this.size / 2;
 
-    ctx.translate(offsetXPosition, offsetYPosition);
-    ctx.rotate((-this.spin * Math.PI) / 180);
-    ctx.translate(-offsetXPosition, -offsetYPosition);
+    this.ctx.translate(offsetXPosition, offsetYPosition);
+    this.ctx.rotate((this.spin * Math.PI) / 180);
+    this.ctx.translate(-offsetXPosition, -offsetYPosition);
+  }
+
+  private checkPipeHit(pipesPositionsConfig: PipesPositionsConfig): boolean {
+    return (
+      this.y < pipesPositionsConfig.y ||
+      this.y > pipesPositionsConfig.y + PipeConstants.GAP_BETWEEN_PIPES - this.bird.height
+    );
   }
 }

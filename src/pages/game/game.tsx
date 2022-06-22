@@ -1,4 +1,5 @@
 import { GameBoard } from './components/game-board';
+import './game.css';
 
 export const Game = () => (
   <div>
