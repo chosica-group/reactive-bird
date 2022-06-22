@@ -1,67 +1,59 @@
 import { useEffect, useRef, useState } from 'react';
-import { Bird } from '../bird';
-import { Background } from '../background';
-import { Pipe } from '../pipe';
+import { Button } from '@mui/material';
+import { CanvasContainer } from 'pages/game';
+import './game-board.css';
 
 export type IGameBoard = {
   height: number;
   width: number;
-}
+};
 
 export const GameBoard = ({ height, width }: IGameBoard) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
-  let bird: Bird;
-  let bg: Background;
-  let pipe: Pipe;
+  const [isHit, setHit] = useState<boolean>(false);
+  const [game, setGame] = useState<CanvasContainer | null>(null);
+  const [score, setScore] = useState<number>(0);
 
-  const handleSpacePress = (event: KeyboardEvent) => {
-    if (event.code === 'Space' && context) {
-      bird.jumpCounter = 0;
-      bird.shouldJump = true;
-    }
-  }
+  useEffect(() => {
+    setGame(
+      new CanvasContainer({
+        canvas: canvasRef.current as HTMLCanvasElement,
+        onHit: (scoreResult: number) => {
+          setScore(scoreResult);
+          setHit(true);
+        },
+      }),
+    );
 
-  function animate() {
-    if (context) {
-      requestAnimationFrame(animate);
-      context.clearRect(0, 0, width, height);
-      bg.render();
-      pipe.render();
+    return () => game?.destroy();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-      bird.draw(context);
-    }
-  }
-
-  const startGame = () => {
-    bird = new Bird(150,450,50,'black');
+  const restart = () => {
+    setHit(false);
+    game?.restart();
   };
 
-  useEffect(() => {
-    setContext(canvasRef.current && canvasRef.current.getContext("2d"));
-
-    if (context) {
-      bg = new Background(context);
-      pipe = new Pipe(context);
-      startGame();
-      animate();
-    }
-  }, [context]);
-
-  useEffect(() => {
-    window.addEventListener('keypress', handleSpacePress);
-
-    return () => window.removeEventListener('keypress', handleSpacePress);
-  });
-
   return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        border: "3px solid black",
-      }}
-      height={height}
-      width={width}
-    />
+    <div className="game-wrapper">
+      <p>{isHit}</p>
+      {isHit ? (
+        <div className="game-wrapper__status-container">
+          <p>Вы проиграли!</p>
+          <p>Ваш результат: {score}</p>
+          <Button size="large" variant="contained" onClick={restart}>
+            Начать заново
+          </Button>
+        </div>
+      ) : null}
+      <canvas
+        ref={canvasRef}
+        style={{
+          border: '3px solid black',
+        }}
+        height={height}
+        width={width}
+      />
+    </div>
   );
 };
