@@ -1,6 +1,6 @@
 // import React, { useEffect, useState } from 'react';
 import { Stack, Typography } from '@mui/material';
-import { useGetAllLeaderboardQuery } from 'services/leaderboard/index';
+import { useGetTeamLeaderboardQuery } from 'services/leaderboard/index';
 import type { TAllLeaderboardRequest } from 'services/leaderboard/types';
 import { Container, LeaderCard } from './components';
 
@@ -14,7 +14,7 @@ export const LeaderboardPage = () => {
     cursor: 0,
     limit: 10,
   };
-  const { data, error, isLoading } = useGetAllLeaderboardQuery(body);
+  const { data, error, isLoading } = useGetTeamLeaderboardQuery(body);
   if (isLoading) {
     return <div>Loading...</div>;
   }

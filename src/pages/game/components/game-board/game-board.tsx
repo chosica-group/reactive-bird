@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { Button } from '@mui/material';
 import { CanvasContainer } from 'pages/game';
 import { useAddUserToLeaderboardMutation } from 'services/leaderboard';
-import type { TUserLeaderboardRequest } from 'services/leaderboard/types';
+import type {
+  TUserDataScoreLeaderboard,
+  TUserLeaderboardRequest,
+} from 'services/leaderboard/types';
 import './game-board.css';
 
 export type IGameBoard = {
@@ -18,12 +21,14 @@ export const GameBoard = ({ height, width }: IGameBoard) => {
   const [sendData] = useAddUserToLeaderboardMutation();
 
   const sendResult = (scoreResult: number) => {
+    const userData: TUserDataScoreLeaderboard = {
+      score: scoreResult,
+      date: new Date(),
+      userAvatar: '',
+      userName: 'Elena', // store.userId или вся инфа о юзере
+    };
     const result: TUserLeaderboardRequest = {
-      data: {
-        score: scoreResult,
-        date: new Date(),
-        userName: 'Elena', // store.userId или вся инфа о юзере
-      },
+      data: userData,
       ratingFieldName: 'score',
       teamName: 'chosica',
     };

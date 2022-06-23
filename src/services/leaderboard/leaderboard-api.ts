@@ -2,7 +2,6 @@ import { instanceApi } from '../instance-api';
 import type {
   TAllLeaderboardRequest,
   TAllLeaderboardResponse,
-  TTeamLeaderboardRequest,
   TUserLeaderboardRequest,
 } from './types';
 
@@ -22,9 +21,9 @@ export const leaderboardApi = instanceApi.injectEndpoints({
         body,
       }),
     }),
-    getTeamLeaderboard: builder.query<TAllLeaderboardResponse, TTeamLeaderboardRequest>({
-      query: ({ teamName, body }) => ({
-        url: `/leaderboard/${teamName}`,
+    getTeamLeaderboard: builder.query<TAllLeaderboardResponse, TAllLeaderboardRequest>({
+      query: (body) => ({
+        url: `/leaderboard/${process.env.GROUP_NAME || 'chosica'}`,
         method: 'POST',
         body,
       }),
