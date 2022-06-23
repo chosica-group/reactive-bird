@@ -1,6 +1,6 @@
 import { PipeConstants } from 'pages/game/components/pipe';
-import type { PipesPositionsConfig } from 'pages/game/components/pipe';
 import bird from '../../../../assets/images/bird.png';
+import type { PipesPositionsConfig } from '../pipe/pipe';
 import { BirdConstants } from './bird-constants';
 
 export class Bird {

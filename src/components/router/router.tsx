@@ -8,7 +8,7 @@ import { StartGamePage } from 'pages/start-game';
 import { WelcomePage } from 'pages/welcome-page';
 import { Route, Routes } from 'react-router-dom';
 
-const user = false;
+const user = true;
 
 export const AppRouter = () => {
   if (user) {
