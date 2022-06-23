@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@mui/material';
 import { CanvasContainer } from 'pages/game';
+import { useAddUserToLeaderboardMutation } from 'services/leaderboard';
+import type { TUserLeaderboardRequest } from 'services/leaderboard/types';
 import './game-board.css';
 
 export type IGameBoard = {
@@ -13,6 +15,21 @@ export const GameBoard = ({ height, width }: IGameBoard) => {
   const [isHit, setHit] = useState<boolean>(false);
   const [game, setGame] = useState<CanvasContainer | null>(null);
   const [score, setScore] = useState<number>(0);
+  const [sendData] = useAddUserToLeaderboardMutation();
+
+  const sendResult = (scoreResult: number) => {
+    const result: TUserLeaderboardRequest = {
+      data: {
+        score: scoreResult,
+        date: new Date(),
+        userName: 'Elena', // store.userId или вся инфа о юзере
+      },
+      ratingFieldName: 'score',
+      teamName: 'chosica',
+    };
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    sendData(result);
+  };
 
   useEffect(() => {
     setGame(
@@ -20,6 +37,7 @@ export const GameBoard = ({ height, width }: IGameBoard) => {
         canvas: canvasRef.current as HTMLCanvasElement,
         onHit: (scoreResult: number) => {
           setScore(scoreResult);
+          sendResult(scoreResult);
           setHit(true);
         },
       }),

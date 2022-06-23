@@ -4,43 +4,38 @@ import { useGetAllLeaderboardQuery } from 'services/leaderboard/index';
 import type { TAllLeaderboardRequest } from 'services/leaderboard/types';
 import { Container, LeaderCard } from './components';
 
-// const mockData = [
-//   {
-//     rating: 1,
-//     time: 35,
-//     result: 1,
-//     name: 'Ваня',
-//     avatar: '',
-//   },
-//   {
-//     rating: 2,
-//     time: 65,
-//     result: 22,
-//     name: 'Маша',
-//     avatar: '',
-//   },
-//   {
-//     rating: 3,
-//     time: 35,
-//     result: 15,
-//     name: 'Петя',
-//     avatar: '',
-//   },
-// ];
+type TDataLeaderboard = {
+  data?: Record<string, any>;
+};
 
 export const LeaderboardPage = () => {
   const body: TAllLeaderboardRequest = {
-    ratingFieldName: 'rrrr',
+    ratingFieldName: 'score',
     cursor: 0,
-    limit: 0,
+    limit: 10,
   };
-  const { data } = useGetAllLeaderboardQuery(body);
+  const { data, error, isLoading } = useGetAllLeaderboardQuery(body);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Oops, an error occured</div>;
+  }
   return (
     <Container>
       <Typography variant="h1">Рекорды</Typography>
       <Stack spacing={2} alignItems="center">
-        {data?.map((user, index) => (
-          <LeaderCard rating={0} time={0} result={0} name="dddd" avatar="wedwedwe" key={index} />
+        {data?.map((item: TDataLeaderboard, index) => (
+          <LeaderCard
+            rating={0}
+            time={0}
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            result={item.data?.score}
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            name={item.data?.userName}
+            avatar="wedwedwe"
+            key={index}
+          />
         ))}
       </Stack>
     </Container>
