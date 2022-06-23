@@ -1,11 +1,10 @@
-// import React, { useEffect, useState } from 'react';
 import { Stack, Typography } from '@mui/material';
 import { useGetTeamLeaderboardQuery } from 'services/leaderboard/index';
-import type { TAllLeaderboardRequest } from 'services/leaderboard/types';
+import type { TAllLeaderboardRequest, TUserDataScoreLeaderboard } from 'services/leaderboard/types';
 import { Container, LeaderCard } from './components';
 
 type TDataLeaderboard = {
-  data?: Record<string, any>;
+  data?: TUserDataScoreLeaderboard;
 };
 
 export const LeaderboardPage = () => {
@@ -15,28 +14,27 @@ export const LeaderboardPage = () => {
     limit: 10,
   };
   const { data, error, isLoading } = useGetTeamLeaderboardQuery(body);
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>Oops, an error occured</div>;
-  }
+
   return (
     <Container>
       <Typography variant="h1">Рекорды</Typography>
       <Stack spacing={2} alignItems="center">
-        {data?.map((item: TDataLeaderboard, index) => (
-          <LeaderCard
-            rating={0}
-            time={0}
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            result={item.data?.score}
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            name={item.data?.userName}
-            avatar="wedwedwe"
-            key={index}
-          />
-        ))}
+        {isLoading && <div>Loading...</div>}
+        {error && <div>Oops, an error occured</div>}
+        {!data ? (
+          <div>no results</div>
+        ) : (
+          data.map((item: TDataLeaderboard, index: number) => (
+            <LeaderCard
+              rating={0}
+              time={0}
+              result={item.data?.score || 0}
+              name={item.data?.userName || 'name'}
+              avatar={item.data?.userAvatar || ''}
+              key={index}
+            />
+          ))
+        )}
       </Stack>
     </Container>
   );

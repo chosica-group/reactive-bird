@@ -6,6 +6,7 @@ import type {
   TUserDataScoreLeaderboard,
   TUserLeaderboardRequest,
 } from 'services/leaderboard/types';
+import { useGetUserQuery } from 'services/user';
 import './game-board.css';
 
 export type IGameBoard = {
@@ -19,14 +20,19 @@ export const GameBoard = ({ height, width }: IGameBoard) => {
   const [game, setGame] = useState<CanvasContainer | null>(null);
   const [score, setScore] = useState<number>(0);
   const [sendData] = useAddUserToLeaderboardMutation();
+  const { data: { avatar, id, ...data } = {}, isSuccess } = useGetUserQuery();
 
   const sendResult = (scoreResult: number) => {
     const userData: TUserDataScoreLeaderboard = {
       score: scoreResult,
       date: new Date(),
       userAvatar: '',
-      userName: 'Elena', // store.userId или вся инфа о юзере
+      userName: 'name',
     };
+    if (isSuccess) {
+      userData.userAvatar = avatar || '';
+      userData.userName = 'first_name' in data ? data.first_name : 'name';
+    }
     const result: TUserLeaderboardRequest = {
       data: userData,
       ratingFieldName: 'score',

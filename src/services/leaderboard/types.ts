@@ -21,7 +21,7 @@ export type TAllLeaderboardResponse = TDataObject[];
 
 export type TUserDataScoreLeaderboard = {
   score: number;
-  date: Date;
+  date?: Date;
   userAvatar: string;
   userName: string;
 };
