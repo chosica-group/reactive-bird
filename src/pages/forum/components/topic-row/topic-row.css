@@ -13,19 +13,19 @@
 .grid-item {
   padding: 10px;
   border-radius: 22px;
+  border: 1px solid black;
 }
 
 .grid-item__title {
   cursor: pointer;
-}
-
-.grid-item.title-item {
-  background-color: white;
+  text-align: start;
+  padding-left: 20px;
 }
 
 .grid-item.count-item {
-  color: white;
   display: flex;
-  background-color: transparent;
-  border: 1px solid white;
+}
+
+.grid-item.title-item {
+
 }

@@ -15,7 +15,7 @@ export const TopicRow = (data: TProps) => {
   return (
     <>
       <Grid item xs={8} zeroMinWidth>
-        <Typography noWrap component="div" className="grid-item title-item">
+        <Typography noWrap component="div" className="grid-item">
           <p className="grid-item__title grid-item__text">{title}</p>
         </Typography>
       </Grid>
@@ -26,7 +26,7 @@ export const TopicRow = (data: TProps) => {
         </Typography>
       </Grid>
       <Grid item xs={1.3} zeroMinWidth>
-        <Typography noWrap component="div" className="grid-item count-item">
+        <Typography noWrap component="div" className="grid-item">
           <p className="grid-item__text">{answersCount}</p>
         </Typography>
       </Grid>
