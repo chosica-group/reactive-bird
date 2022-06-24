@@ -20,17 +20,19 @@ export const GameBoard = ({ height, width }: IGameBoard) => {
   const [game, setGame] = useState<CanvasContainer | null>(null);
   const [score, setScore] = useState<number>(0);
   const [sendData] = useAddUserToLeaderboardMutation();
-  const { data: { avatar, id, ...data } = {}, isSuccess } = useGetUserQuery();
+  const { data: { avatar, id, ...data } = {}, isSuccess } = useGetUserQuery(); // вот эта штука работает не всегда - не пойму в чем дело
 
   const sendResult = (scoreResult: number) => {
     const userData: TUserDataScoreLeaderboard = {
       score: scoreResult,
       date: new Date(),
+      id: 123,
       userAvatar: '',
       userName: 'name',
     };
     if (isSuccess) {
       userData.userAvatar = avatar || '';
+      userData.id = id || 321;
       userData.userName = 'first_name' in data ? data.first_name : 'name';
     }
     const result: TUserLeaderboardRequest = {
