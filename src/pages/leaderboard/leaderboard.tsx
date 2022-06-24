@@ -13,7 +13,10 @@ export const LeaderboardPage = () => {
     cursor: 0,
     limit: 10,
   };
-  const { data, error, isLoading } = useGetTeamLeaderboardQuery(body);
+  const { data, error, isLoading } = useGetTeamLeaderboardQuery({
+    teamName: process.env.GROUP_NAME || 'chosica',
+    body,
+  });
 
   return (
     <Container>
