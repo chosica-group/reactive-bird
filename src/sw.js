@@ -23,15 +23,12 @@ self.addEventListener('fetch', (event) => {
     const { request } = event;
     const url = new URL(request.url)
     if (url.origin === location.origin) {
-        // console.log('06785')
         event.respondWith(cacheFirst(event.request));
     } else {
-        // console.log('12344')
-        // event.respondWith(networkFirst(request));
+        // event.respondWith(networkFirst(request)); // этот вариант отменяет fetch
         event.respondWith(caches.match(event.request)
         .then(function(response) {
             if (response) {
-                // console.log('eeeee')
                 return response;
             } 
             return fetch(event.request);
