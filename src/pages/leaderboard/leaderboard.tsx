@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 import { useGetTeamLeaderboardQuery } from 'services/leaderboard/index';
-import type { TAllLeaderboardRequest, TUserDataScoreLeaderboard } from 'services/leaderboard/types';
+import type { TAllLeaderboardRequest, TUserDataScoreLeaderboard } from 'services/leaderboard/index';
 import { Container, LeaderCard } from './components';
 
 type TDataLeaderboard = {
@@ -24,7 +24,7 @@ export const LeaderboardPage = () => {
       <Stack spacing={2} alignItems="center">
         {isLoading && <div>Loading...</div>}
         {error && <div>Oops, an error occured</div>}
-        {!data ? (
+        {!data || data.length === 0 ? (
           <div>no results</div>
         ) : (
           data.map((item: TDataLeaderboard, index: number) => (
