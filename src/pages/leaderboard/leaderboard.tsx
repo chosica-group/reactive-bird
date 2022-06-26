@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material';
-import { useGetTeamLeaderboardQuery } from 'services/leaderboard/index';
-import type { TAllLeaderboardRequest, TUserDataScoreLeaderboard } from 'services/leaderboard/index';
+import { useGetTeamLeaderboardQuery } from 'services/leaderboard';
+import type { TAllLeaderboardRequest, TUserDataScoreLeaderboard } from 'services/leaderboard';
 import { Container, LeaderCard } from './components';
 
 type TDataLeaderboard = {

@@ -5,8 +5,8 @@ import { LeaderboardPage } from 'pages/leaderboard';
 import { SignInPage } from 'pages/signin';
 import { SignUpPage } from 'pages/signup';
 import { StartGamePage } from 'pages/start-game';
-import { UserPage } from 'pages/user/index';
-import { WelcomePage } from 'pages/welcome-page/index';
+import { UserPage } from 'pages/user';
+import { WelcomePage } from 'pages/welcome-page';
 import { Route, Routes } from 'react-router-dom';
 
 const user = true;
