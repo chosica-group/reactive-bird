@@ -1,6 +1,7 @@
-const STATIC_CACHE_NAME = 's-cfp-app-v9';
-const DYNAMIC_CACHE_NAME = 'd-cfp-app-v9';
+const STATIC_CACHE_NAME = 's-cfp-app-v10';
+const DYNAMIC_CACHE_NAME = 'd-cfp-app-v10';
 const CACHE_URLS = [
+    '/',
     'index.html',
     'main.js',
     ];
@@ -21,26 +22,16 @@ self.addEventListener('activate', async (event) => {
 self.addEventListener('fetch', (event) => {
     console.log('fetch111', event.request.url);
     const { request } = event;
-    const url = new URL(request.url)
-    if (url.origin === location.origin) {
-        event.respondWith(cacheFirst(event.request));
-    } else {
-        // event.respondWith(networkFirst(request)); // этот вариант отменяет fetch
-        event.respondWith(caches.match(event.request)
-        .then(function(response) {
-            if (response) {
-                return response;
-            } 
-            return fetch(event.request);
-        }))
-    }
+    event.respondWith(cacheData(request));
 });
 
-async function cacheFirst(request) {
-    const cached = await caches.match(request);
-    console.log(cached, 'cached')
-    return cached ?? await fetch(request);
-};
+async function cacheData(request) {
+    const cashedRequest = await caches.match(request);
+    if (CACHE_URLS.some(sa => request.url.indexOf(sa) >= 0) || request.headers.get('accept').includes('text/html')) {
+      return networkFirst(request) || cashedRequest || await caches.match('/offline.html');
+    }
+    return networkFirst(request) || cashedRequest;
+}
 
 async function networkFirst(request) {
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
