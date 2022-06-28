@@ -18,3 +18,11 @@ export type TTeamLeaderboardRequest = {
 };
 
 export type TAllLeaderboardResponse = TDataObject[];
+
+export type TUserDataScoreLeaderboard = {
+  score: number;
+  date?: Date;
+  id: number;
+  userAvatar: string;
+  userName: string;
+};

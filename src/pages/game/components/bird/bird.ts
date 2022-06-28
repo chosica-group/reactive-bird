@@ -42,7 +42,6 @@ export class Bird {
 
       if (this.checkPipeHit(pipesPositionsConfig)) {
         this.ctx.drawImage(this.bird, this.x, this.y);
-
         return true;
       }
     } else if (pipesPositionsConfig.x < BirdConstants.END_HIT_X && this.pipeHitChecking) {
