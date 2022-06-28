@@ -1,37 +1,44 @@
 import { Stack, Typography } from '@mui/material';
+import { useGetTeamLeaderboardQuery } from 'services/leaderboard';
+import type { TAllLeaderboardRequest, TUserDataScoreLeaderboard } from 'services/leaderboard';
 import { Container, LeaderCard } from './components';
 
-const mockData = [
-  {
-    rating: 1,
-    time: 35,
-    result: 1,
-    name: 'Ваня',
-    avatar: '',
-  },
-  {
-    rating: 2,
-    time: 65,
-    result: 22,
-    name: 'Маша',
-    avatar: '',
-  },
-  {
-    rating: 3,
-    time: 35,
-    result: 15,
-    name: 'Петя',
-    avatar: '',
-  },
-];
+type TDataLeaderboard = {
+  data?: TUserDataScoreLeaderboard;
+};
 
-export const LeaderboardPage = () => (
-  <Container>
-    <Typography variant="h1">Рекорды</Typography>
-    <Stack spacing={2} alignItems="center">
-      {mockData.map((user, index) => (
-        <LeaderCard key={index} {...user} />
-      ))}
-    </Stack>
-  </Container>
-);
+export const LeaderboardPage = () => {
+  const body: TAllLeaderboardRequest = {
+    ratingFieldName: 'score',
+    cursor: 0,
+    limit: 10,
+  };
+  const { data, error, isLoading } = useGetTeamLeaderboardQuery({
+    teamName: process.env.GROUP_NAME || 'chosica',
+    body,
+  });
+
+  return (
+    <Container>
+      <Typography variant="h1">Рекорды</Typography>
+      <Stack spacing={2} alignItems="center">
+        {isLoading && <div>Loading...</div>}
+        {error && <div>Oops, an error occured</div>}
+        {!data || data.length === 0 ? (
+          <div>no results</div>
+        ) : (
+          data.map((item: TDataLeaderboard, index: number) => (
+            <LeaderCard
+              rating={0}
+              time={0}
+              result={item.data?.score || 0}
+              name={item.data?.userName || 'name'}
+              avatar={item.data?.userAvatar || ''}
+              key={index}
+            />
+          ))
+        )}
+      </Stack>
+    </Container>
+  );
+};

@@ -14,7 +14,7 @@ export const DesktopLogo = () => (
       }}
       mr={2}
     >
-      Flappy Bird
+      Reactive Bird
     </LinkLogo>
   </>
 );
