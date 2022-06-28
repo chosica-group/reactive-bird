@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@mui/material';
 import { CanvasContainer } from 'pages/game';
+import { useAddUserToLeaderboardMutation } from 'services/leaderboard';
+import type {
+  TUserDataScoreLeaderboard,
+  TUserLeaderboardRequest,
+} from 'services/leaderboard/types';
+import { useGetUserQuery } from 'services/user';
 import './game-board.css';
 
 export type IGameBoard = {
@@ -13,6 +19,30 @@ export const GameBoard = ({ height, width }: IGameBoard) => {
   const [isHit, setHit] = useState<boolean>(false);
   const [game, setGame] = useState<CanvasContainer | null>(null);
   const [score, setScore] = useState<number>(0);
+  const [sendData] = useAddUserToLeaderboardMutation();
+  const { data: { avatar, id, ...data } = {}, isSuccess } = useGetUserQuery(); // вот эта штука работает не всегда - не пойму в чем дело
+
+  const sendResult = (scoreResult: number) => {
+    const userData: TUserDataScoreLeaderboard = {
+      score: scoreResult,
+      date: new Date(),
+      id: 123,
+      userAvatar: '',
+      userName: 'name',
+    };
+    if (isSuccess) {
+      userData.userAvatar = avatar || '';
+      userData.id = id || 321;
+      userData.userName = 'first_name' in data ? data.first_name : 'name';
+    }
+    const result: TUserLeaderboardRequest = {
+      data: userData,
+      ratingFieldName: 'score',
+      teamName: 'chosica',
+    };
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    sendData(result);
+  };
 
   useEffect(() => {
     setGame(
@@ -20,6 +50,7 @@ export const GameBoard = ({ height, width }: IGameBoard) => {
         canvas: canvasRef.current as HTMLCanvasElement,
         onHit: (scoreResult: number) => {
           setScore(scoreResult);
+          sendResult(scoreResult);
           setHit(true);
         },
       }),
