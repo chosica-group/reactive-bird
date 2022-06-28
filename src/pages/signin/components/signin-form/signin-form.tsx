@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Button } from '@mui/material';
 import { Form } from 'components/form';
 import type { TFormInputs } from 'components/form';
-import useAuth from 'providers/with-auth';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import type { SigninParams } from 'services/auth.service';
+import { signin } from 'services/auth.service';
+import { setUserLoggedIn } from 'store/auth-reducer';
 
 const inputs: TFormInputs<SigninParams> = [
   { name: 'login', label: 'Логин', type: 'text', required: true },
@@ -13,16 +15,17 @@ const inputs: TFormInputs<SigninParams> = [
 
 export const SigninForm = () => {
   const navigate = useNavigate();
-  const { signinUser } = useAuth();
+  const dispatch = useDispatch();
   const [apiError, setApiError] = useState<string | undefined>();
 
   const onSubmit = (data: SigninParams) => {
-    signinUser(data)
+    signin(data)
       .then((res) => {
         if (res.reason && res.reason !== 'User already in system') {
           setApiError(res.reason);
         } else {
-          navigate('/', { replace: true });
+          dispatch(setUserLoggedIn(true));
+          navigate('/game', { replace: true });
         }
       })
       .catch(() => {

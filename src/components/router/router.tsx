@@ -6,13 +6,14 @@ import { SignInPage } from 'pages/signin';
 import { SignUpPage } from 'pages/signup';
 import { StartGamePage } from 'pages/start-game';
 import { WelcomePage } from 'pages/welcome-page';
-import useAuth from 'providers/with-auth';
+import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import type { AuthState } from 'store/auth-reducer';
 
 export const AppRouter = () => {
-  const { isAuthorized } = useAuth();
+  const authState = useSelector((state) => (state as { auth: AuthState }).auth);
 
-  if (isAuthorized) {
+  if (authState.isLoggedIn) {
     return (
       <MainLayout>
         <Routes>
