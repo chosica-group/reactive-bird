@@ -1,2 +1,2 @@
-export { Pipe, PipesPositionsConfig } from './pipe';
+export { Pipe } from './pipe';
 export { PipeConstants } from './pipe-constants';

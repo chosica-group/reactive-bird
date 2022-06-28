@@ -33,7 +33,7 @@ export const SignupForm = () => {
         .then((res) => {
           setApiError(res.reason);
         })
-        .catch(() => {
+        .catch((e) => {
           setApiError('что-то пошло не так');
         });
     } else {

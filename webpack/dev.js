@@ -48,7 +48,7 @@ module.exports = merge(common, {
   devServer: {
     static: distPath,
     // открыть браузер после запуска сервера
-    open: true,
+    open: false,
     // index.html страница вместо любых 404 ответов
     historyApiFallback: true,
     compress: false,
