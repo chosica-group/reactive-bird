@@ -4,12 +4,12 @@ import { PlugComponent } from 'pages/plug';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getUserInfo } from 'services/auth.service';
-import { AuthState, setUserLoggedIn } from 'store/auth-reducer';
+import { isLoggedInIfoSelector, setUserLoggedIn } from 'store/auth-reducer';
 
 export const withAuth = (Component: ComponentType) => () => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
-  const authState = useSelector((state) => (state as { auth: AuthState }).auth);
+  const authState = useSelector(isLoggedInIfoSelector);
   const navigate = useNavigate();
 
   useEffect(() => {

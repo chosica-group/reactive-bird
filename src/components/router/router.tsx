@@ -8,10 +8,10 @@ import { StartGamePage } from 'pages/start-game';
 import { WelcomePage } from 'pages/welcome-page';
 import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import type { AuthState } from 'store/auth-reducer';
+import { isLoggedInIfoSelector } from 'store/auth-reducer';
 
 export const AppRouter = () => {
-  const authState = useSelector((state) => (state as { auth: AuthState }).auth);
+  const authState = useSelector(isLoggedInIfoSelector);
 
   if (authState.isLoggedIn) {
     return (

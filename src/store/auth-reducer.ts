@@ -1,3 +1,5 @@
+import { createSelector } from '@reduxjs/toolkit';
+
 export type AuthState = {
   status: string;
   isLoggedIn: boolean;
@@ -37,3 +39,8 @@ export const authReducer = (
 export function setUserLoggedIn(isLoggedIn: boolean): ItemActionType {
   return { type: actions.SET_USER_AUTH as keyof typeof actions, isLoggedIn };
 }
+
+export const isLoggedInIfoSelector = createSelector(
+  (state: { auth: AuthState }) => state,
+  (items) => items.auth,
+);
