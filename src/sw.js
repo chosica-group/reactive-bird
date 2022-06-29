@@ -1,5 +1,5 @@
-const STATIC_CACHE_NAME = 's-cfp-app-v10';
-const DYNAMIC_CACHE_NAME = 'd-cfp-app-v10';
+const STATIC_CACHE_NAME = 's-cfp-app-v12';
+const DYNAMIC_CACHE_NAME = 'd-cfp-app-v12';
 const CACHE_URLS = [
     '/',
     'index.html',
