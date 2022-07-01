@@ -20,7 +20,7 @@ export const AppRouter = () => {
           <Route path="/game" element={<StartGamePage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="/forum" element={<ForumPage />} />
-          <Route path="*" element={<Navigate to="/game" />} />
+          <Route path="*" element={<StartGamePage />} />
         </Routes>
       </MainLayout>
     );

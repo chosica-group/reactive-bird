@@ -32,11 +32,8 @@ module.exports = merge(common, {
         },
       },
       {
-        test: /\.(png|jpe?g|gif|jp2|webp)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-        },
+        test: /\.png/,
+        type: 'asset/resource'
       },
     ],
   },
