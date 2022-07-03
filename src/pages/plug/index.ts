@@ -1,0 +1,1 @@
+export { PlugComponent } from './plug';
