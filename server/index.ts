@@ -1,6 +1,8 @@
 const express = require('express');
+// import render from "./render";
 
 const app = express();
+app.use(render)
 
 const PORT = process.env.PORT || 3000;
 
@@ -10,6 +12,6 @@ function serveIndev(req, res) {
 }
 
 app.get('*', serveIndev);
-app.listen(PORT, () => { // хероку тут берет свой PORT из своего env
+app.listen(PORT, () => {
   console.log(`Running on ${PORT}`);
 });

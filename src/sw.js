@@ -1,5 +1,5 @@
-const STATIC_CACHE_NAME = 's-cfp-app-v10';
-const DYNAMIC_CACHE_NAME = 'd-cfp-app-v10';
+const STATIC_CACHE_NAME = 's-cfp-app-v9';
+const DYNAMIC_CACHE_NAME = 'd-cfp-app-v9';
 const CACHE_URLS = [
     '/',
     'index.html',
@@ -22,7 +22,7 @@ self.addEventListener('activate', async (event) => {
 self.addEventListener('fetch', (event) => {
     console.log('fetch111', event.request.url);
     const { request } = event;
-    event.respondWith(cacheData(request));
+   // event.respondWith(cacheData(request));
 });
 
 async function cacheData(request) {

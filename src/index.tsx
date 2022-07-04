@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
+import { hydrate } from 'react-dom';
 import { App } from './app';
 
 function startServiceWorker() {
@@ -15,6 +16,6 @@ function startServiceWorker() {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+hydrate(<App />, document.getElementById('root'));
 
 startServiceWorker();

@@ -4,4 +4,4 @@ export {
   useGetTeamLeaderboardQuery,
 } from './leaderboard-api';
 
-export { TAllLeaderboardRequest, TUserDataScoreLeaderboard } from './types';
+export type { TAllLeaderboardRequest, TUserDataScoreLeaderboard } from './types';
