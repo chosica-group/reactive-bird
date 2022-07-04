@@ -1,13 +1,12 @@
 const path = require('path');
 const { distPath, rootPath, srcPath } = require('./path');
 const Dotenv = require('dotenv-webpack');
-const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   context: process.cwd(),
   entry: {
     main: path.resolve(srcPath, 'index.tsx'),
-    'service-worker': path.resolve(srcPath, 'sw.js'),
+    'sw': path.resolve(srcPath, 'sw.js'),
   },
   output: {
     path: distPath,
@@ -48,9 +47,6 @@ module.exports = {
     new Dotenv({
       path: path.resolve(rootPath, '.env'),
       allowEmptyValues: false,
-    }),
-    new CopyPlugin({
-      patterns: ['./src/sw.js'],
     }),
   ],
 };

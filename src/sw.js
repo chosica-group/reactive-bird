@@ -1,9 +1,12 @@
-const STATIC_CACHE_NAME = 's-cfp-app-v9';
-const DYNAMIC_CACHE_NAME = 'd-cfp-app-v9';
+const STATIC_CACHE_NAME = 's-cfp-app-v2';
+const DYNAMIC_CACHE_NAME = 'd-cfp-app-v2';
 const CACHE_URLS = [
-    '/',
-    'index.html',
-    'main.js',
+    '/index.html',
+    '/game',
+    '/leaderboard',
+    '/login',
+    '/signup',
+    '/forum'
     ];
 
 self.addEventListener('install', async (event) => {
@@ -19,29 +22,32 @@ self.addEventListener('activate', async (event) => {
         .map(name => caches.delete(name))
     )
 });
-self.addEventListener('fetch', (event) => {
-    console.log('fetch111', event.request.url);
-    const { request } = event;
-   // event.respondWith(cacheData(request));
-});
+self.addEventListener('fetch', event => {
+    console.log('fetch1', event.request.url);
+    const {request} = event;
+    const url = new URL(request.url)
+    url.origin === location.origin ?
+        event.respondWith(cacheFirst(request))
+        : event.respondWith(networkFirst(request))
+})
 
-async function cacheData(request) {
-    const cashedRequest = await caches.match(request);
-    if (CACHE_URLS.some(sa => request.url.indexOf(sa) >= 0) || request.headers.get('accept').includes('text/html')) {
-      return networkFirst(request) || cashedRequest || await caches.match('/offline.html');
-    }
-    return networkFirst(request) || cashedRequest;
-}
+async function cacheFirst(request) {
+    const cashed = await caches.match(request);
+    return cashed ?? fetch(request);
+};
 
 async function networkFirst(request) {
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
-    console.log(cache, 'networkFirst')
     try {
-        const response = await fetch(request)
-        await cache.put(request, response.clone());
+        const response = await fetch(request);
+        await cache.put(request, response.clone()).catch(() => {
+        });
         return response;
     } catch (e) {
-        const cached = await cache.match(request);
-        return cached ?? await caches.match('/offline.html');
+        const cached = await cache.match(request)
+        if (cached) {
+            return cached
+        }
+        throw e;
     }
-}
+};
