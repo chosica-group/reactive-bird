@@ -31,6 +31,10 @@ module.exports = merge(common, {
           }),
         },
       },
+      {
+        test: /\.png/,
+        type: 'asset/resource'
+      },
     ],
   },
   resolve: {
