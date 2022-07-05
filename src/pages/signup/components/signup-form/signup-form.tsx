@@ -3,8 +3,8 @@ import { Button } from '@mui/material';
 import { Form } from 'components/form';
 import type { TFormInputs } from 'components/form';
 import { useNavigate } from 'react-router-dom';
-import { signup } from 'services/auth.service';
-import type { SignupParams } from 'services/auth.service';
+import { signup } from 'services/auth/auth-api';
+import type { SignupParams } from 'services/auth/types';
 
 type TSubmitWithPassRepeat = SignupParams & {
   passwordRepeat: string;

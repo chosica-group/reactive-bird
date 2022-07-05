@@ -1,40 +1,7 @@
-import config from './config';
+import config from '../config';
+import type { SignInRes, SignUpRes, SigninParams, SignupParams } from './types';
 
 const authUrl = `${config.API_URL}/auth`;
-
-export type SigninParams = {
-  login: string;
-  password: string;
-};
-
-export type SignupParams = {
-  first_name: string;
-  second_name: string;
-  login: string;
-  email: string;
-  password: string;
-  phone: string;
-};
-
-export type SignUpRes = {
-  reason?: string;
-  id?: number;
-};
-
-export type SignInRes = {
-  reason?: string;
-};
-
-export type UserModel = {
-  avatar: string | null;
-  display_name: string | null;
-  email: string;
-  first_name: string;
-  id: number;
-  login: string;
-  phone: string | null;
-  second_name: string;
-};
 
 const defaultParams = {
   credentials: 'include' as RequestCredentials,
@@ -72,12 +39,4 @@ const logout = (): Promise<boolean> => {
   return fetch(`${authUrl}/logout`, requestOptions).then(() => true);
 };
 
-const getUserInfo = (): Promise<UserModel> => {
-  const requestOptions = {
-    method: 'GET',
-    ...defaultParams,
-  };
-  return fetch(`${authUrl}/user`, requestOptions).then((res) => res.json()) as Promise<UserModel>;
-};
-
-export { signin, signup, logout, getUserInfo };
+export { signin, signup, logout };
