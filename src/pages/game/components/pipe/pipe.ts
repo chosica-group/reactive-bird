@@ -1,5 +1,5 @@
-import pipe1 from '../../../../assets/images/pipe-1.png';
-import pipe2 from '../../../../assets/images/pipe-2.png';
+import pipe1 from 'assets/images/pipe-1.png';
+import pipe2 from 'assets/images/pipe-2.png';
 import { PipeConstants } from './pipe-constants';
 
 export type PipesPositionsConfig = {

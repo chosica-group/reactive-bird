@@ -1,7 +1,7 @@
 import type { FunctionComponent } from 'react';
 import { compose } from '@reduxjs/toolkit';
 import { withAuth } from 'providers/with-auth';
-import { hot } from 'react-hot-loader';
+// import { hot } from 'react-hot-loader';
 import { withErrorBoundary } from './with-error-boundary';
 import { withRedux } from './with-redux';
 import { withRouter } from './with-router';
@@ -13,5 +13,5 @@ export const withProviders = compose<FunctionComponent>(
   withRouter,
   withErrorBoundary,
   withAuth,
-  hot,
+  // hot,
 );

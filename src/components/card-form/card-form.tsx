@@ -1,6 +1,6 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import './card-form.css';
+// import './card-form.css';
 import type { CardFormProps } from './card-form.type';
 
 export const CardFormComponent = ({ children }: CardFormProps) => (

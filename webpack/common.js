@@ -20,6 +20,7 @@ module.exports = {
       layout: path.join(srcPath, 'layout'),
       providers: path.join(srcPath, 'providers'),
       pages: path.join(srcPath, 'pages'),
+      assets: path.join(srcPath, 'assets'),
       utils: path.join(srcPath, 'utils'),
       store: path.join(srcPath, 'store'),
       services: path.join(srcPath, 'services'),
