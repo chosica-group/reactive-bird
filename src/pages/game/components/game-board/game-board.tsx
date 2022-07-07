@@ -7,7 +7,7 @@ import type {
   TUserLeaderboardRequest,
 } from 'services/leaderboard/types';
 import { useGetUserQuery } from 'services/user';
-// import './game-board.css';
+import './game-board.css';
 
 export type IGameBoard = {
   height: number;

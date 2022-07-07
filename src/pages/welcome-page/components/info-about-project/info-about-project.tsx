@@ -2,7 +2,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
-// import './info-about-project.css';
+import './info-about-project.css';
 import { ColorButton } from './styled';
 
 export const InfoAboutProject = () => {

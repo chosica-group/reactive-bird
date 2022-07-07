@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { AddCircleRounded } from '@mui/icons-material';
-// import './topic-row.css';
+import './topic-row.css';
 
 type TProps = {
   title: string;

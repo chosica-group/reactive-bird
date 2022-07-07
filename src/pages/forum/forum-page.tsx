@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@mui/material';
 import { TopicRow } from 'pages/forum/components/topic-row';
-// import './forum-page.css';
+import './forum-page.css';
 
 const mockData = [
   {
