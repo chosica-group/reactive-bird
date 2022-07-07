@@ -14,8 +14,6 @@ export const withAuth = (Component: ComponentType) => () => {
   useEffect(() => {
     if (data && Number.isInteger(data.id)) {
       dispatch(setUserLoggedIn(true));
-    } else if (error) {
-      navigate('/login', { replace: true });
     }
   }, [data, error, isLoading, dispatch, navigate]);
 

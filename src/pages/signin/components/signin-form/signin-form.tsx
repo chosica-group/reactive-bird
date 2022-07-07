@@ -36,6 +36,13 @@ export const SigninForm = () => {
   const goToSignupPage = () => {
     navigate('/signup', { replace: true });
   };
+  const goToOAuth = () => {
+    const CLIENT_ID = process.env.CLIENT_ID || '';
+    const REDIRECT_URI = process.env.REDIRECT_URI || '';
+    document.location.assign(
+      `https://oauth.yandex.ru/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`,
+    );
+  };
 
   return (
     <>
@@ -46,8 +53,11 @@ export const SigninForm = () => {
         submitText="Войти"
         error={apiError}
       />
+      <Button size="medium" variant="text" fullWidth onClick={goToOAuth}>
+        Вход c Яндекс ID
+      </Button>
       <Button size="small" variant="text" fullWidth onClick={goToSignupPage}>
-        У вас нет аккаунта? Регистрация
+        Регистрация
       </Button>
     </>
   );

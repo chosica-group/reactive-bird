@@ -1,4 +1,4 @@
-import background from '../../../../assets/images/background.png';
+import background from 'assets/images/background.png';
 import { BackgroundConstants } from './background-constants';
 
 export class Background {
