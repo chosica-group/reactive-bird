@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 // @ts-ignore
 import { render } from './render/render';
 
@@ -7,7 +8,7 @@ app.use(render);
 
 const PORT = process.env.PORT || 3000;
 
-// app.use(express.static(`${__dirname}/dist`));
+app.use(express.static(path.resolve(__dirname, '../../public')));
 // function serveIndev(req, res) {
 //   res.redirect('/');
 // }
