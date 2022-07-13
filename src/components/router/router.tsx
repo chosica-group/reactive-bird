@@ -9,10 +9,12 @@ import { UserPage } from 'pages/user';
 import { WelcomePage } from 'pages/welcome-page';
 import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { AccessToken } from 'services/auth/o-auth/actions';
 import { isLoggedInIfoSelector } from 'store/auth-reducer';
 
 export const AppRouter = () => {
   const authState = useSelector(isLoggedInIfoSelector);
+  console.log(authState.isLoggedIn, 'AppRouter');
 
   if (authState.isLoggedIn) {
     return (
@@ -33,7 +35,7 @@ export const AppRouter = () => {
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<SignInPage />} />
-        <Route path="*" element={<Navigate to="/welcome" />} />
+        <Route path="*" element={<AccessToken />} />
       </Routes>
     </PublicLayout>
   );

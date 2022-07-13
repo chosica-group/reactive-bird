@@ -10,7 +10,6 @@ export const withAuth = (Component: ComponentType) => () => {
   const { data, error, isLoading } = useGetUserQuery();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   useEffect(() => {
     if (data && Number.isInteger(data.id)) {
       dispatch(setUserLoggedIn(true));
