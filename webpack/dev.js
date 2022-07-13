@@ -32,7 +32,7 @@ module.exports = merge(common, {
         },
       },
       {
-        test: /\.png/,
+        test: /\.png|.wav/,
         type: 'asset/resource'
       },
     ],

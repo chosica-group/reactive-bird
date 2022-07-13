@@ -1,3 +1,6 @@
+import pipeHitSound from 'assets/audio/sfx_hit.wav';
+import pointSound from 'assets/audio/sfx_point.wav';
+import jumpSound from 'assets/audio/sfx_wing.wav';
 import bird from 'assets/images/bird.png';
 import { PipeConstants } from 'pages/game/components/pipe';
 import type { PipesPositionsConfig } from '../pipe/pipe';
@@ -17,9 +20,17 @@ export class Bird {
   private ctx: CanvasRenderingContext2D;
   private readonly bird: HTMLImageElement;
   private pipeHitChecking = false;
+  private birdJumpSound: HTMLAudioElement;
+  private birdHitSound: HTMLAudioElement;
+  private pointSound: HTMLAudioElement;
+  private groundHitSound: HTMLAudioElement;
 
   constructor(ctx: CanvasRenderingContext2D) {
     this.bird = new Image();
+    this.birdJumpSound = new Audio(jumpSound);
+    this.birdHitSound = new Audio(pipeHitSound);
+    this.pointSound = new Audio(pointSound);
+    this.groundHitSound = new Audio(groundHitSound);
     this.bird.src = bird as string;
     this.ctx = ctx;
     this.y = ctx.canvas.height / 2;
@@ -41,10 +52,12 @@ export class Bird {
       this.pipeHitChecking = true;
 
       if (this.checkPipeHit(pipesPositionsConfig)) {
+        this.birdHitSound.play();
         this.ctx.drawImage(this.bird, this.x, this.y);
         return true;
       }
     } else if (pipesPositionsConfig.x < BirdConstants.END_HIT_X && this.pipeHitChecking) {
+      this.pointSound.play();
       this.pipeHitChecking = false;
       this.score += 1;
     }
@@ -52,6 +65,7 @@ export class Bird {
     this.jump();
 
     if (this.y >= this.ctx.canvas.height - BirdConstants.BIRD_HEIGHT) {
+      this.groundHitSound.play();
       this.ctx.drawImage(this.bird, this.x, this.ctx.canvas.height - BirdConstants.BIRD_HEIGHT);
 
       return true;
@@ -68,6 +82,11 @@ export class Bird {
 
   jump() {
     if (this.shouldJump) {
+      if (this.jumpCounter === 0) {
+        this.birdJumpSound.currentTime = 0;
+        this.birdJumpSound.play();
+      }
+
       this.jumpCounter += 1;
 
       if (this.y > this.jumpHeight) {

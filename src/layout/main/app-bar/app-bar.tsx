@@ -28,7 +28,7 @@ export const AppBar = () => {
       }
     } catch (e) {
       console.log(e, 'error logout');
-    };
+    }
   };
 
   return (
