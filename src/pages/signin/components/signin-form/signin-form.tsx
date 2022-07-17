@@ -4,8 +4,8 @@ import { Form } from 'components/form';
 import type { TFormInputs } from 'components/form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import type { SigninParams } from 'services/auth.service';
-import { signin } from 'services/auth.service';
+import { signin } from 'services/auth/auth-api';
+import type { SigninParams } from 'services/auth/types';
 import { setUserLoggedIn } from 'store/auth-reducer';
 
 const inputs: TFormInputs<SigninParams> = [
