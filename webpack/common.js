@@ -38,7 +38,7 @@ module.exports = {
         use: '@svgr/webpack',
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|wav|jpe?g|gif)$/i,
         type: 'asset/resource',
       },
     ],
