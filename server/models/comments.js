@@ -1,6 +1,6 @@
-import { Sequelize, DataTypes } from 'sequelize';
+const { DataTypes } = require('sequelize');
 
-module.exports = (sequelize: Sequelize) =>
+module.exports = (sequelize) =>
   sequelize.define('comments', {
     id: {
       type: DataTypes.INTEGER,
@@ -12,5 +12,5 @@ module.exports = (sequelize: Sequelize) =>
       allowNull: false
     },
   }, {
-    timestamps: false
+    timestamps: true
   });
