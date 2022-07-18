@@ -5,7 +5,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const TerserPlugin = require('terser-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { staticPath } = require('./path');
+// const { staticPath } = require('./path');
 const path = require('path');
 
 const BUILD_ANALYZE_PORT = process.env.BUILD_ANALYZE_PORT ?? 8888;
