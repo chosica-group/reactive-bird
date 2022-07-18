@@ -4,8 +4,8 @@ const common = require('./common.js');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const TerserPlugin = require('terser-webpack-plugin');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const { staticPath } = require('./path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { staticPath } = require('./path');
 const path = require('path');
 
 const BUILD_ANALYZE_PORT = process.env.BUILD_ANALYZE_PORT ?? 8888;
@@ -15,23 +15,23 @@ module.exports = ({ ANALYZE }) => {
     new ForkTsCheckerWebpackPlugin({
       async: false,
     }),
-    // new HtmlWebpackPlugin({
-    //   hash: true,
-    //   inject: true,
-    //   template: path.join(staticPath, 'index.html'),
-    //   minify: {
-    //     removeComments: true,
-    //     collapseWhitespace: true,
-    //     removeRedundantAttributes: true,
-    //     useShortDoctype: true,
-    //     removeEmptyAttributes: true,
-    //     removeStyleLinkTypeAttributes: true,
-    //     keepClosingSlash: true,
-    //     minifyJS: true,
-    //     minifyCSS: true,
-    //     minifyURLs: true,
-    //   },
-    // }),
+    new HtmlWebpackPlugin({
+      hash: true,
+      inject: true,
+      template: path.join(staticPath, 'index.html'),
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+    }),
   ];
 
   if (ANALYZE) {
