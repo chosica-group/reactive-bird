@@ -5,8 +5,6 @@
   "main": "src/index.tsx",
   "scripts": {
     "dev": "webpack server --config webpack/dev.js",
-    "clean": "rimraf dist/",
-    "copy-files": "copyfiles -u 1 src/**/*.html src/**/*.css dist/",
     "start": "npm run build && node dist/server/index.js",
     "build:client": "webpack --config webpack/prod.js",
     "build:server": "webpack --config webpack/webpack.server.js",
@@ -15,7 +13,6 @@
     "build:analyze": "webpack --config webpack/prod.js --env ANALYZE",
     "lint": "eslint src",
     "fix": "eslint src --fix",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
     "jest": "jest"
   },

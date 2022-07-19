@@ -1,13 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
-const common = require('./common.js');
+// const common = require('./common.js');
 const { merge } = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
 
 const { NODE_ENV = 'development' } = process.env;
 
 
-module.exports = merge(common, {
+module.exports = {
     mode: NODE_ENV,
     name: 'server',
     target: 'node',
@@ -70,4 +70,4 @@ module.exports = merge(common, {
     externals: [nodeExternals({allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i]})],
 
     optimization: {nodeEnv: false},
-});
+};

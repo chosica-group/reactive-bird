@@ -8,9 +8,8 @@ import { StaticRouter } from 'react-router-dom/server';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import { App } from '../../ssr';
 
-const sheet = new ServerStyleSheet();
-
 export const render = (req: Request, res: Response) => {
+  const sheet: ServerStyleSheet = new ServerStyleSheet();
   let indexHTML = fs.readFileSync(path.resolve(__dirname, '../../src/static/index.html'), {
     encoding: 'utf-8',
   });
