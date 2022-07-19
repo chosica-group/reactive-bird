@@ -35,3 +35,12 @@ export type UserModel = {
 export type TReject = {
   reason: string;
 };
+
+export type TClientId = {
+  service_id: string;
+};
+
+export type TAuthWithYandex = {
+  code: string;
+  redirect_uri: string;
+};

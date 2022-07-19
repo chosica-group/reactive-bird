@@ -4,14 +4,19 @@ import { Form } from 'components/form';
 import type { TFormInputs } from 'components/form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { signin } from 'services/auth/auth-api';
-import type { SigninParams } from 'services/auth/types';
+import { getServiceIdOauth, signin } from 'services/auth/auth-api';
+import type { SignUpRes, SigninParams, TClientId } from 'services/auth/types';
 import { setUserLoggedIn } from 'store/auth-reducer';
 
 const inputs: TFormInputs<SigninParams> = [
   { name: 'login', label: 'Логин', type: 'text', required: true },
   { name: 'password', label: 'Пароль', type: 'password', required: true },
 ];
+
+export const REDIRECT_URI =
+  process.env.NODE_ENV === 'production'
+    ? 'https://chosica-flappy-bird.herokuapp.com'
+    : `http://localhost:${process.env.DEV_SERVER_PORT || 3000}`;
 
 export const SigninForm = () => {
   const navigate = useNavigate();
@@ -33,8 +38,26 @@ export const SigninForm = () => {
       });
   };
 
+  const redirect = (id: string) => {
+    document.location.assign(
+      `https://oauth.yandex.ru/authorize?response_type=code&client_id=${id}&redirect_uri=${REDIRECT_URI}`,
+    );
+  };
+
   const goToSignupPage = () => {
     navigate('/signup', { replace: true });
+  };
+  const useGoToOAuth = () => {
+    getServiceIdOauth(REDIRECT_URI)
+      .then((res: TClientId | SignUpRes) => {
+        if ('service_id' in res) {
+          // setClientId(res.service_id);
+          redirect(res.service_id);
+        }
+      })
+      .catch((err) => {
+        console.log(err, 'error get service id');
+      });
   };
 
   return (
@@ -46,8 +69,11 @@ export const SigninForm = () => {
         submitText="Войти"
         error={apiError}
       />
+      <Button size="medium" variant="text" fullWidth onClick={useGoToOAuth}>
+        Вход c Яндекс ID
+      </Button>
       <Button size="small" variant="text" fullWidth onClick={goToSignupPage}>
-        У вас нет аккаунта? Регистрация
+        Регистрация
       </Button>
     </>
   );

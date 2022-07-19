@@ -6,6 +6,7 @@ type TProps = {
   handleOpenUserMenu: (event: MouseEvent<HTMLElement>) => void;
   anchorElUser: null | HTMLElement;
   handleCloseUserMenu: () => void;
+  handleLogoutUser: () => void;
 };
 
 const settings = [
@@ -14,7 +15,12 @@ const settings = [
 ];
 
 // TODO Добавить аватар пользователя
-export const User = ({ handleOpenUserMenu, anchorElUser, handleCloseUserMenu }: TProps) => (
+export const User = ({
+  handleOpenUserMenu,
+  anchorElUser,
+  handleCloseUserMenu,
+  handleLogoutUser,
+}: TProps) => (
   <Box sx={{ flexGrow: 0 }}>
     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
       <Avatar alt="avatar" src="" />
@@ -48,7 +54,7 @@ export const User = ({ handleOpenUserMenu, anchorElUser, handleCloseUserMenu }: 
             </Typography>
           </MenuItem>
         ) : (
-          <MenuItem key={setting.text} onClick={handleCloseUserMenu}>
+          <MenuItem key={setting.text} onClick={handleLogoutUser}>
             <Typography textAlign="center">{setting.text}</Typography>
           </MenuItem>
         ),

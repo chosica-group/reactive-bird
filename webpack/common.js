@@ -21,6 +21,7 @@ module.exports = {
       providers: path.join(srcPath, 'providers'),
       pages: path.join(srcPath, 'pages'),
       utils: path.join(srcPath, 'utils'),
+      assets: path.join(srcPath, 'assets'),
       store: path.join(srcPath, 'store'),
       services: path.join(srcPath, 'services'),
     },
