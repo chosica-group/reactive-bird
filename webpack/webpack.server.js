@@ -39,23 +39,24 @@ module.exports = merge(common, {
             },
         ],
     },
+    plugins: [
+        new webpack.ProvidePlugin({
+            window: path.resolve(path.join(__dirname, '../webpack/mock/window.mock')),
+            // localStorage: resolve(join(__dirname, '../mock/localStorage.mock')),
+            document: 'global/document',
+        }),
+        new webpack.BannerPlugin({
+            banner: 'require("source-map-support").install();',
+            raw: true,
+            entryOnly: false
+        }),
+    ],
     output: {
         filename: 'server.js',
         libraryTarget: 'commonjs2',
         path: path.posix.resolve('dist'),
         publicPath: path.posix.resolve(__dirname, '/'),
     },
-    plugins: [
-        new webpack.BannerPlugin({
-            banner: 'require("source-map-support").install();',
-            raw: true,
-            entryOnly: false
-        }),
-        new webpack.ProvidePlugin({
-        window: path.resolve(path.join(__dirname, '../webpack/mock/window.mock')),
-        // localStorage: resolve(join(__dirname, '../mock/localStorage.mock')),
-        document: 'global/document',
-    }),],
     resolve: {
         modules: ['src', 'node_modules'],
         extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
