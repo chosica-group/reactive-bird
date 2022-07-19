@@ -1,3 +1,4 @@
+import groundHitSound from 'assets/audio/sfx_die.wav';
 import pipeHitSound from 'assets/audio/sfx_hit.wav';
 import pointSound from 'assets/audio/sfx_point.wav';
 import jumpSound from 'assets/audio/sfx_wing.wav';
