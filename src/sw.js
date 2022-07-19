@@ -1,12 +1,15 @@
-const STATIC_CACHE_NAME = 's-cfp-app-v2';
-const DYNAMIC_CACHE_NAME = 'd-cfp-app-v2';
+const STATIC_CACHE_NAME = 's-cfp-app-v3';
+const DYNAMIC_CACHE_NAME = 'd-cfp-app-v3';
 const CACHE_URLS = [
     '/index.html',
     '/game',
     '/leaderboard',
     '/login',
     '/signup',
-    '/forum'
+    '/forum',
+    '/profile',
+    '/welcome',
+    '/'
     ];
 
 self.addEventListener('install', async (event) => {

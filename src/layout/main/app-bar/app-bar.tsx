@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { MouseEvent } from 'react';
 import { AppBar as AppBarMui, Container, Stack, Toolbar } from '@mui/material';
 import { FullscreenBtn } from 'components/fullscreen-btn';
+import { logout } from 'services/auth/auth-api';
 import { DesktopLogo, DesktopMenu, MobileLogo, MobileMenu, User } from './components';
 
 const pages = [
@@ -15,9 +16,19 @@ export const AppBar = () => {
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogoutUser = async () => {
+    try {
+      const logoutUser = await logout();
+      if (logoutUser) {
+        document.location.reload();
+      }
+    } catch (e) {
+      console.log(e, 'error logout');
+    }
   };
 
   return (
@@ -38,6 +49,7 @@ export const AppBar = () => {
               anchorElUser={anchorElUser}
               handleCloseUserMenu={handleCloseUserMenu}
               handleOpenUserMenu={handleOpenUserMenu}
+              handleLogoutUser={handleLogoutUser}
             />
           </Stack>
         </Toolbar>
