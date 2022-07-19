@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const common = require('./common.js');
 const { merge } = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
@@ -28,7 +29,6 @@ module.exports = merge(common, {
                 exclude: /node_modules/,
                 options: {
                     configFile: path.join(__dirname, '..', 'tsconfig.json'),
-                    // отключает проверку типов
                     transpileOnly: true,
                     happyPackMode: true,
                 },
@@ -45,6 +45,17 @@ module.exports = merge(common, {
         path: path.posix.resolve('dist'),
         publicPath: path.posix.resolve(__dirname, '/'),
     },
+    plugins: [
+        new webpack.BannerPlugin({
+            banner: 'require("source-map-support").install();',
+            raw: true,
+            entryOnly: false
+        }),
+        new webpack.ProvidePlugin({
+        window: path.resolve(path.join(__dirname, '../webpack/mock/window.mock')),
+        // localStorage: resolve(join(__dirname, '../mock/localStorage.mock')),
+        document: 'global/document',
+    }),],
     resolve: {
         modules: ['src', 'node_modules'],
         extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
