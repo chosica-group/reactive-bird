@@ -1,10 +1,10 @@
+import groundHitSound from 'assets/audio/sfx_die.wav';
+import pipeHitSound from 'assets/audio/sfx_hit.wav';
+import pointSound from 'assets/audio/sfx_point.wav';
+import jumpSound from 'assets/audio/sfx_wing.wav';
+import bird from 'assets/images/bird.png';
 import { PipeConstants } from 'pages/game/components/pipe';
-import bird from '../../../../assets/images/bird.png';
 import type { PipesPositionsConfig } from '../pipe/pipe';
-import jumpSound from '../../../../assets/audio/sfx_wing.wav';
-import pipeHitSound from '../../../../assets/audio/sfx_hit.wav';
-import pointSound from '../../../../assets/audio/sfx_point.wav';
-import groundHitSound from '../../../../assets/audio/sfx_die.wav';
 import { BirdConstants } from './bird-constants';
 
 export class Bird {
