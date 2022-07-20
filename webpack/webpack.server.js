@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-// const common = require('./common.js');
 const { merge } = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
 
@@ -12,7 +11,7 @@ module.exports = {
     name: 'server',
     target: 'node',
     node: {__dirname: false},
-    entry: path.posix.resolve('src/server/render/render.tsx'),
+    entry: path.posix.resolve('src/server/index.ts'),
     module: {
         rules: [
             {

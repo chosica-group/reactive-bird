@@ -10,7 +10,7 @@ import { App } from '../../ssr';
 
 export const render = (req: Request, res: Response) => {
   const sheet: ServerStyleSheet = new ServerStyleSheet();
-  let indexHTML = fs.readFileSync(path.resolve(__dirname, '../../src/static/index.html'), {
+  let indexHTML = fs.readFileSync(path.resolve(__dirname, '../static/index.html'), {
     encoding: 'utf-8',
   });
 

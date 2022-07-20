@@ -4,7 +4,7 @@ import path from 'path';
 import { render } from './render/render';
 
 const app = express();
-app.use(render);
+// app.use(render());
 
 const PORT = process.env.PORT || 3000;
 
@@ -13,7 +13,7 @@ app.use(express.static(path.resolve(__dirname, '../../public')));
 //   res.redirect('/');
 // }
 
-// app.get('*', serveIndev);
+app.get('*', render);
 app.listen(PORT, () => {
   console.log(`Running on ${PORT}`);
 });
