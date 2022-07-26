@@ -8,7 +8,7 @@ import { StartGamePage } from 'pages/start-game';
 import { UserPage } from 'pages/user';
 import { WelcomePage } from 'pages/welcome-page';
 import { useSelector } from 'react-redux';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { AccessToken } from 'services/auth/o-auth/actions';
 import { isLoggedInIfoSelector } from 'store/auth-reducer';
 
@@ -18,29 +18,25 @@ export const AppRouter = () => {
   if (authState.isLoggedIn) {
     return (
       <MainLayout>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/game" exact component={StartGamePage} />
-            <Route path="/leaderboard" exact component={LeaderboardPage} />
-            <Route path="/forum" exact component={ForumPage} />
-            <Route path="/profile" exact component={UserPage} />
-            <Redirect from="*" to="/game" />
-          </Switch>
-        </BrowserRouter>
+        <Switch>
+          <Route path="/game" exact component={StartGamePage} />
+          <Route path="/leaderboard" exact component={LeaderboardPage} />
+          <Route path="/forum" exact component={ForumPage} />
+          <Route path="/profile" exact component={UserPage} />
+          <Redirect from="*" to="/game" />
+        </Switch>
       </MainLayout>
     );
   }
   return (
     <PublicLayout>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/welcome" exact component={WelcomePage} />
-          <Route path="/signup" exact component={SignUpPage} />
-          <Route path="/login" exact component={SignInPage} />
-          <Route path="/" component={AccessToken} />
-          <Redirect from="*" to="/" />
-        </Switch>
-      </BrowserRouter>
+      <Switch>
+        <Route path="/welcome" exact component={WelcomePage} />
+        <Route path="/signup" exact component={SignUpPage} />
+        <Route path="/login" exact component={SignInPage} />
+        <Route path="/" component={AccessToken} />
+        <Redirect from="*" to="/" />
+      </Switch>
     </PublicLayout>
   );
 };

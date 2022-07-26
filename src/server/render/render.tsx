@@ -6,10 +6,11 @@ import path from 'path';
 import * as ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter, StaticRouterContext } from 'react-router';
-import { store } from 'store';
+import { configureInitialStore } from 'store';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import { App } from '../../ssr';
 
+const { store } = configureInitialStore();
 export const render = (req: Request, res: Response) => {
   const sheet: ServerStyleSheet = new ServerStyleSheet();
   const context: StaticRouterContext = {};
@@ -30,6 +31,11 @@ export const render = (req: Request, res: Response) => {
   indexHTML = indexHTML.replace(
     `<div id="root"></div>`,
     `<div id="root">${reactHTNL}</div>
+    <script
+      dangerouslySetInnerHTML={{
+          __html: window.__PRELOADED_STATE__ = {test: 1234},
+      }}
+  />
     <script src="main.js"></script>`,
   );
   return res.send(indexHTML);

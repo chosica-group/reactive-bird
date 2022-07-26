@@ -2,7 +2,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { hydrate } from 'react-dom';
 import { hot } from 'react-hot-loader/root';
 import { Provider } from 'react-redux';
-import { history, store } from 'store';
+import { configureInitialStore, history } from 'store';
 import { App } from './app';
 
 const HotBundle = hot(App);
@@ -19,6 +19,21 @@ function startServiceWorker() {
     });
   }
 }
+
+declare global {
+  interface Window {
+    // В d.ts нам неважно, что это за тип,
+    // так как он сразу попадает в redux store на клиенте
+    __PRELOADED_STATE__?: object;
+  }
+}
+
+// eslint-disable-next-line no-underscore-dangle
+const state = window.__PRELOADED_STATE__; // Здесь будет объект с данными с сервера
+console.log(window, 'window', state, '__PRELOADED_STATE__');
+// eslint-disable-next-line no-underscore-dangle
+delete window.__PRELOADED_STATE__;
+const { store } = configureInitialStore(state);
 
 hydrate(
   <Provider store={store}>
