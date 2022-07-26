@@ -4,12 +4,10 @@
   "description": "flappy-bird game",
   "main": "src/index.tsx",
   "scripts": {
-    "dev": "webpack server --config webpack/dev.js",
-    "start": "npm run build && node dist/server/index.js",
-    "build:client": "webpack --config webpack/prod.js",
-    "build:server": "webpack --config webpack/webpack.server.js",
-    "start:server": "node dist/server.js",
-    "build": "npm run build:client && npm run build:server",
+    "build:prod": "webpack --config webpack/prod.js && webpack --config webpack/webpack.server.js --mode=production",
+    "build:dev": "webpack --config webpack/dev.js && webpack --config webpack/webpack.server.js --mode=development",
+    "start:prod": "npm run build:prod && NODE_ENV=production node dist/server.js",
+    "start:dev": "npm run build:dev && NODE_ENV=development node dist/server.js --watch dist/server.js",
     "build:analyze": "webpack --config webpack/prod.js --env ANALYZE",
     "lint": "eslint src",
     "fix": "eslint src --fix",
@@ -35,10 +33,11 @@
     "@mui/lab": "^5.0.0-alpha.86",
     "@mui/material": "^5.8.1",
     "@reduxjs/toolkit": "^1.8.2",
+    "@types/webpack-hot-middleware": "^2.25.6",
     "babel-jest": "^28.1.2",
     "connected-react-router": "^6.9.3",
     "express": "^4.18.1",
-    "history": "^5.3.0",
+    "history": "^4.10.1",
     "hot-module-reload": "^0.4.1",
     "identity-obj-proxy": "^3.0.0",
     "isomorphic-fetch": "^3.0.0",
@@ -51,7 +50,8 @@
     "react-router-dom": "^5.3.3",
     "react-test-renderer": "^17.0.2",
     "styled-components": "^5.3.5",
-    "ts-node-register": "^1.0.0"
+    "ts-node-register": "^1.0.0",
+    "webpack-hot-middleware": "^2.25.1"
   },
   "engines": {
     "node": "16.15.0"

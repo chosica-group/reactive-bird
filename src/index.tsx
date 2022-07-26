@@ -1,10 +1,11 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
-// import ReactDOM from 'react-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { hydrate } from 'react-dom';
+import { hot } from 'react-hot-loader/root';
 import { Provider } from 'react-redux';
 import { history, store } from 'store';
 import { App } from './app';
+
+const HotBundle = hot(App);
 
 function startServiceWorker() {
   if ('serviceWorker' in navigator) {
@@ -23,7 +24,7 @@ hydrate(
   <Provider store={store}>
     {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
     <ConnectedRouter history={history}>
-      <App />
+      <HotBundle />
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root'),

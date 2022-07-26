@@ -44,7 +44,6 @@ export const SignupForm = () => {
   };
 
   const goToSigninPage = () => {
-    // navigate('/login', { replace: true });
     history.push('/login');
   };
 

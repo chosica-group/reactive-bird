@@ -6,12 +6,14 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import renderer, { ReactTestRendererJSON } from 'react-test-renderer';
 import { instanceApi } from 'services/instance-api';
+import { history } from 'store';
 import { rootReducer } from 'store/root-reducer';
 import { CardFormComponent } from './card-form';
 
 describe('Card form render', () => {
   const mockStore = configureStore({
-    reducer: rootReducer,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    reducer: rootReducer(history),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(instanceApi.middleware),
   });
 

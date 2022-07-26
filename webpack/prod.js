@@ -1,11 +1,10 @@
 require('dotenv').config();
 const { merge } = require('webpack-merge');
 const common = require('./common.js');
+const { srcPath } = require('./path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const TerserPlugin = require('terser-webpack-plugin');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const { staticPath } = require('./path');
 const path = require('path');
 
 const BUILD_ANALYZE_PORT = process.env.BUILD_ANALYZE_PORT ?? 8888;
@@ -15,23 +14,6 @@ module.exports = ({ ANALYZE }) => {
     new ForkTsCheckerWebpackPlugin({
       async: false,
     }),
-    // new HtmlWebpackPlugin({
-    //   hash: true,
-    //   inject: true,
-    //   template: path.join(staticPath, 'index.html'),
-    //   minify: {
-    //     removeComments: true,
-    //     collapseWhitespace: true,
-    //     removeRedundantAttributes: true,
-    //     useShortDoctype: true,
-    //     removeEmptyAttributes: true,
-    //     removeStyleLinkTypeAttributes: true,
-    //     keepClosingSlash: true,
-    //     minifyJS: true,
-    //     minifyCSS: true,
-    //     minifyURLs: true,
-    //   },
-    // }),
   ];
 
   if (ANALYZE) {
@@ -47,6 +29,10 @@ module.exports = ({ ANALYZE }) => {
 
   return merge(common, {
     mode: 'production',
+    entry: {
+      main: path.resolve(srcPath, 'index.tsx'),
+      'sw': path.resolve(srcPath, 'sw.js'),
+    },
     module: {
       rules: [
         {

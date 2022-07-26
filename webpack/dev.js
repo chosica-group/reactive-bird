@@ -3,7 +3,7 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+// const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const ReactRefreshTypeScript = require('react-refresh-typescript');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
@@ -15,6 +15,9 @@ const { DEV_SERVER_PORT = 3000 } = process.env;
 module.exports = merge(common, {
   mode: 'development',
   devtool: 'eval-cheap-module-source-map',
+  entry: [
+    'webpack-hot-middleware/client',
+  ],
   module: {
     rules: [
       {
@@ -67,7 +70,6 @@ module.exports = merge(common, {
     },
   },
   plugins: [
-    new ReactRefreshWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin(),
     new ForkTsCheckerNotifierWebpackPlugin({
       excludeWarnings: true,

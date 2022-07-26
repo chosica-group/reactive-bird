@@ -45,7 +45,6 @@ export const SigninForm = () => {
   };
 
   const goToSignupPage = () => {
-    // navigate('/signup', { replace: true });
     history.push('/signup');
   };
   const useGoToOAuth = () => {

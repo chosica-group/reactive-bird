@@ -30,7 +30,7 @@ export const render = (req: Request, res: Response) => {
   indexHTML = indexHTML.replace(
     `<div id="root"></div>`,
     `<div id="root">${reactHTNL}</div>
-    <script src="/main.js"></script>`,
+    <script src="main.js"></script>`,
   );
   return res.send(indexHTML);
 };

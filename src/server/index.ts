@@ -1,19 +1,15 @@
 import express from 'express';
 import path from 'path';
-// @ts-ignore
-import { render } from './render/render';
+import { getWebpackMiddlewares } from './render/hmr';
 
 const app = express();
 // app.use(render());
 
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static(path.resolve(__dirname, '../../public')));
-// function serveIndev(req, res) {
-//   res.redirect('/');
-// }
+app.use(express.static(path.resolve(__dirname, '../public')));
 
-app.get('*', render);
+app.get('*', getWebpackMiddlewares(process.env.NODE_ENV || 'development'));
 app.listen(PORT, () => {
   console.log(`Running on ${PORT}`);
 });

@@ -1,13 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
-const { merge } = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
 
-const { NODE_ENV = 'development' } = process.env;
-
-
 module.exports = {
-    mode: NODE_ENV,
     name: 'server',
     target: 'node',
     node: {__dirname: false},
@@ -64,7 +59,8 @@ module.exports = {
     devtool: 'source-map',
 
     performance: {
-        hints: NODE_ENV === 'development' ? false : 'warning',
+        // hints: mode === 'development' ? false : 'warning',
+        hints: false,
     },
     externals: [nodeExternals({allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i]})],
 

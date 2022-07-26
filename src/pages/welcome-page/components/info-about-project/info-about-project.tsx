@@ -8,11 +8,9 @@ import { ColorButton } from './styled';
 export const InfoAboutProject = () => {
   const history = useHistory();
   const goToSignupPage = () => {
-    // navigate('/signup', { replace: true });
     history.push('/signup');
   };
   const goToSigninPage = () => {
-    // navigate('/login', { replace: true });
     history.push('/login');
   };
   return (

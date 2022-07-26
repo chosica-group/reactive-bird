@@ -8,7 +8,7 @@ import { StartGamePage } from 'pages/start-game';
 import { UserPage } from 'pages/user';
 import { WelcomePage } from 'pages/welcome-page';
 import { useSelector } from 'react-redux';
-import { BrowserRouter, Redirect, Route } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { AccessToken } from 'services/auth/o-auth/actions';
 import { isLoggedInIfoSelector } from 'store/auth-reducer';
 
@@ -19,13 +19,13 @@ export const AppRouter = () => {
     return (
       <MainLayout>
         <BrowserRouter>
-          <Route path="/game" component={StartGamePage} />
-          <Route path="/leaderboard" component={LeaderboardPage} />
-          <Route path="/forum" component={ForumPage} />
-          <Route path="/profile" component={UserPage} />
-          <Route path="*">
-            <Redirect to="/game" />
-          </Route>
+          <Switch>
+            <Route path="/game" exact component={StartGamePage} />
+            <Route path="/leaderboard" exact component={LeaderboardPage} />
+            <Route path="/forum" exact component={ForumPage} />
+            <Route path="/profile" exact component={UserPage} />
+            <Redirect from="*" to="/game" />
+          </Switch>
         </BrowserRouter>
       </MainLayout>
     );
@@ -33,10 +33,13 @@ export const AppRouter = () => {
   return (
     <PublicLayout>
       <BrowserRouter>
-        <Route path="/welcome" component={WelcomePage} />
-        <Route path="/signup" component={SignUpPage} />
-        <Route path="/login" component={SignInPage} />
-        <Route path="*" component={AccessToken} />
+        <Switch>
+          <Route path="/welcome" exact component={WelcomePage} />
+          <Route path="/signup" exact component={SignUpPage} />
+          <Route path="/login" exact component={SignInPage} />
+          <Route path="/" component={AccessToken} />
+          <Redirect from="*" to="/" />
+        </Switch>
       </BrowserRouter>
     </PublicLayout>
   );

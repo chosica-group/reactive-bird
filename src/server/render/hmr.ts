@@ -1,22 +1,22 @@
-// import webpack from 'webpack';
-// import config from '../../../webpack/common';
-// import devMiddleware from 'webpack-dev-middleware';
-// // @ts-ignore
-// import hotMiddleware from '@gatsbyjs/webpack-hot-middleware'
-// import { render } from './render';
+import type { RequestHandler } from 'express';
+import { render } from './render';
+import { webpackDev } from './webpackDev';
+import { webpackHot } from './webpackHot';
 
-// const compiler = webpack(config);
+const webpack = require('webpack');
 
-// export default [
-//   devMiddleware(compiler, {
-//     serverSideRender: true,
-//     index: false,
-//     publicPath: config.output!.publicPath!,
-//   }),
-//   hotMiddleware(compiler, {
-//     path: `/__webpack_hmr`,
-//     log: false,
-//     heartbeat: 10 * 1000,
-//   }),
-//   render
-// ]
+const common = require('../../../webpack/common.js');
+
+export function getWebpackMiddlewares(mode: string): RequestHandler[] {
+  const compiler = webpack(common);
+
+  const middlewares = [];
+  if (mode === 'development') {
+    middlewares.push(webpackDev(compiler));
+    middlewares.push(webpackHot(compiler));
+  }
+
+  middlewares.push(render);
+
+  return middlewares;
+}
