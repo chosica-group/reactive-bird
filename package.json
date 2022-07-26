@@ -42,6 +42,8 @@
     "identity-obj-proxy": "^3.0.0",
     "isomorphic-fetch": "^3.0.0",
     "jest-environment-jsdom": "^28.1.2",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.13.0",
@@ -51,7 +53,8 @@
     "react-test-renderer": "^17.0.2",
     "styled-components": "^5.3.5",
     "ts-node-register": "^1.0.0",
-    "webpack-hot-middleware": "^2.25.1"
+    "webpack-hot-middleware": "^2.25.1",
+    "sequelize": "^6.21.3"
   },
   "engines": {
     "node": "16.15.0"
