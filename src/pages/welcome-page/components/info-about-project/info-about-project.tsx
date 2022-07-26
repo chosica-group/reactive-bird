@@ -1,17 +1,19 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './info-about-project.css';
 import { ColorButton } from './styled';
 
 export const InfoAboutProject = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
   const goToSignupPage = () => {
-    navigate('/signup', { replace: true });
+    // navigate('/signup', { replace: true });
+    history.push('/signup');
   };
   const goToSigninPage = () => {
-    navigate('/login', { replace: true });
+    // navigate('/login', { replace: true });
+    history.push('/login');
   };
   return (
     <Card style={{ backgroundColor: '#1976d2', maxWidth: '700px' }} className="infocard">

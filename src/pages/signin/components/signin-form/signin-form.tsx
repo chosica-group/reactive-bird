@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import { Form } from 'components/form';
 import type { TFormInputs } from 'components/form';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { getServiceIdOauth, signin } from 'services/auth/auth-api';
 import type { SignUpRes, SigninParams, TClientId } from 'services/auth/types';
 import { setUserLoggedIn } from 'store/auth-reducer';
@@ -19,7 +19,7 @@ export const REDIRECT_URI =
     : `http://localhost:${process.env.DEV_SERVER_PORT || 3000}`;
 
 export const SigninForm = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
   const dispatch = useDispatch();
   const [apiError, setApiError] = useState<string | undefined>();
 
@@ -30,7 +30,7 @@ export const SigninForm = () => {
           setApiError(res.reason);
         } else {
           dispatch(setUserLoggedIn(true));
-          navigate('/game', { replace: true });
+          history.push('/game');
         }
       })
       .catch(() => {
@@ -45,7 +45,8 @@ export const SigninForm = () => {
   };
 
   const goToSignupPage = () => {
-    navigate('/signup', { replace: true });
+    // navigate('/signup', { replace: true });
+    history.push('/signup');
   };
   const useGoToOAuth = () => {
     getServiceIdOauth(REDIRECT_URI)

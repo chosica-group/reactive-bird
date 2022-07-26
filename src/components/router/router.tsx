@@ -8,35 +8,36 @@ import { StartGamePage } from 'pages/start-game';
 import { UserPage } from 'pages/user';
 import { WelcomePage } from 'pages/welcome-page';
 import { useSelector } from 'react-redux';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import { AccessToken } from 'services/auth/o-auth/actions';
 import { isLoggedInIfoSelector } from 'store/auth-reducer';
 
 export const AppRouter = () => {
   const authState = useSelector(isLoggedInIfoSelector);
-  console.log(authState.isLoggedIn, 'AppRouter');
 
   if (authState.isLoggedIn) {
     return (
       <MainLayout>
-        <Routes>
-          <Route path="/game" element={<StartGamePage />} />
-          <Route path="/leaderboard" element={<LeaderboardPage />} />
-          <Route path="/forum" element={<ForumPage />} />
-          <Route path="/profile" element={<UserPage />} />
-          <Route path="*" element={<Navigate to="/game" />} />
-        </Routes>
+        <BrowserRouter>
+          <Route path="/game" component={StartGamePage} />
+          <Route path="/leaderboard" component={LeaderboardPage} />
+          <Route path="/forum" component={ForumPage} />
+          <Route path="/profile" component={UserPage} />
+          <Route path="*">
+            <Redirect to="/game" />
+          </Route>
+        </BrowserRouter>
       </MainLayout>
     );
   }
   return (
     <PublicLayout>
-      <Routes>
-        <Route path="/welcome" element={<WelcomePage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/login" element={<SignInPage />} />
-        <Route path="*" element={<AccessToken />} />
-      </Routes>
+      <BrowserRouter>
+        <Route path="/welcome" component={WelcomePage} />
+        <Route path="/signup" component={SignUpPage} />
+        <Route path="/login" component={SignInPage} />
+        <Route path="*" component={AccessToken} />
+      </BrowserRouter>
     </PublicLayout>
   );
 };

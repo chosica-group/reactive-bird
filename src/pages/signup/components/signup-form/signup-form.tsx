@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Button } from '@mui/material';
 import { Form } from 'components/form';
 import type { TFormInputs } from 'components/form';
-import { useNavigate } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { signup } from 'services/auth/auth-api';
 import type { SignupParams } from 'services/auth/types';
 
@@ -21,7 +22,8 @@ const inputs: TFormInputs<TSubmitWithPassRepeat> = [
 ];
 
 export const SignupForm = () => {
-  const navigate = useNavigate();
+  // const history = useHistory();
+  const history = useHistory();
   const [apiError, setApiError] = useState<string | undefined>();
 
   const onSubmit = ({
@@ -42,7 +44,8 @@ export const SignupForm = () => {
   };
 
   const goToSigninPage = () => {
-    navigate('/login', { replace: true });
+    // navigate('/login', { replace: true });
+    history.push('/login');
   };
 
   return (
