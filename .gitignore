@@ -4,3 +4,4 @@
 /.webpack_cache
 /.env
 /postgresdata
+/public
