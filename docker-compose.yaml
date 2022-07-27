@@ -1,0 +1,55 @@
+services:
+  my-app:
+        # Этим ключом мы скажем docker-compose, чтобы он собирал Dockerfile, который 
+        # находится в папке рядом с docker-compose.yaml
+    build:
+      context: .
+    env_file:
+      .env
+        # Проброс порта так же, как в командной строке — на какой порт хоста какой порт контейнера
+    ports:
+      - "3000:3000"
+        # Проброс файлов, откуда с хоста, куда в контейнер
+    volumes:
+      - ./shared:/var/www/shared
+    depends_on:
+      - postgres
+    networks:
+      - awesome
+
+  postgres:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    volumes: 
+      - ./postgresdata:/var/lib/postgresql/data
+      # Если у вас есть схема БД, которую можно подгрузить на старте, — передайте её
+      - ./src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+    restart: always
+    env_file:
+      .env
+    networks:
+      - awesome
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:4.18
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: secret
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - awesome
+
+volumes:
+    pgadmin-data:
+
+networks:
+    awesome:
+        driver: bridge
