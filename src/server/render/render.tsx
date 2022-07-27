@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { StaticRouter, StaticRouterContext } from 'react-router';
 import { configureInitialStore } from 'store';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
+import { renderObject } from 'utils/server-side/render-object';
 import { App } from '../../ssr';
 
 const { store } = configureInitialStore();
@@ -28,10 +29,17 @@ export const render = (req: Request, res: Response) => {
     </StyleSheetManager>,
   );
 
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  const storeString = `window.__PRELOADED_STATE__ = ${renderObject(store.getState())}`;
+
   indexHTML = indexHTML.replace(
     `<div id="root"></div>`,
     `<div id="root">${reactHTNL}</div>
-    <script>window.__PRELOADED_STATE__={test: 1234}</script>
+    <script
+    dangerouslySetInnerHTML={{
+      __html: ${storeString},
+    }}
+  />
     <script src="main.js"></script>`,
   );
   return res.send(indexHTML);

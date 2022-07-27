@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createBrowserHistory, createMemoryHistory } from 'history';
 import { instanceApi } from 'services/instance-api';
-import isServer from 'utils/isServerSide';
+import isServer from 'utils/server-side/is-server-side';
 import { rootReducer } from './root-reducer';
 
 export const history = !isServer
