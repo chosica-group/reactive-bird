@@ -11,7 +11,7 @@ import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import { renderObject } from 'utils/server-side/render-object';
 import { App } from '../../ssr';
 
-const { store } = configureInitialStore();
+const { store } = configureInitialStore(); // тут можно передать начальное состояние
 export const render = (req: Request, res: Response) => {
   const sheet: ServerStyleSheet = new ServerStyleSheet();
   const context: StaticRouterContext = {};
@@ -28,18 +28,13 @@ export const render = (req: Request, res: Response) => {
       </Provider>
     </StyleSheetManager>,
   );
-
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   const storeString = `window.__PRELOADED_STATE__ = ${renderObject(store.getState())}`;
 
   indexHTML = indexHTML.replace(
     `<div id="root"></div>`,
-    `<div id="root">${reactHTNL}</div>
-    <script
-    dangerouslySetInnerHTML={{
-      __html: ${storeString},
-    }}
-  />
+    `<script>${storeString}</script>
+    <div id="root">${reactHTNL}</div>
     <script src="main.js"></script>`,
   );
   return res.send(indexHTML);

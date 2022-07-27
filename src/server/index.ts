@@ -3,7 +3,6 @@ import path from 'path';
 import { getWebpackMiddlewares } from './render/hmr';
 
 const app = express();
-// app.use(render());
 
 const PORT = process.env.PORT || 3000;
 
