@@ -1,20 +1,21 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "ES6",
+    "module": "commonjs",
     "moduleResolution": "node",
     "lib": ["DOM", "ES7", "ES2017", "ES2018", "ES2019", "dom.iterable"],
-    "outDir": "./dist",
+    "outDir": "./dist",   
     "jsx": "react-jsx",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "importsNotUsedAsValues": "error",
     "strict": true,
-
     "importHelpers": true,
     "noUnusedLocals": true,
-    "experimentalDecorators": false,
+    "experimentalDecorators": true,
+    "noImplicitReturns": false,
+    "strictPropertyInitialization": false,
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
@@ -22,6 +23,6 @@
     },
     "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
   },
-  "include": ["src", "./node_modules/@types", "./src/index.d.ts", "src/sw.js", "./src/import-png.d.ts"],
+  "include": ["src", "node_modules/@types", "src/index.d.ts", "src/sw.js", "src/import-png.d.ts"],
   "exclude": ["**/*.js"]
 }
