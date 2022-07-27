@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'express';
 import { render } from './render';
-import { webpackDev } from './webpackDev';
-import { webpackHot } from './webpackHot';
+import { webpackDev } from './webpack-dev';
+import { webpackHot } from './webpack-hot';
 
 const webpack = require('webpack');
 

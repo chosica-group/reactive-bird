@@ -31,11 +31,7 @@ export const render = (req: Request, res: Response) => {
   indexHTML = indexHTML.replace(
     `<div id="root"></div>`,
     `<div id="root">${reactHTNL}</div>
-    <script
-      dangerouslySetInnerHTML={{
-          __html: window.__PRELOADED_STATE__ = {test: 1234},
-      }}
-  />
+    <script>window.__PRELOADED_STATE__={test: 1234}</script>
     <script src="main.js"></script>`,
   );
   return res.send(indexHTML);
