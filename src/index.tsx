@@ -31,7 +31,6 @@ const state = window.__PRELOADED_STATE__;
 // eslint-disable-next-line no-underscore-dangle
 delete window.__PRELOADED_STATE__;
 const { store } = configureInitialStore(state);
-console.log(store.getState(), 'store');
 
 hydrate(
   <Provider store={store}>

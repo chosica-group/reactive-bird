@@ -36,7 +36,6 @@ module.exports = {
     plugins: [
         new webpack.ProvidePlugin({
             window: path.resolve(path.join(__dirname, '../webpack/mock/window.mock')),
-            // localStorage: resolve(join(__dirname, '../mock/localStorage.mock')),
             document: 'global/document',
         }),
         new webpack.BannerPlugin({

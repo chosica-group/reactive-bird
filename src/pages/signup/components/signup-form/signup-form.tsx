@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Button } from '@mui/material';
 import { Form } from 'components/form';
 import type { TFormInputs } from 'components/form';
-// import { useHistory } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { signup } from 'services/auth/auth-api';
 import type { SignupParams } from 'services/auth/types';
@@ -22,7 +21,6 @@ const inputs: TFormInputs<TSubmitWithPassRepeat> = [
 ];
 
 export const SignupForm = () => {
-  // const history = useHistory();
   const history = useHistory();
   const [apiError, setApiError] = useState<string | undefined>();
 
