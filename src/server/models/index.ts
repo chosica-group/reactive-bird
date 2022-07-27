@@ -32,20 +32,18 @@ import { Comments } from './comments';
 import { Topics } from './topics';
 
 const sequelizeOptions: SequelizeOptions = {
-  host: process.env.NODE_ENV === 'production' ? 'postgres' : 'localhost',
-  //   port: Number(process.env.DB_PORT),
-  port: 5432,
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
-  dialect: 'postgres', // 'mysql', 'sqlite', 'mariadb', 'mssql'
+  dialect: 'postgres',
 };
 
 // Создаем инстанс Sequelize
 export const sequelize = new Sequelize(sequelizeOptions);
 
 // // Инициализируем модели
-// export const User = sequelize.define('Comments', commentsModel, {});
 export async function createComment() {
   return Comments.create({ id: 1, comment: 'wehdioewhdowehdowe' });
 }
