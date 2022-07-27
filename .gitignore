@@ -3,3 +3,4 @@
 /dist
 /.webpack_cache
 /.env
+/postgresdata
