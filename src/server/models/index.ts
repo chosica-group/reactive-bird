@@ -32,11 +32,11 @@ import { Comments } from './comments';
 import { Topics } from './topics';
 
 const sequelizeOptions: SequelizeOptions = {
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  username: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  database: process.env.POSTGRES_DB,
+  host: 'localhost',
+  port: 5432,
+  username: 'postgres',
+  password: 'magus-malawi-gush',
+  database: 'chosica',
   dialect: 'postgres',
 };
 
@@ -49,6 +49,12 @@ export async function createComment() {
 }
 export async function getCommentById(id: number) {
   return Comments.findOne({ where: { id } });
+}
+// export async function updateUserById(id: number, data) {
+//     return Comments.update(data, { where: { id } });
+// }
+export async function deleteCommentById(id: number) {
+  return Comments.destroy({ where: { id } });
 }
 sequelize.addModels([Topics, Comments]);
 
@@ -68,4 +74,5 @@ export const initDB = async () => {
   const findedComment = await getCommentById(1);
   // Выводим в консоль найденный коммент
   console.log('Finded comment: ', findedComment);
+  //   await deleteCommentById(1)
 };

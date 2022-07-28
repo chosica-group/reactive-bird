@@ -1,26 +1,8 @@
 services:
-  my-app:
-        # Этим ключом мы скажем docker-compose, чтобы он собирал Dockerfile, который 
-        # находится в папке рядом с docker-compose.yaml
-    build:
-      context: .
-    env_file:
-      .env
-        # Проброс порта так же, как в командной строке — на какой порт хоста какой порт контейнера
-    ports:
-      - "3000:3000"
-        # Проброс файлов, откуда с хоста, куда в контейнер
-    volumes:
-      - ./shared:/var/www/shared
-    depends_on:
-      - postgres
-    networks:
-      - awesome
-
   postgres:
-    image: postgres:12
+    image: postgres:14
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes: 
       - ./postgresdata:/var/lib/postgresql/data
       # Если у вас есть схема БД, которую можно подгрузить на старте, — передайте её
@@ -29,6 +11,7 @@ services:
       .env
     networks:
       - awesome
+
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4:4.18
@@ -41,6 +24,24 @@ services:
       - "8080:80"
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - awesome
+
+  my-app:
+        # Этим ключом мы скажем docker-compose, чтобы он собирал Dockerfile, который 
+        # находится в папке рядом с docker-compose.yaml
+    build:
+      context: .
+    env_file:
+      .env
+        # Проброс порта так же, как в командной строке — на какой порт хоста какой порт контейнера
+    ports:
+      - "4000:3000"
+        # Проброс файлов, откуда с хоста, куда в контейнер
+    volumes:
+      - ./shared:/var/www/shared
     depends_on:
       - postgres
     networks:
