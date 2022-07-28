@@ -3,11 +3,8 @@ const { distPath, rootPath, srcPath } = require('./path');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
+  mode: 'none',
   context: process.cwd(),
-  entry: {
-    main: path.resolve(srcPath, 'index.tsx'),
-    'sw': path.resolve(srcPath, 'sw.js'),
-  },
   output: {
     path: distPath,
     filename: '[name].js',
@@ -20,6 +17,7 @@ module.exports = {
       layout: path.join(srcPath, 'layout'),
       providers: path.join(srcPath, 'providers'),
       pages: path.join(srcPath, 'pages'),
+      assets: path.join(srcPath, 'assets'),
       utils: path.join(srcPath, 'utils'),
       assets: path.join(srcPath, 'assets'),
       store: path.join(srcPath, 'store'),

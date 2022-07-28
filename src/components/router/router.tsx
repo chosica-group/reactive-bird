@@ -8,35 +8,35 @@ import { StartGamePage } from 'pages/start-game';
 import { UserPage } from 'pages/user';
 import { WelcomePage } from 'pages/welcome-page';
 import { useSelector } from 'react-redux';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { AccessToken } from 'services/auth/o-auth/actions';
 import { isLoggedInIfoSelector } from 'store/auth-reducer';
 
 export const AppRouter = () => {
   const authState = useSelector(isLoggedInIfoSelector);
-  console.log(authState.isLoggedIn, 'AppRouter');
 
   if (authState.isLoggedIn) {
     return (
       <MainLayout>
-        <Routes>
-          <Route path="/game" element={<StartGamePage />} />
-          <Route path="/leaderboard" element={<LeaderboardPage />} />
-          <Route path="/forum" element={<ForumPage />} />
-          <Route path="/profile" element={<UserPage />} />
-          <Route path="*" element={<Navigate to="/game" />} />
-        </Routes>
+        <Switch>
+          <Route path="/game" exact component={StartGamePage} />
+          <Route path="/leaderboard" exact component={LeaderboardPage} />
+          <Route path="/forum" exact component={ForumPage} />
+          <Route path="/profile" exact component={UserPage} />
+          <Redirect from="*" to="/game" />
+        </Switch>
       </MainLayout>
     );
   }
   return (
     <PublicLayout>
-      <Routes>
-        <Route path="/welcome" element={<WelcomePage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/login" element={<SignInPage />} />
-        <Route path="*" element={<AccessToken />} />
-      </Routes>
+      <Switch>
+        <Route path="/welcome" exact component={WelcomePage} />
+        <Route path="/signup" exact component={SignUpPage} />
+        <Route path="/login" exact component={SignInPage} />
+        <Route path="/" component={AccessToken} />
+        <Redirect from="*" to="/" />
+      </Switch>
     </PublicLayout>
   );
 };

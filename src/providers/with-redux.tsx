@@ -1,6 +1,8 @@
 import type { ComponentType } from 'react';
 import { Provider } from 'react-redux';
-import { store } from 'store';
+import { configureInitialStore } from 'store';
+
+const { store } = configureInitialStore();
 
 export const withRedux = (Component: ComponentType) => () =>
   (

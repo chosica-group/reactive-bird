@@ -1,1 +1,1 @@
-export { store } from './store';
+export { configureInitialStore, history } from './store';
