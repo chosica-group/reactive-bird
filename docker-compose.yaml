@@ -9,6 +9,10 @@ services:
     restart: always
     env_file:
       .env
+    # environment:
+    #   POSTGRES_USER: postgres
+    #   POSTGRES_PASSWORD: magus-malawi-gush
+    #   POSTGRES_DB: chosica
     networks:
       - awesome
 
