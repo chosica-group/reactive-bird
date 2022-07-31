@@ -7,6 +7,7 @@
     "build:prod": "webpack --config webpack/prod.js && webpack --config webpack/webpack.server.js --mode=production",
     "build:dev": "webpack --config webpack/dev.js && webpack --config webpack/webpack.server.js --mode=development",
     "start:prod": "npm run build:prod && NODE_ENV=production node dist/server.js",
+    "start:no-build": "NODE_ENV=production node dist/server.js",
     "start:dev": "npm run build:dev && NODE_ENV=development node dist/server.js --watch dist/server.js",
     "build:analyze": "webpack --config webpack/prod.js --env ANALYZE",
     "lint": "eslint src",
