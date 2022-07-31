@@ -32,7 +32,7 @@ import { Comments } from './comments';
 import { Topics } from './topics';
 
 const sequelizeOptions: SequelizeOptions = {
-  host: 'localhost',
+  host: !process.env.NODE_ENV || process.env.NODE_ENV === 'production' ? 'postgres' : 'localhost',
   port: 5432,
   username: 'postgres',
   password: 'magus-malawi-gush',
@@ -44,8 +44,8 @@ const sequelizeOptions: SequelizeOptions = {
 export const sequelize = new Sequelize(sequelizeOptions);
 
 // // Инициализируем модели
-export async function createComment() {
-  return Comments.create({ id: 1, comment: 'wehdioewhdowehdowe' });
+export async function createComment(comment: string) {
+  return Comments.create({ comment });
 }
 export async function getCommentById(id: number) {
   return Comments.findOne({ where: { id } });
@@ -70,7 +70,7 @@ export async function dbConnect() {
 
 export const initDB = async () => {
   await dbConnect();
-  await createComment();
+  await createComment('привет привет');
   const findedComment = await getCommentById(1);
   // Выводим в консоль найденный коммент
   console.log('Finded comment: ', findedComment);

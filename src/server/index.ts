@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.resolve(__dirname, '../public')));
 
-app.get('*', getWebpackMiddlewares(process.env.NODE_ENV || 'development'));
+app.get('*', getWebpackMiddlewares(process.env.NODE_ENV || 'production'));
 app.listen(PORT, () => {
   console.log(`Running on ${PORT}`);
 });

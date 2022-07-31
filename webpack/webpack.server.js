@@ -59,7 +59,7 @@ module.exports = {
 
     performance: {
         // hints: mode === 'development' ? false : 'warning',
-        hints: false,
+        hints: 'warning',
     },
     externals: [nodeExternals({allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i]})],
 

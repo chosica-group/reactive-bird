@@ -1,16 +1,14 @@
 import {
   AllowNull,
-  AutoIncrement,
   Column,
   DataType,
   Model,
-  PrimaryKey,
   Table,
 } from 'sequelize-typescript';
 
 
 type TComment = {
-  id: number;
+  id?: number;
   comment: string;
 }
 
@@ -21,11 +19,6 @@ type TComment = {
   tableName: 'comments',
 })
 export class Comments extends Model<TComment> {
-  @AutoIncrement
-  @PrimaryKey
-  @Column(DataType.INTEGER)
-  id: number;
-
   @AllowNull(false)
   @Column(DataType.STRING)
   comment: string;

@@ -5,14 +5,13 @@ services:
       - "5433:5432"
     volumes: 
       - ./postgresdata:/var/lib/postgresql/data
-      # Если у вас есть схема БД, которую можно подгрузить на старте, — передайте её
     restart: always
-    env_file:
-      .env
-    # environment:
-    #   POSTGRES_USER: postgres
-    #   POSTGRES_PASSWORD: magus-malawi-gush
-    #   POSTGRES_DB: chosica
+    # env_file:
+    #   .env
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: magus-malawi-gush
+      POSTGRES_DB: chosica
     networks:
       - awesome
 
@@ -34,18 +33,13 @@ services:
       - awesome
 
   my-app:
-        # Этим ключом мы скажем docker-compose, чтобы он собирал Dockerfile, который 
-        # находится в папке рядом с docker-compose.yaml
     build:
       context: .
     env_file:
       .env
-        # Проброс порта так же, как в командной строке — на какой порт хоста какой порт контейнера
     ports:
-      - "4000:3000"
-        # Проброс файлов, откуда с хоста, куда в контейнер
-    volumes:
-      - ./shared:/var/www/shared
+      - "3000:3000"
+    restart: always
     depends_on:
       - postgres
     networks:
