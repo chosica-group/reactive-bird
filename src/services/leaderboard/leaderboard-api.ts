@@ -14,6 +14,7 @@ export const leaderboardApi = instanceApi.injectEndpoints({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['Leaderboard'],
     }),
     getAllLeaderboard: builder.query<TAllLeaderboardResponse, TAllLeaderboardRequest>({
       query: (body) => ({
@@ -28,6 +29,7 @@ export const leaderboardApi = instanceApi.injectEndpoints({
         method: 'POST',
         body,
       }),
+      providesTags: ['Leaderboard'],
     }),
   }),
 });

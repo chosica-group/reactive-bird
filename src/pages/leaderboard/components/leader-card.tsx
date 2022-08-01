@@ -1,7 +1,8 @@
 import { Box, Typography } from '@mui/material';
-import { CurrencyBitcoin as CoinIcon, AccessTime as TimeIcon } from '@mui/icons-material';
-import { getSecondTime } from 'utils/get-second-time';
-import { numWord } from 'utils/num-word';
+import { CurrencyBitcoin as CoinIcon } from '@mui/icons-material';
+// import { CurrencyBitcoin as CoinIcon, AccessTime as TimeIcon } from '@mui/icons-material';
+// import { getSecondTime } from 'utils/get-second-time';
+// import { numWord } from 'utils/num-word';
 import { Avatar, BadgeWrap, Item, ResultText } from './styled';
 
 type TProps = {
@@ -12,7 +13,7 @@ type TProps = {
   avatar: string;
 };
 
-const COIN_LANG = ['монета', 'монеты', 'монет'] as [string, string, string];
+// const COIN_LANG = ['монета', 'монеты', 'монет'] as [string, string, string]; //
 
 export const LeaderCard = ({ avatar, name, rating, time, result }: TProps) => (
   <BadgeWrap
@@ -31,12 +32,12 @@ export const LeaderCard = ({ avatar, name, rating, time, result }: TProps) => (
             {name}
           </Typography>
 
-          <ResultText variant="body1" textAlign="left">
+          {/* <ResultText variant="body1" textAlign="left">
             <TimeIcon fontSize="small" /> время: {getSecondTime(time)}
-          </ResultText>
+          </ResultText> */}
 
           <ResultText variant="body1" textAlign="left">
-            <CoinIcon fontSize="small" /> результат: {result} {numWord(result, COIN_LANG)}
+            <CoinIcon fontSize="small" /> результат: {result}
           </ResultText>
         </Box>
       </Box>
