@@ -3,7 +3,7 @@ import { Topics } from './topics';
 import { Comments } from './comments';
 import { SiteTheme } from './site-theme';
 import { UserTheme } from './user-theme';
-import { createTheme } from 'server/controllers/site-theme';
+import siteThemeService from 'server/services/site-theme';
 import { lightTheme, darkTheme } from './theme-data';
 
 const sequelizeOptions: SequelizeOptions = {
@@ -32,6 +32,6 @@ export async function dbConnect() {
 
 export const initDB = async () => {
   await dbConnect();
-  await createTheme(lightTheme);
-  await createTheme(darkTheme);
+  await siteThemeService.create(lightTheme);
+  await siteThemeService.create(darkTheme);
 };
