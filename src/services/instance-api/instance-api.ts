@@ -5,5 +5,5 @@ export const instanceApi = createApi({
   reducerPath: 'api',
   baseQuery,
   endpoints: () => ({}),
-  tagTypes: ['user'],
+  tagTypes: ['user', 'Leaderboard'],
 });
