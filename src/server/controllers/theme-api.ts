@@ -1,10 +1,11 @@
 import type { Request, Response } from 'express';
 import type { TSiteTheme } from 'server/models/types';
-import { siteThemeService } from 'server/services';
+import { SiteThemeService } from 'server/services';
 
 type TBody = {
   body: TSiteTheme;
 };
+const siteThemeService = new SiteThemeService();
 
 export class ThemeAPI {
   // @validation({/* rules */}) // Можно использовать декораторы, можно передавать в middlewares
@@ -19,11 +20,24 @@ export class ThemeAPI {
         theme_text_color: body.theme_text_color,
         theme_id: body.theme_id,
       });
+      response.status(200).send(body);
+    } else {
+      response.status(404).send({ reason: 'theme exists' });
     }
   };
 
   public static find = async (request: Request, response: Response) => {
-    const { themeMame } = request.params;
-    await siteThemeService.find(themeMame);
+    const { themeName } = request.params;
+    if (!themeName) response.status(404).send({ reason: 'invalid request' });
+    try {
+      const theme = await siteThemeService.find(themeName);
+      if (theme) {
+        response.send(theme);
+      } else {
+        response.status(404).send({ reason: 'theme not found' });
+      }
+    } catch (e) {
+      response.status(500).send({ reason: 'error' });
+    }
   };
 }

@@ -3,7 +3,7 @@ import { Topics } from './topics';
 import { Comments } from './comments';
 import { SiteTheme } from './site-theme';
 import { UserTheme } from './user-theme';
-import siteThemeService from 'server/services/site-theme';
+import { SiteThemeService } from 'server/services/site-theme';
 import { lightTheme, darkTheme } from './theme-data';
 
 const sequelizeOptions: SequelizeOptions = {
@@ -15,7 +15,7 @@ const sequelizeOptions: SequelizeOptions = {
   database: 'chosica',
   dialect: 'postgres',
 };
-
+const siteThemeService = new SiteThemeService();
 export const sequelize = new Sequelize(sequelizeOptions);
 
 sequelize.addModels([Topics, Comments, UserTheme, SiteTheme]);
@@ -34,4 +34,6 @@ export const initDB = async () => {
   await dbConnect();
   await siteThemeService.create(lightTheme);
   await siteThemeService.create(darkTheme);
+  const theme = await siteThemeService.find('dark');
+  console.log(theme, 'theme');
 };
