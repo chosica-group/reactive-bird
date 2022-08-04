@@ -7,6 +7,7 @@ import { SignUpPage } from 'pages/signup';
 import { StartGamePage } from 'pages/start-game';
 import { UserPage } from 'pages/user';
 import { WelcomePage } from 'pages/welcome-page';
+import { TopicPage } from 'pages/topic';
 import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { AccessToken } from 'services/auth/o-auth/actions';
@@ -23,6 +24,7 @@ export const AppRouter = () => {
           <Route path="/game" element={<StartGamePage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="/forum" element={<ForumPage />} />
+          <Route path="/topic/:id" element={<TopicPage />} />
           <Route path="/profile" element={<UserPage />} />
           <Route path="*" element={<Navigate to="/game" />} />
         </Routes>

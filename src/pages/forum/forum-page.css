@@ -1,10 +1,13 @@
-.main-wrapper {
+.forum-wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin-top: 100px;
+  gap: 20px;
+  align-items: center;
 }
 
-.grid-wrapper {
+.forum-wrapper .grid-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,9 +15,44 @@
   min-width: 500px;
 }
 
-.grid-wrapper__column {
+.forum-wrapper .grid-wrapper__column {
   text-align: center;
   margin: 0;
   color: blue;
   font-weight: bold;
+}
+
+.create-topic-btn {
+  width: 20%;
+}
+
+.create-topic-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.create-topic-container {
+  width: 30%;
+  height: 20%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 50px 50px;
+}
+
+.create-topic-btns-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.new-topic-cancel-btn {
+  background-color: grey !important;
+}
+
+.create-topic-header-text {
+  text-align: center;
 }

@@ -9,6 +9,7 @@ const CACHE_URLS = [
     '/forum',
     '/profile',
     '/welcome',
+    '/topic/:id',
     '/'
     ];
 

@@ -1,33 +1,27 @@
 import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { AddCircleRounded } from '@mui/icons-material';
 import './topic-row.css';
+import type { TTopicResponse } from 'services/topics/types';
+import { useNavigate } from 'react-router-dom';
 
-type TProps = {
-  title: string;
-  subTopicsCount: number;
-  answersCount: number;
-};
+export const TopicRow = (data: TTopicResponse) => {
+  const { commentsCount, name } = data;
+  const navigate = useNavigate();
 
-export const TopicRow = (data: TProps) => {
-  const { subTopicsCount, answersCount, title } = data;
+  const onClick = () => {
+    navigate(`/topic/${data.id}`, { replace: true });
+  }
 
   return (
     <>
-      <Grid item xs={8} zeroMinWidth>
+      <Grid item xs={6} zeroMinWidth>
         <Typography noWrap component="div" className="grid-item">
-          <p className="grid-item__title grid-item__text">{title}</p>
+          <p className="grid-item__title grid-item__text" onClick={onClick}>{name}</p>
         </Typography>
       </Grid>
-      <Grid item xs={1.6} zeroMinWidth>
-        <Typography noWrap component="div" className="grid-item count-item">
-          <p className="grid-item__text">{subTopicsCount}</p>
-          <AddCircleRounded className="add-icon" />
-        </Typography>
-      </Grid>
-      <Grid item xs={1.3} zeroMinWidth>
+      <Grid item xs={2} zeroMinWidth>
         <Typography noWrap component="div" className="grid-item">
-          <p className="grid-item__text">{answersCount}</p>
+          <p className="grid-item__text">{commentsCount}</p>
         </Typography>
       </Grid>
     </>

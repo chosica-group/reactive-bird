@@ -1,0 +1,27 @@
+.comment-item__text {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.comment-item {
+  padding: 10px;
+  border-radius: 22px;
+  border: 1px solid black;
+  display: flex;
+}
+
+.comment-item__title {
+  text-align: start;
+  padding-left: 20px;
+}
+
+.comment-item__date {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.comment-grid-row {
+  padding-left: 0 !important;
+}
