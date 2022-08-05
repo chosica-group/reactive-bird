@@ -1,5 +1,7 @@
 /node_modules
 /.idea
 /dist
+/public
 /.webpack_cache
 /.env
+/postgresdata

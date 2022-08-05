@@ -2,14 +2,14 @@ import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import './topic-row.css';
 import type { TTopicResponse } from 'services/topics/types';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export const TopicRow = (data: TTopicResponse) => {
   const { commentsCount, name } = data;
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const onClick = () => {
-    navigate(`/topic/${data.id}`, { replace: true });
+    history.push(`/topic/${data.id}`);
   }
 
   return (

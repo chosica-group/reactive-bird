@@ -1,9 +1,10 @@
-const express = require('express');
-const comments = require('../models').comments;
-const router = express.Router();
+import { Router } from 'express';
+import { Comments } from '../models/comments';
+
+const router = Router();
 
 router.get('/:id/comments', (req, res) => {
-  comments.findAll({ where: { topicId: req.params.id } })
+  Comments.findAll({ where: { topicId: req.params.id } })
     .then((comments) => res.send(comments))
     .catch((err) => {
       res.status(500).send({ message: err.message});
@@ -11,7 +12,7 @@ router.get('/:id/comments', (req, res) => {
 });
 
 router.post('/:id/comments', (req, res) => {
-  comments.create({ ...req.body, topicId: req.params.id })
+  Comments.create({ ...req.body, topicId: req.params.id })
     .then(comment => {
       res.status(201).send(comment);
     })
@@ -20,4 +21,4 @@ router.post('/:id/comments', (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;
