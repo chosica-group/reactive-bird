@@ -1,6 +1,6 @@
 export type TTopicResponse = {
   id: number;
-  commentsCount: string;
+  comments: Comment[];
   name: string;
   createdAt: string;
   updatedAt: string;

@@ -5,7 +5,7 @@ import type { TTopicResponse } from 'services/topics/types';
 import { useHistory } from 'react-router-dom';
 
 export const TopicRow = (data: TTopicResponse) => {
-  const { commentsCount, name } = data;
+  const { comments, name } = data;
   const history = useHistory();
 
   const onClick = () => {
@@ -21,7 +21,7 @@ export const TopicRow = (data: TTopicResponse) => {
       </Grid>
       <Grid item xs={2} zeroMinWidth>
         <Typography noWrap component="div" className="grid-item">
-          <p className="grid-item__text">{commentsCount}</p>
+          <p className="grid-item__text">{comments.length}</p>
         </Typography>
       </Grid>
     </>

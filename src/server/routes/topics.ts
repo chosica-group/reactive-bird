@@ -1,4 +1,3 @@
-const { Sequelize } = require('sequelize');
 import { Router } from 'express';
 import { Comments } from '../models/comments';
 import { Topics } from '../models/topics'
@@ -6,21 +5,7 @@ import { Topics } from '../models/topics'
 const router = Router();
 
 router.get('/', (req, res) => {
-  Topics.findAll(
-    {
-      attributes: {
-        include: [
-          [Sequelize.fn('COUNT', Sequelize.col('comments.id')), 'commentsCount']
-        ]
-      },
-      include: [{
-        attributes: [],
-        model: Comments
-      }],
-      group: ['topics.id'],
-      order: [['count', 'DESC']]
-    }
-  )
+  Topics.findAll({ include: { as: 'comments', model: Comments } })
     .then(topics => res.send(topics))
     .catch(err => {
       res.status(500).send({ message: err.message});
@@ -36,7 +21,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  Topics.create(req.body)
+  Topics.create({ ...req.body, createdAt: new Date(), updatedAt: new Date() })
     .then(topic => {
       res.status(201).send(topic);
     })

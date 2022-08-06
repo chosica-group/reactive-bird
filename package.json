@@ -13,7 +13,8 @@
     "lint": "eslint src",
     "fix": "eslint src --fix",
     "prepare": "husky install",
-    "jest": "jest"
+    "jest": "jest",
+    "start:with-server": "npm run build:prod && node dist/server.js"
   },
   "repository": {
     "type": "git",
