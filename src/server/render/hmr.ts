@@ -1,5 +1,5 @@
 import type { RequestHandler } from 'express';
-// import { authMiddleware } from './auth';
+// import { authMidsdleware } from './auth';
 import { render } from './render';
 import { webpackDev } from './webpack-dev';
 import { webpackHot } from './webpack-hot';

@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { AppBar as AppBarMui, Container, Stack, Toolbar } from '@mui/material';
 import { FullscreenBtn } from 'components/fullscreen-btn';
 import { SiteThemeBtn } from 'components/site-theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'services/auth/auth-api';
-import { useUpdateUserThemeMutation } from 'services/theme/theme-api';
-import { isLoggedInIfoSelector, setUserTheme } from 'store/auth-reducer';
+import { useGetThemeQuery, useUpdateUserThemeMutation } from 'services/theme/theme-api';
+import { isLoggedInIfoSelector, setUserTheme, setUserThemeName } from 'store/auth-reducer';
 import { DesktopLogo, DesktopMenu, MobileLogo, MobileMenu, User } from './components';
 
 const pages = [
@@ -17,13 +17,23 @@ const pages = [
 
 export const AppBar = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const [themeName, setThemeName] = useState<string>('light');
   const userData = useSelector(isLoggedInIfoSelector);
+  const [skip, setSkip] = useState(true);
+  const { data: currentTheme, isSuccess } = useGetThemeQuery(userData.userTheme || 'light', {
+    skip,
+  });
+  // const [themeName, setThemeName] = useState<string>(userData.userTheme || 'light');
   const dispatch = useDispatch();
   const [updateUserTheme] = useUpdateUserThemeMutation();
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(setUserTheme(currentTheme));
+    }
+  }, [currentTheme, dispatch, isSuccess]);
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -39,10 +49,12 @@ export const AppBar = () => {
     }
   };
   const handleChangeMode = async () => {
-    setThemeName((prevState) => (prevState === 'light' ? 'dark' : 'light'));
-    if (userData.userId) {
-      await updateUserTheme({ user_id: userData.userId, theme_name: themeName });
-      dispatch(setUserTheme(themeName));
+    // setThemeName((prevState) => (prevState === 'light' ? 'dark' : 'light'));
+    if (userData.userId && userData.userTheme) {
+      const newTheme = userData.userTheme === 'light' ? 'dark' : 'light';
+      await updateUserTheme({ user_id: userData.userId, theme_name: newTheme });
+      dispatch(setUserThemeName(newTheme));
+      setSkip(false);
     }
   };
 
@@ -59,7 +71,10 @@ export const AppBar = () => {
           <DesktopMenu handleCloseNavMenu={handleCloseUserMenu} pages={pages} />
           <Stack direction="row" spacing={1}>
             <FullscreenBtn element={document.documentElement} />
-            <SiteThemeBtn handleChangeMode={handleChangeMode} themeName={themeName} />
+            <SiteThemeBtn
+              handleChangeMode={handleChangeMode}
+              themeName={userData.userTheme || 'light'}
+            />
             <User
               anchorElUser={anchorElUser}
               handleCloseUserMenu={handleCloseUserMenu}

@@ -11,11 +11,11 @@ import { isLoggedInIfoSelector } from 'store/auth-reducer';
 // import { useGetUserThemeQuery } from 'services/theme/theme-api';
 // import { useAddUserThemeMutation } from 'services/theme/theme-api';
 // import { useGetUserQuery } from 'services/user';
-// import { setUserId, setUserLoggedIn, setUserTheme } from 'store/auth-reducer';
+// import { setUserId, setUserLoggedIn, setUserThemeName } from 'store/auth-reducer';
 
 export const withAuth = (Component: ComponentType) => () => {
   const authState = useSelector(isLoggedInIfoSelector);
-  console.log(authState.isLoggedIn, 'authState');
+  console.log(authState.isLoggedIn, 'authState222');
   // const { data, isLoading } = useGetUserQuery();
   // const [skipUserTheme, setSkipUserTheme] = useState(true);
   // const [userInfo, setUserInfo] = useState<TUserTheme>();
@@ -41,8 +41,8 @@ export const withAuth = (Component: ComponentType) => () => {
   //   if (userThemeL) {
   //     console.log('222222', userThemeL);
   //     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  //     dispatch(setUserTheme(userThemeL.theme_name));
+  //     dispatch(setUserThemeName(userThemeL.theme_name));
   //   }
   // });
-  return authState.isLoggedIn ? <PlugComponent /> : <Component />;
+  return !authState.isLoggedIn ? <PlugComponent /> : <Component />;
 };

@@ -7,12 +7,12 @@ export const themeApi = appApi.injectEndpoints({
       query: (themeName) => ({
         url: `/theme/${themeName}`,
       }),
+      providesTags: ['Theme'],
     }),
     getUserTheme: builder.query<TUserTheme, number>({
       query: (userId) => ({
         url: `/theme/user/${userId}`,
       }),
-      // providesTags: ['Theme'],
     }),
     addUserTheme: builder.mutation<TUserTheme, TUserTheme>({
       query: (body) => ({
@@ -20,7 +20,6 @@ export const themeApi = appApi.injectEndpoints({
         method: 'POST',
         body,
       }),
-      // invalidatesTags: ['Theme'],
     }),
     getAllThemes: builder.query<TSiteTheme[], void>({
       query: () => ({
@@ -33,7 +32,7 @@ export const themeApi = appApi.injectEndpoints({
         method: 'PUT',
         body,
       }),
-      // invalidatesTags: ['Theme'],
+      invalidatesTags: ['Theme'],
     }),
   }),
 });
