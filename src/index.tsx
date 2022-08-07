@@ -28,9 +28,10 @@ declare global {
 
 // eslint-disable-next-line no-underscore-dangle
 const state = window.__PRELOADED_STATE__;
+console.log(state, 'state __PRELOADED_STATE__');
 // eslint-disable-next-line no-underscore-dangle
-delete window.__PRELOADED_STATE__;
-const { store } = configureInitialStore(state);
+// delete window.__PRELOADED_STATE__;
+const { store } = configureInitialStore(state || {});
 
 hydrate(
   <Provider store={store}>

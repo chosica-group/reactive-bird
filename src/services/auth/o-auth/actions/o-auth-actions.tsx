@@ -9,7 +9,7 @@ export const AccessToken = () => {
   const authState = useSelector(isLoggedInIfoSelector);
   const dispatch = useDispatch();
   const history = useHistory();
-  const queryString = document.location.search;
+  const queryString = document?.location?.search;
   const params = new URLSearchParams(queryString);
   const code: string | null = params.get('code');
   useEffect(() => {

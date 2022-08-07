@@ -12,11 +12,13 @@
     "importsNotUsedAsValues": "error",
     "strict": true,
     "importHelpers": true,
-    "noUnusedLocals": true,
+    // "noUnusedLocals": true,
     "experimentalDecorators": true,
     "noImplicitReturns": false,
     "strictPropertyInitialization": false,
     "skipLibCheck": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "baseUrl": ".",
     "paths": {
       "*": ["./src/*"]

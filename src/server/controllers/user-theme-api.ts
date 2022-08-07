@@ -28,6 +28,27 @@ export class UserThemeAPI {
     }
   };
 
+  public static findAndCreate = async (request: Request, response: Response) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const { body }: TBody = request;
+    if (body) {
+      try {
+        const user = await userThemeService.find(Number(body.user_id));
+        if (!user) {
+          await userThemeService.create({
+            user_id: body.user_id,
+            theme_name: body.theme_name,
+          });
+          response.status(200).send(body);
+        } else {
+          response.status(200).send(user);
+        }
+      } catch (e) {
+        response.status(500).send({ reason: 'error' });
+      }
+    }
+  };
+
   public static find = async (request: Request, response: Response) => {
     const { id } = request.params;
     if (!id) response.status(404).send('not found');

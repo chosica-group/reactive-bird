@@ -26,6 +26,17 @@ export class ThemeAPI {
     }
   };
 
+  public static findAll = async (request: Request, response: Response) => {
+    try {
+      const allThemes = await siteThemeService.findAll();
+      if (allThemes !== undefined) {
+        response.send(allThemes);
+      }
+    } catch (e) {
+      response.status(500).send({ reason: 'error' });
+    }
+  };
+
   public static find = async (request: Request, response: Response) => {
     const { themeName } = request.params;
     if (!themeName) response.status(404).send({ reason: 'invalid request' });

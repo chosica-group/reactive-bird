@@ -6,6 +6,8 @@ import type { BaseRESTService } from './baseRESTService';
 export class SiteThemeService implements BaseRESTService {
   public find = (themeName: string) => SiteTheme.findOne({ where: { theme_name: themeName } });
 
+  public findAll = () => SiteTheme.findAll();
+
   // eslint-disable-next-line consistent-return
   public create = async (newTheme: TSiteTheme) => {
     const theme = await this.find(newTheme.theme_name);
@@ -19,5 +21,4 @@ export class SiteThemeService implements BaseRESTService {
     }
   };
   // TO DO сделать update
-  // TO DO сделать find all
 }

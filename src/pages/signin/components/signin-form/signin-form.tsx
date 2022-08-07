@@ -13,10 +13,10 @@ const inputs: TFormInputs<SigninParams> = [
   { name: 'password', label: 'Пароль', type: 'password', required: true },
 ];
 
-export const REDIRECT_URI =
-  process.env.NODE_ENV === 'production'
-    ? 'https://chosica-flappy-bird.herokuapp.com'
-    : `http://localhost:${process.env.DEV_SERVER_PORT || 3000}`;
+export const REDIRECT_URI = `http://localhost:${process.env.DEV_SERVER_PORT || 3000}`;
+// process.env.NODE_ENV === 'production'
+//   ? 'https://chosica-flappy-bird.herokuapp.com'
+//   : `http://localhost:${process.env.DEV_SERVER_PORT || 3000}`;
 
 export const SigninForm = () => {
   const history = useHistory();

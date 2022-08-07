@@ -34,6 +34,4 @@ export const initDB = async () => {
   await dbConnect();
   await siteThemeService.create(lightTheme);
   await siteThemeService.create(darkTheme);
-  const theme = await siteThemeService.find('dark');
-  console.log(theme, 'theme');
 };
