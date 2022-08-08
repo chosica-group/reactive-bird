@@ -3,7 +3,7 @@ import { Box, Button, Skeleton, Typography } from '@mui/material';
 import { Game } from 'pages/game';
 import { useSelector } from 'react-redux';
 import { userInfoSelector } from 'store/auth-reducer';
-import { PaperGame, Progress, Rules } from './components';
+import { PaperGame, Progress } from './components';
 
 export const StartGamePage = () => {
   const [progress, setProgress] = useState(10);
@@ -50,7 +50,6 @@ export const StartGamePage = () => {
       )}
 
       {progress === 100 && isGameStarted && <Game />}
-      <Rules />
     </Box>
   );
 };

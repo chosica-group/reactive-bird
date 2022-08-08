@@ -46,27 +46,27 @@ const getUserTheme = async (id: number) => {
 export const render = async (req: Request, res: Response) => {
   // console.log(req.locals.userInfo, 'reqqqqq');
   // let userInfo;
-  console.log(req.headers.cookie, 'req.headers.cookie');
+  console.log(req.cookies, req.secret, 'req.headers.cookie');
+  console.log(req.signedCookies, 'req.signedCookies');
   await fetch('https://ya-praktikum.tech/api/v2/auth/user', {
     credentials: 'include',
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       accept: 'application/json',
-      Cookie: `${req.headers.cookie || ''}`,
     },
   })
     .then((data) => data.json())
     .then(async (user) => {
       console.log(user, 'user 1111');
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      if (user.reason) {
+      if (user.id) {
         console.log('user.reason');
         store.dispatch(setUserLoggedIn(true));
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-        store.dispatch(setUserId(1234));
+        store.dispatch(setUserId(user.id));
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-        await getUserTheme(1234);
+        await getUserTheme(user.id);
       }
     })
     .catch((err) => console.log(err));

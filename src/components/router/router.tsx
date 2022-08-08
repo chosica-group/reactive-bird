@@ -14,6 +14,7 @@ import { userInfoSelector } from 'store/auth-reducer';
 
 export const AppRouter = () => {
   const authState = useSelector(userInfoSelector);
+  console.log(authState, 'authState');
 
   if (authState.isLoggedIn) {
     return (

@@ -30,7 +30,7 @@ declare global {
 const state = window.__PRELOADED_STATE__;
 console.log(state, 'state __PRELOADED_STATE__');
 // eslint-disable-next-line no-underscore-dangle
-// delete window.__PRELOADED_STATE__;
+delete window.__PRELOADED_STATE__;
 const { store } = configureInitialStore(state || {});
 
 hydrate(
@@ -43,4 +43,4 @@ hydrate(
   document.getElementById('root'),
 );
 
-startServiceWorker();
+// startServiceWorker();
