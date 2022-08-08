@@ -6,7 +6,7 @@ import { SiteThemeBtn } from 'components/site-theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'services/auth/auth-api';
 import { useGetThemeQuery, useUpdateUserThemeMutation } from 'services/theme/theme-api';
-import { isLoggedInIfoSelector, setUserTheme, setUserThemeName } from 'store/auth-reducer';
+import { setUserTheme, setUserThemeName, userInfoSelector } from 'store/auth-reducer';
 import { DesktopLogo, DesktopMenu, MobileLogo, MobileMenu, User } from './components';
 
 const pages = [
@@ -17,7 +17,7 @@ const pages = [
 
 export const AppBar = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const userData = useSelector(isLoggedInIfoSelector);
+  const userData = useSelector(userInfoSelector);
   const [skip, setSkip] = useState(true);
   const { data: currentTheme, isSuccess } = useGetThemeQuery(userData.userTheme || 'light', {
     skip,

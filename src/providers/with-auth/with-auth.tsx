@@ -6,7 +6,7 @@ import { PlugComponent } from 'pages/plug';
 // import type { TUserTheme } from 'server/models/types';
 // import { useAddUserThemeMutation } from 'services/theme/theme-api';
 import { useSelector } from 'react-redux';
-import { isLoggedInIfoSelector } from 'store/auth-reducer';
+import { userInfoSelector } from 'store/auth-reducer';
 
 // import { useGetUserThemeQuery } from 'services/theme/theme-api';
 // import { useAddUserThemeMutation } from 'services/theme/theme-api';
@@ -14,7 +14,7 @@ import { isLoggedInIfoSelector } from 'store/auth-reducer';
 // import { setUserId, setUserLoggedIn, setUserThemeName } from 'store/auth-reducer';
 
 export const withAuth = (Component: ComponentType) => () => {
-  const authState = useSelector(isLoggedInIfoSelector);
+  const authState = useSelector(userInfoSelector);
   console.log(authState.isLoggedIn, 'authState222');
   // const { data, isLoading } = useGetUserQuery();
   // const [skipUserTheme, setSkipUserTheme] = useState(true);

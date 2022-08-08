@@ -10,10 +10,10 @@ import { WelcomePage } from 'pages/welcome-page';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { AccessToken } from 'services/auth/o-auth/actions';
-import { isLoggedInIfoSelector } from 'store/auth-reducer';
+import { userInfoSelector } from 'store/auth-reducer';
 
 export const AppRouter = () => {
-  const authState = useSelector(isLoggedInIfoSelector);
+  const authState = useSelector(userInfoSelector);
 
   if (authState.isLoggedIn) {
     return (

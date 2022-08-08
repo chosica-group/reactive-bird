@@ -3,10 +3,10 @@ import { REDIRECT_URI } from 'pages/signin/components/signin-form/signin-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { authWithYandexOauth } from 'services/auth/auth-api';
-import { isLoggedInIfoSelector, setUserLoggedIn } from 'store/auth-reducer';
+import { userInfoSelector, setUserLoggedIn } from 'store/auth-reducer';
 
 export const AccessToken = () => {
-  const authState = useSelector(isLoggedInIfoSelector);
+  const authState = useSelector(userInfoSelector);
   const dispatch = useDispatch();
   const history = useHistory();
   const queryString = document?.location?.search;

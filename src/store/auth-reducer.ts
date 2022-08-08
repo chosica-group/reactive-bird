@@ -70,7 +70,7 @@ export function setUserThemeName(userTheme: string): ItemActionType {
   return { type: actions.SET_USER_THEME as keyof typeof actions, userTheme };
 }
 
-export const isLoggedInIfoSelector = createSelector(
+export const userInfoSelector = createSelector(
   (state: { auth: AuthState }) => state,
   (items) => items.auth,
 );

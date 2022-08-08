@@ -1,6 +1,8 @@
 import { Stack, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { useGetTeamLeaderboardQuery } from 'services/leaderboard';
 import type { TAllLeaderboardRequest, TUserDataScoreLeaderboard } from 'services/leaderboard';
+import { userInfoSelector } from 'store/auth-reducer';
 import { Container, LeaderCard } from './components';
 
 type TDataLeaderboard = {
@@ -8,6 +10,7 @@ type TDataLeaderboard = {
 };
 
 export const LeaderboardPage = () => {
+  const userData = useSelector(userInfoSelector);
   const body: TAllLeaderboardRequest = {
     ratingFieldName: 'score',
     cursor: 0,
@@ -20,7 +23,9 @@ export const LeaderboardPage = () => {
 
   return (
     <Container>
-      <Typography variant="h1">Рекорды</Typography>
+      <Typography variant="h1" color={userData.themeData?.theme_text_color || 'black'}>
+        Рекорды
+      </Typography>
       <Stack spacing={2} alignItems="center">
         {isLoading && <div>Loading...</div>}
         {error && <div>Oops, an error occured</div>}

@@ -15,6 +15,7 @@ export class SiteThemeService implements BaseRESTService {
       return SiteTheme.create({
         theme_name: newTheme.theme_name,
         theme_background_color: newTheme.theme_background_color,
+        theme_header_text_color: newTheme.theme_header_text_color,
         theme_text_color: newTheme.theme_text_color,
         theme_id: newTheme.theme_id,
       });

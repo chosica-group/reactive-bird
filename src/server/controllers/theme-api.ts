@@ -17,6 +17,7 @@ export class ThemeAPI {
       await siteThemeService.create({
         theme_name: body.theme_name,
         theme_background_color: body.theme_background_color,
+        theme_header_text_color: body.theme_header_text_color,
         theme_text_color: body.theme_text_color,
         theme_id: body.theme_id,
       });

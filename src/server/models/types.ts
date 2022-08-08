@@ -14,5 +14,6 @@ export type TSiteTheme = {
   theme_name: string;
   theme_id: number;
   theme_background_color: string;
+  theme_header_text_color: string;
   theme_text_color: string;
 };

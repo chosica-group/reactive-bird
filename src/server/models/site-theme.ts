@@ -30,6 +30,10 @@ export class SiteTheme extends Model<TSiteTheme> {
 
   @AllowNull(false)
   @Column(DataType.STRING)
+  theme_header_text_color: string;
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
   theme_text_color: string;
 
   @Index
