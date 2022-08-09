@@ -13,6 +13,7 @@ export const themeApi = appApi.injectEndpoints({
       query: (userId) => ({
         url: `/theme/user/${userId}`,
       }),
+      providesTags: ['Theme'],
     }),
     addUserTheme: builder.mutation<TUserTheme, TUserTheme>({
       query: (body) => ({
@@ -20,6 +21,7 @@ export const themeApi = appApi.injectEndpoints({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['Theme'],
     }),
     getAllThemes: builder.query<TSiteTheme[], void>({
       query: () => ({

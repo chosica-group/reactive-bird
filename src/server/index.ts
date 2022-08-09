@@ -19,12 +19,8 @@ app.use(
     credentials: true,
   }),
 );
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 app.use(cookieParser());
 
 const PORT = process.env.PORT || 3000;
@@ -33,6 +29,8 @@ const userThemeRouter = userThemeRoutes(router);
 
 app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(router);
 app.use(themeRouter);
 app.use(userThemeRouter);
 
