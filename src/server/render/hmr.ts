@@ -11,7 +11,7 @@ const common = require('../../../webpack/common.js');
 export function getWebpackMiddlewares(mode: string): RequestHandler[] {
   const compiler = webpack(common);
 
-  const middlewares = [authMiddleware, render];
+  const middlewares = [render];
   if (mode === 'development') {
     // middlewares.push(webpackDev(compiler));
     // middlewares.push(webpackHot(compiler));

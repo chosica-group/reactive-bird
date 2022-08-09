@@ -22,7 +22,7 @@ app.use(
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 app.use(cookieParser());
-
+app.get('/*', getWebpackMiddlewares(process.env.NODE_ENV || 'production'));
 const PORT = process.env.PORT || 3000;
 const themeRouter = themeRoutes(router);
 const userThemeRouter = userThemeRoutes(router);
@@ -33,8 +33,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(router);
 app.use(themeRouter);
 app.use(userThemeRouter);
-
-app.get('/*', getWebpackMiddlewares(process.env.NODE_ENV || 'production'));
 
 initDB()
   .then(() => {

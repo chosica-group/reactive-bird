@@ -10,5 +10,5 @@ export const withProviders = compose<FunctionComponent>(
   withTheme,
   withRouter,
   withErrorBoundary,
-  withAuth,
+  // withAuth,
 );

@@ -22,6 +22,7 @@
     ],
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-unsafe-member-access": "warn",
     "react/function-component-definition": [
       2,
       {

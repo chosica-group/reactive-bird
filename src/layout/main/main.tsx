@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import { Container } from '@mui/material';
 import { useSelector } from 'react-redux';
-// import { useGetThemeQuery } from 'services/theme/theme-api';
 import { userInfoSelector } from 'store/auth-reducer';
 import { AppBar } from './app-bar';
 
