@@ -11,7 +11,7 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const common = require('./common.js');
 const { rootPath, staticPath, distPath, srcPath } = require('./path');
 
-const { DEV_SERVER_PORT = 3000 } = process.env;
+const { DEV_SERVER_PORT = 9000 } = process.env;
 
 module.exports = merge(common, {
   mode: 'development',
