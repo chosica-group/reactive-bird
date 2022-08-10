@@ -4,12 +4,6 @@
   text-align: center;
 }
 
-.add-icon {
-  margin-left: auto;
-  cursor: pointer;
-  color: blue;
-}
-
 .grid-item {
   padding: 10px;
   border-radius: 22px;
@@ -24,8 +18,4 @@
 
 .grid-item.count-item {
   display: flex;
-}
-
-.grid-item.title-item {
-
 }
