@@ -8,7 +8,6 @@ import { initDB } from './models';
 import { getWebpackMiddlewares } from './render/hmr';
 import { themeRoutes } from './router/theme-routes';
 import { userThemeRoutes } from './router/user-theme-routes';
-
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
 const cors = require('cors');
 

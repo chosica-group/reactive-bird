@@ -1,6 +1,7 @@
 export type TComment = {
   id?: number;
   comment: string;
+  topicId: number;
 };
 
 export type TUserTheme = {

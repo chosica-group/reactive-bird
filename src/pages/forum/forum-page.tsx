@@ -1,47 +1,68 @@
-import { Grid, Typography } from '@mui/material';
+import { Button, Grid, Modal, TextField, Typography } from '@mui/material';
 import { TopicRow } from 'pages/forum/components/topic-row';
 import './forum-page.css';
+import { useCreateTopicMutation, useGetTopicsQuery } from 'services/topics';
+import { PlugComponent } from 'pages/plug';
+import { useState } from 'react';
 
-const mockData = [
-  {
-    title: 'Новые игры',
-    subTopicsCount: 222,
-    answersCount: 345,
-  },
-  {
-    title: 'Ваши рекорды',
-    subTopicsCount: 5,
-    answersCount: 14,
-  },
-  {
-    title: 'Идеи и предложения',
-    subTopicsCount: 590,
-    answersCount: 895,
-  },
-];
+export const ForumPage = () => {
+  const { data, isLoading, refetch } = useGetTopicsQuery();
+  const [modalWindowOpen, setModalWindowOpen] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>('');
+  const [sendData] = useCreateTopicMutation();
 
-export const ForumPage = () => (
-  <div className="main-wrapper">
-    <Grid className="grid-wrapper" container spacing={3}>
-      <Grid item xs={8} zeroMinWidth>
-        <Typography noWrap component="div">
-          <p className="grid-wrapper__column">Форумы</p>
-        </Typography>
-      </Grid>
-      <Grid item xs={1.6} zeroMinWidth>
-        <Typography noWrap component="div">
-          <p className="grid-wrapper__column">Темы</p>
-        </Typography>
-      </Grid>
-      <Grid item xs={1.3} zeroMinWidth>
-        <Typography noWrap component="div">
-          <p className="grid-wrapper__column">Ответы</p>
-        </Typography>
+  const createTopic = () => {
+
+    if (inputValue) {
+      sendData({ name: inputValue });
+    }
+
+    refetch();
+    setModalWindowOpen(false);
+  }
+
+  return (
+    isLoading ? <PlugComponent /> :
+    <div className="forum-wrapper">
+      <Modal open={modalWindowOpen}>
+        <div className="create-topic-wrapper">
+          <div className="create-topic-container">
+            <h3 className="create-topic-header-text">Создать тему</h3>
+            <TextField className="input-container" type="text" placeholder="Введите название темы" onChange={(e) => setInputValue(e.target.value)} />
+
+            <div className="create-topic-btns-container">
+              <Button className="new-topic-cancel-btn" size="large" variant="contained" onClick={() => setModalWindowOpen(false)}>
+                Отменить
+              </Button>
+
+              <Button size="large" variant="contained" onClick={createTopic}>
+                Создать
+              </Button>
+            </div>
+          </div>
+        </div>
+      </Modal>
+
+      <Grid className="grid-wrapper" container spacing={3}>
+        <Grid item xs={6} zeroMinWidth>
+          <Typography noWrap component="div">
+            <p className="grid-wrapper__column">Форумы</p>
+          </Typography>
+        </Grid>
+        <Grid item xs={2} zeroMinWidth>
+          <Typography noWrap component="div">
+            <p className="grid-wrapper__column">Комментарии</p>
+          </Typography>
+        </Grid>
+
+        {data?.map((data, i) => (
+          <TopicRow key={i} {...data} />
+        ))}
       </Grid>
 
-      {mockData.map((data, i) => (
-        <TopicRow key={i} {...data} />
-      ))}
-    </Grid>
-  </div>
-);
+      <Button className="create-topic-btn" size="large" variant="contained" onClick={() => setModalWindowOpen(true)}>
+        Добавить тему
+      </Button>
+    </div>
+  );
+}

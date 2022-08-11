@@ -20,6 +20,9 @@ export const sequelize = new Sequelize(sequelizeOptions);
 
 sequelize.addModels([Topics, Comments, UserTheme, SiteTheme]);
 
+Topics.hasMany(Comments, { as: 'comments', foreignKey: { name: 'topicId' } });
+Comments.belongsTo(Topics, { as: 'topic' });
+
 export async function dbConnect() {
   try {
     await sequelize.authenticate(); // Проверка аутентификации в БД
