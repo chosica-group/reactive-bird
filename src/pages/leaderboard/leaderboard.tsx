@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { lightTheme } from 'server/models/theme-data';
 import { useGetTeamLeaderboardQuery } from 'services/leaderboard';
 import type { TAllLeaderboardRequest, TUserDataScoreLeaderboard } from 'services/leaderboard';
-import { userInfoSelector } from 'store/auth-reducer';
+import { themeInfoSelector } from 'store/theme-reduser';
 import { Container, LeaderCard } from './components';
 
 type TDataLeaderboard = {
@@ -11,7 +11,7 @@ type TDataLeaderboard = {
 };
 
 export const LeaderboardPage = () => {
-  const userData = useSelector(userInfoSelector);
+  const userTheme = useSelector(themeInfoSelector);
   const body: TAllLeaderboardRequest = {
     ratingFieldName: 'score',
     cursor: 0,
@@ -24,7 +24,7 @@ export const LeaderboardPage = () => {
 
   return (
     <Container>
-      <Typography variant="h1" color={userData.themeData?.theme_text_color || 'black'}>
+      <Typography variant="h1" color={userTheme.themeData?.theme_text_color || 'black'}>
         Рекорды
       </Typography>
       <Stack spacing={2} alignItems="center">
@@ -36,7 +36,7 @@ export const LeaderboardPage = () => {
           data.map((item: TDataLeaderboard, index: number) => (
             <LeaderCard
               rating={0}
-              themeData={userData.themeData || lightTheme}
+              themeData={userTheme.themeData || lightTheme}
               result={item.data?.score || 0}
               name={item.data?.userName || 'name'}
               avatar={item.data?.userAvatar || ''}

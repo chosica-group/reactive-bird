@@ -7,6 +7,7 @@ import { setUserId, setUserLoggedIn } from 'store/auth-reducer';
 
 export const withAuth = (Component: ComponentType) => () => {
   const { data: user, isLoading } = useGetUserQuery();
+  // const [setTheme] = useAddUserThemeMutation();
   const dispatch = useDispatch();
   useEffect(() => {
     if (user && Number.isInteger(user.id)) {

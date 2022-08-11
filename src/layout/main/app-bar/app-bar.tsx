@@ -6,7 +6,8 @@ import { SiteThemeBtn } from 'components/site-theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'services/auth/auth-api';
 import { useGetThemeQuery, useUpdateUserThemeMutation } from 'services/theme/theme-api';
-import { setUserTheme, setUserThemeName, userInfoSelector } from 'store/auth-reducer';
+import { userInfoSelector } from 'store/auth-reducer';
+import { setUserTheme, setUserThemeName, themeInfoSelector } from 'store/theme-reduser';
 import { DesktopLogo, DesktopMenu, MobileLogo, MobileMenu, User } from './components';
 
 const pages = [
@@ -18,8 +19,9 @@ const pages = [
 export const AppBar = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const userData = useSelector(userInfoSelector);
+  const userTheme = useSelector(themeInfoSelector);
   const [skip, setSkip] = useState(true);
-  const { data: currentTheme, isSuccess } = useGetThemeQuery(userData.userTheme || 'light', {
+  const { data: currentTheme, isSuccess } = useGetThemeQuery(userTheme.userTheme || 'light', {
     skip,
   });
   // const [themeName, setThemeName] = useState<string>(userData.userTheme || 'light');
@@ -50,8 +52,8 @@ export const AppBar = () => {
   };
   const handleChangeMode = async () => {
     // setThemeName((prevState) => (prevState === 'light' ? 'dark' : 'light'));
-    if (userData.userId && userData.userTheme) {
-      const newTheme = userData.userTheme === 'light' ? 'dark' : 'light';
+    if (userData.userId && userTheme.userTheme) {
+      const newTheme = userTheme.userTheme === 'light' ? 'dark' : 'light';
       await updateUserTheme({ user_id: userData.userId, theme_name: newTheme });
       dispatch(setUserThemeName(newTheme));
       setSkip(false);
@@ -73,7 +75,7 @@ export const AppBar = () => {
             <FullscreenBtn element={document.documentElement} />
             <SiteThemeBtn
               handleChangeMode={handleChangeMode}
-              themeName={userData.userTheme || 'light'}
+              themeName={userTheme.userTheme || 'light'}
             />
             <User
               anchorElUser={anchorElUser}

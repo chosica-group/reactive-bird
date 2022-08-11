@@ -7,9 +7,9 @@ import { withTheme } from './with-theme';
 // import { withUserTheme } from './with-user-theme';
 
 export const withProviders = compose<FunctionComponent>(
+  // withUserTheme,
   withTheme,
   withRouter,
   withErrorBoundary,
-  // withUserTheme,
   withAuth,
 );

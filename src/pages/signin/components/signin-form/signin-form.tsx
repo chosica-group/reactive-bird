@@ -8,7 +8,8 @@ import type { TUserTheme } from 'server/models/types';
 import { getServiceIdOauth, signin } from 'services/auth/auth-api';
 import type { SignUpRes, SigninParams, TClientId, UserModel } from 'services/auth/types';
 import { useAddUserThemeMutation } from 'services/theme/theme-api';
-import { setUserId, setUserLoggedIn, setUserThemeName } from 'store/auth-reducer';
+import { setUserId, setUserLoggedIn } from 'store/auth-reducer';
+import { setUserThemeName } from 'store/theme-reduser';
 
 const inputs: TFormInputs<SigninParams> = [
   { name: 'login', label: 'Логин', type: 'text', required: true },
@@ -33,11 +34,10 @@ export const SigninForm = () => {
   const onSubmit = (data: SigninParams) => {
     signin(data)
       .then((res: TAnswer) => {
-        if (res.reason) {
+        if (res.reason && res.reason !== '') {
           setApiError(res.reason);
         }
-        console.log(res, 'res');
-        if (res.id) {
+        if (res.reason === '' || res.id) {
           dispatch(setUserLoggedIn(true));
           dispatch(setUserId(res.id || 1));
           const userThemeData: TUserTheme = {
@@ -47,7 +47,7 @@ export const SigninForm = () => {
           setUserTheme(userThemeData)
             .then((theme) => {
               const themeData = theme as TAnswer;
-              dispatch(setUserThemeName(themeData.theme_name || ''));
+              dispatch(setUserThemeName(themeData.theme_name || 'light'));
             })
             .catch((err) => console.log(err, 'error theme'));
           history.push('/game');

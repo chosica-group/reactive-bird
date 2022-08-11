@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 import { Container } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { userInfoSelector } from 'store/auth-reducer';
+import { themeInfoSelector } from 'store/theme-reduser';
 import { AppBar } from './app-bar';
 
 export const MainLayout: FC = ({ children }) => {
-  const authState = useSelector(userInfoSelector);
+  const themeState = useSelector(themeInfoSelector);
   const root = document.getElementById('root');
   if (root) {
-    root.style.background = authState.themeData?.theme_background_color || 'white';
+    root.style.background = themeState.themeData?.theme_background_color || 'white';
     root.style.height = '100vh';
   }
   return (

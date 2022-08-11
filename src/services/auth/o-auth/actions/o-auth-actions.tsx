@@ -3,7 +3,7 @@ import { REDIRECT_URI } from 'pages/signin/components/signin-form/signin-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { authWithYandexOauth } from 'services/auth/auth-api';
-import { userInfoSelector, setUserLoggedIn } from 'store/auth-reducer';
+import { setUserLoggedIn, userInfoSelector } from 'store/auth-reducer';
 
 export const AccessToken = () => {
   const authState = useSelector(userInfoSelector);

@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { Box, Button, Skeleton, Typography } from '@mui/material';
 import { Game } from 'pages/game';
 import { useSelector } from 'react-redux';
-import { userInfoSelector } from 'store/auth-reducer';
+import { themeInfoSelector } from 'store/theme-reduser';
 import { PaperGame, Progress } from './components';
 
 export const StartGamePage = () => {
   const [progress, setProgress] = useState(10);
   const [isGameStarted, setGameStart] = useState(false);
-  const userData = useSelector(userInfoSelector);
+  const userTheme = useSelector(themeInfoSelector);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -36,10 +36,10 @@ export const StartGamePage = () => {
         <Box>
           <PaperGame
             sx={{
-              backgroundColor: userData.themeData?.theme_background_color || '#e0e0e0',
+              backgroundColor: userTheme.themeData?.theme_background_color || '#e0e0e0',
             }}
           >
-            <Typography variant="h2" color={userData.themeData?.theme_text_color || 'black'}>
+            <Typography variant="h2" color={userTheme.themeData?.theme_text_color || 'black'}>
               Все готово!
             </Typography>
             <Button size="large" variant="contained" onClick={startGame}>

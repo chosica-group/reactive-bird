@@ -28,11 +28,9 @@ declare global {
 
 // eslint-disable-next-line no-underscore-dangle
 const state = window.__PRELOADED_STATE__;
-console.log(state, 'state __PRELOADED_STATE__');
 // eslint-disable-next-line no-underscore-dangle
 delete window.__PRELOADED_STATE__;
 const { store } = configureInitialStore(state || {});
-console.log(store.getState(), 'state');
 hydrate(
   <Provider store={store}>
     {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
@@ -43,4 +41,4 @@ hydrate(
   document.getElementById('root'),
 );
 
-// startServiceWorker();
+startServiceWorker();

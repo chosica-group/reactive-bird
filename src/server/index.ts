@@ -1,19 +1,17 @@
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import express, { Router } from 'express';
 import helmet from 'helmet';
-import https from 'https';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+// import https from 'https';
 import path from 'path';
 import { initDB } from './models';
 import { getWebpackMiddlewares } from './render/hmr';
 import { themeRoutes } from './router/theme-routes';
 import { userThemeRoutes } from './router/user-theme-routes';
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
-const cors = require('cors');
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, import/no-extraneous-dependencies, @typescript-eslint/no-var-requires
-const selfSigned = require('openssl-self-signed-certificate');
-
+// const selfSigned = require('openssl-self-signed-certificate');
 const srcDirectives = ["'self'", 'https://ya-praktikum.tech'];
 
 const app = express();
@@ -29,6 +27,7 @@ app
         },
       },
       crossOriginEmbedderPolicy: false,
+      xssFilter: true,
     }),
   )
   .use(cookieParser())
@@ -48,7 +47,13 @@ app.use(
     credentials: true,
   }),
 );
-
+app.use(
+  '/api',
+  createProxyMiddleware({
+    target: 'http://localhost:9000',
+    cookieDomainRewrite: 'localhost',
+  }),
+);
 // app.use(router);
 app.use(themeRouter);
 app.use(userThemeRouter);

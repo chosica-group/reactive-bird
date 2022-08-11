@@ -2,16 +2,17 @@ import type { NextFunction, Request, Response } from 'express';
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   let user = null;
-  res.locals.user = { id: 3055 };
-  if (req.headers.cookie) {
+  // res.locals.user = { id: 3 }; это для проверки мидлвары
+  if (req.headers.cookie || req.cookies) {
     try {
       await fetch('https://ya-praktikum.tech/api/v2/auth/user', {
         credentials: 'include',
       })
         .then((data) => {
-          user = data;
-          res.locals.user = user;
-          console.log(user, 'user');
+          if ('id' in data) {
+            user = data;
+            res.locals.user = user;
+          }
         })
         .catch((error) => {
           console.log(error);

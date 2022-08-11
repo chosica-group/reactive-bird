@@ -10,10 +10,13 @@ import { StaticRouter, StaticRouterContext } from 'react-router';
 import { lightTheme } from 'server/models/theme-data';
 import type { TSiteTheme } from 'server/models/types';
 import { configureInitialStore } from 'store';
-import { setUserId, setUserLoggedIn, setUserTheme, setUserThemeName } from 'store/auth-reducer';
+import { setUserId, setUserLoggedIn } from 'store/auth-reducer';
+import { setUserTheme, setUserThemeName } from 'store/theme-reduser';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import { renderObject } from 'utils/server-side/render-object';
 import { App } from '../../ssr';
+import { getTheme } from './get-theme-middlware';
+import { getUserTheme } from './get-user-theme-middlware';
 
 const { store } = configureInitialStore();
 
@@ -24,15 +27,14 @@ type TUserData = {
 };
 
 export const render = async (req: Request, res: Response) => {
-  console.log(res.locals.user, 'res.locals.user');
-  // let userInfo;
-  console.log(req.cookies.authCookie, 'req.cookies?.authCookie');
   if (res.locals.user) {
     const user = res.locals.user as unknown as TUserData;
     store.dispatch(setUserLoggedIn(true));
     store.dispatch(setUserId(user.id));
-    store.dispatch(setUserThemeName(user.theme_name || 'light'));
-    store.dispatch(setUserTheme(user.theme_data || lightTheme));
+    const userTheme = await getUserTheme(user.id);
+    store.dispatch(setUserThemeName(userTheme || 'light'));
+    const themeData = await getTheme(userTheme || 'light');
+    store.dispatch(setUserTheme(themeData || lightTheme));
   }
   const sheet: ServerStyleSheet = new ServerStyleSheet();
   const context: StaticRouterContext = {};
@@ -50,7 +52,7 @@ export const render = async (req: Request, res: Response) => {
     </StyleSheetManager>,
   );
   const storeString = `window.__PRELOADED_STATE__ = ${renderObject(store.getState())}`;
-  console.log(store.getState(), 'store server');
+
   indexHTML = indexHTML.replace(
     `<div id="root"></div>`,
     `<script>${storeString}</script>

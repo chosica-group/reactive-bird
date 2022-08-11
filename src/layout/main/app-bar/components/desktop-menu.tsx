@@ -1,7 +1,7 @@
 import { Box, Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { userInfoSelector } from 'store/auth-reducer';
+import { themeInfoSelector } from 'store/theme-reduser';
 
 type TPages = {
   text: string;
@@ -14,7 +14,7 @@ type TProps = {
 };
 
 export const DesktopMenu = ({ handleCloseNavMenu, pages }: TProps) => {
-  const authState = useSelector(userInfoSelector);
+  const themeState = useSelector(themeInfoSelector);
   return (
     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
       {pages.map((page) => (
@@ -23,7 +23,7 @@ export const DesktopMenu = ({ handleCloseNavMenu, pages }: TProps) => {
           onClick={handleCloseNavMenu}
           sx={{
             my: 2,
-            color: authState.themeData?.theme_header_text_color || 'white',
+            color: themeState.themeData?.theme_header_text_color || 'white',
             display: 'block',
           }}
           component={NavLink}
