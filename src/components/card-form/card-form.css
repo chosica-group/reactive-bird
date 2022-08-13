@@ -1,0 +1,7 @@
+.card__card-box {
+  border: 3px solid #1976d2;
+  width: 35vw;
+  max-width: 400px;
+  text-align: center;
+  margin-top: 5%;
+}

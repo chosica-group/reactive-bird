@@ -1,0 +1,21 @@
+.grid-item__text {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.grid-item {
+  padding: 10px;
+  border-radius: 22px;
+  border: 1px solid black;
+}
+
+.grid-item__title {
+  cursor: pointer;
+  text-align: start;
+  padding-left: 20px;
+}
+
+.grid-item.count-item {
+  display: flex;
+}

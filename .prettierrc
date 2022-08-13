@@ -1,0 +1,24 @@
+{
+  "printWidth": 100,
+  "tabWidth": 2,
+  "quoteProps": "as-needed",
+  "useTabs": false,
+  "singleQuote": true,
+  "bracketSpacing": true,
+  "semi": true,
+  "trailingComma": "all",
+  "arrowParens": "always",
+  "importOrderSeparation": false,
+  "importOrderSortSpecifiers": true,
+  "endOfLine": "auto",
+  "importOrder": [
+    "^react$",
+    "^@reduxjs/toolkit$",
+    "^@mui/material",
+    "^@mui/icons-material",
+    "<THIRD_PARTY_MODULES>",
+    "^[./]()",
+    "^[../]",
+    "^[../../]"
+  ]
+}
