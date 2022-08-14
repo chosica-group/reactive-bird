@@ -1,3 +1,4 @@
+version: "3"
 services:
   postgres:
     image: postgres:14
@@ -33,10 +34,11 @@ services:
       - awesome
 
   my-app:
+    image: helendoc452/reactive_bird:latest
     build:
       context: .
-    env_file:
-      .env
+    # env_file:
+    #   .env
     ports:
       - "3000:3000"
     restart: always
