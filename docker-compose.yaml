@@ -1,4 +1,19 @@
 services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-server
+    restart: unless-stopped
+    depends_on:
+      - my-app
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+    networks:
+      - awesome
   postgres:
     image: postgres:14
     ports:
@@ -33,10 +48,7 @@ services:
       - awesome
 
   my-app:
-    build:
-      context: .
-    env_file:
-      .env
+    image: helendoc452/reactive_bird:latest
     ports:
       - "3000:3000"
     restart: always
