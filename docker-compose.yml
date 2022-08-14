@@ -34,8 +34,9 @@ services:
       - awesome
 
   my-app:
-    build:
-      context: .
+    image: helendoc452/reactive_bird:latest
+    # build:
+    #   context: .
     # env_file:
     #   .env
     ports:
