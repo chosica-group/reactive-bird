@@ -36,4 +36,4 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           passphrase: ${{ secrets.REMOTE_PASSPHRASE }}
           username: ${{ secrets.REMOTE_USER }}
-          script: cd reactive_bird && git pull origin master && docker pull ${{ secrets.DOCKER_USERNAME }}/reactive_bird:latest && docker-compose up
+          script: cd reactive-bird && git pull origin master && docker pull ${{ secrets.DOCKER_USERNAME }}/reactive_bird:latest && docker-compose up
