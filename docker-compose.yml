@@ -35,8 +35,8 @@ services:
 
   my-app:
     image: helendoc452/reactive_bird:latest
-    # build:
-    #   context: .
+    build:
+      context: .
     # env_file:
     #   .env
     ports:
