@@ -7,8 +7,8 @@ import { SiteThemeService } from 'server/services/site-theme';
 import { lightTheme, darkTheme } from './theme-data';
 
 const sequelizeOptions: SequelizeOptions = {
-  // host: !process.env.NODE_ENV || process.env.NODE_ENV === 'production' ? 'postgres' : 'localhost', // если локально запуск - ставить localhost
-  host: 'localhost',
+  host: !process.env.NODE_ENV || process.env.NODE_ENV === 'production' ? 'postgres' : 'localhost', // если локально запуск - ставить localhost
+  // host: 'localhost',
   port: 5432,
   username: 'postgres',
   password: 'magus-malawi-gush',
