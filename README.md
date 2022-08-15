@@ -1,5 +1,5 @@
 # Игра Flappy Bird
-https://chosica-flappy-bird.herokuapp.com/
+https://chosica-reactive-bird-14.ya-praktikum.tech/
 
 **Механика игры:** 
 > Игрок клавишей пробел контролирует полет птицы между рядами препятствий в виде труб

@@ -8,10 +8,10 @@ services:
     tty: true
     ports:
       - "80:80"
-      # - "443:443"
+      - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      # - /etc/letsencrypt:/etc/letsencrypt тут надо будет сертификат пробросить
+      - /etc/letsencrypt:/etc/letsencrypt
     networks:
       - awesome
   postgres:

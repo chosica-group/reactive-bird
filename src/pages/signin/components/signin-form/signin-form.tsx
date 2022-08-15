@@ -15,7 +15,7 @@ const inputs: TFormInputs<SigninParams> = [
 
 export const REDIRECT_URI =
   process.env.NODE_ENV === 'production'
-    ? 'https://chosica-flappy-bird.herokuapp.com'
+    ? 'https://chosica-reactive-bird-14.ya-praktikum.tech'
     : `http://localhost:${process.env.DEV_SERVER_PORT || 3000}`;
 
 export const SigninForm = () => {
