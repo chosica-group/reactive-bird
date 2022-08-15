@@ -35,7 +35,7 @@ export const AppBar = () => {
     if (isSuccess) {
       dispatch(setUserTheme(currentTheme));
     }
-  }, [currentTheme, dispatch, isSuccess]);
+  });
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };

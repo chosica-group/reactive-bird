@@ -35,7 +35,7 @@ app
   .use(express.static(path.resolve(__dirname, '../public')));
 
 const router: Router = Router();
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 3000;
 const themeRouter = themeRoutes(router);
 const userThemeRouter = userThemeRoutes(router);
 app.use(bodyParser.json());
@@ -43,14 +43,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   cors({
-    origin: 'http://localhost:9000', // поставить хероку при выкладке
+    origin: 'http://localhost:3000', // поставить хероку при выкладке
     credentials: true,
   }),
 );
 app.use(
   '/api',
   createProxyMiddleware({
-    target: 'http://localhost:9000',
+    target: 'http://localhost:3000',
     cookieDomainRewrite: 'localhost',
   }),
 );
