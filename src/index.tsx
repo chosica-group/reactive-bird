@@ -30,8 +30,7 @@ declare global {
 const state = window.__PRELOADED_STATE__;
 // eslint-disable-next-line no-underscore-dangle
 delete window.__PRELOADED_STATE__;
-const { store } = configureInitialStore(state);
-
+const { store } = configureInitialStore(state || {});
 hydrate(
   <Provider store={store}>
     {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}

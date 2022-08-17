@@ -5,16 +5,16 @@ import { LeaderboardPage } from 'pages/leaderboard';
 import { SignInPage } from 'pages/signin';
 import { SignUpPage } from 'pages/signup';
 import { StartGamePage } from 'pages/start-game';
+import { TopicPage } from 'pages/topic';
 import { UserPage } from 'pages/user';
 import { WelcomePage } from 'pages/welcome-page';
-import { TopicPage } from 'pages/topic';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { AccessToken } from 'services/auth/o-auth/actions';
-import { isLoggedInIfoSelector } from 'store/auth-reducer';
+import { userInfoSelector } from 'store/auth-reducer';
 
 export const AppRouter = () => {
-  const authState = useSelector(isLoggedInIfoSelector);
+  const authState = useSelector(userInfoSelector);
 
   if (authState.isLoggedIn) {
     return (

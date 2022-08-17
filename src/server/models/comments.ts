@@ -6,12 +6,7 @@ import {
   Table
 } from 'sequelize-typescript';
 import { Topics } from 'server/models/topics';
-
-type TComment = {
-  id?: number;
-  comment: string;
-  topicId: number;
-}
+import type { TComment } from './types';
 
 // eslint-disable-next-line prettier/prettier
 @Table({
