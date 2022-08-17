@@ -1,5 +1,5 @@
-const STATIC_CACHE_NAME = 's-cfp-app-v4';
-const DYNAMIC_CACHE_NAME = 'd-cfp-app-v4';
+const STATIC_CACHE_NAME = 's-cfp-app-v1';
+const DYNAMIC_CACHE_NAME = 'd-cfp-app-v1';
 const CACHE_URLS = [
     '/index.html',
     '/game',

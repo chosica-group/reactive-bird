@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Router } from 'express';
 import helmet from 'helmet';
-// import { createProxyMiddleware } from 'http-proxy-middleware';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 // import https from 'https';
 import path from 'path';
 import { initDB } from './models';
@@ -43,17 +43,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   cors({
-    origin: 'https://chosica-reactive-bird-14.ya-praktikum.tech',
+    origin: 'http://localhost:3000', // поставить хероку при выкладке
     credentials: true,
   }),
 );
-// app.use(
-//   '/api',
-//   createProxyMiddleware({
-//     target: 'http://localhost:3000',
-//     cookieDomainRewrite: 'localhost',
-//   }),
-// );
+app.use(
+  '/api',
+  createProxyMiddleware({
+    target: 'http://localhost:3000',
+    cookieDomainRewrite: 'localhost',
+  }),
+);
 // app.use(router);
 app.use(themeRouter);
 app.use(userThemeRouter);
