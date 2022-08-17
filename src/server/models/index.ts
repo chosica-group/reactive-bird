@@ -11,8 +11,8 @@ const sequelizeOptions: SequelizeOptions = {
   // host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'popinara',
-  database: 'reactive-bird',
+  password: 'magus-malawi-gush',
+  database: 'chosica',
   dialect: 'postgres',
 };
 const siteThemeService = new SiteThemeService();
