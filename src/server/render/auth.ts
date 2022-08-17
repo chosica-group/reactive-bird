@@ -3,20 +3,19 @@ import type { NextFunction, Request, Response } from 'express';
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   let user = null;
   // res.locals.user = { id: 3 }; это для проверки мидлвары
-  if (req.headers.cookie) {
+  if (req.headers.cookie || req.cookies) {
     try {
-      user = await fetch('https://ya-praktikum.tech/api/v2/auth/user', {
+      await fetch('https://ya-praktikum.tech/api/v2/auth/user', {
         credentials: 'include',
         headers: {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          cookie: req.headers.cookie || '',
+          Cookie: req.headers.cookie || req.cookies || '',
         },
       })
-        .then((data) => data.json())
         .then((data) => {
           if ('id' in data) {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            res.locals.user = data;
+            user = data;
+            res.locals.user = user;
           }
         })
         .catch((error) => {
