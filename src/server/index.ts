@@ -6,11 +6,11 @@ import helmet from 'helmet';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 // import https from 'https';
 import path from 'path';
+import routes from 'server/routes';
 import { initDB } from './models';
 import { getWebpackMiddlewares } from './render/hmr';
 import { themeRoutes } from './router/theme-routes';
 import { userThemeRoutes } from './router/user-theme-routes';
-import routes from 'server/routes';
 
 // const selfSigned = require('openssl-self-signed-certificate');
 const srcDirectives = ["'self'", 'https://ya-praktikum.tech'];
@@ -59,7 +59,7 @@ app.use(
   }),
 );
 // app.use(router);
-app.use(routes);
+app.use('/', routes);
 app.use(themeRouter);
 app.use(userThemeRouter);
 app.get('/*', getWebpackMiddlewares(process.env.NODE_ENV || 'production'));
