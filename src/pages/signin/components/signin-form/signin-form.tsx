@@ -15,15 +15,17 @@ const inputs: TFormInputs<SigninParams> = [
   { name: 'login', label: 'Логин', type: 'text', required: true },
   { name: 'password', label: 'Пароль', type: 'password', required: true },
 ];
+
 type TAnswer = {
   reason?: string;
   id?: number;
   theme_name?: string;
 };
-export const REDIRECT_URI = `http://localhost:${process.env.DEV_SERVER_PORT || 3000}`;
-// process.env.NODE_ENV === 'production'
-//   ? 'https://chosica-flappy-bird.herokuapp.com'
-//   : `http://localhost:${process.env.DEV_SERVER_PORT || 3000}`;
+
+export const REDIRECT_URI =
+  process.env.NODE_ENV === 'production'
+    ? 'https://chosica-reactive-bird-14.ya-praktikum.tech'
+    : `http://localhost:${process.env.DEV_SERVER_PORT || 3000}`;
 
 export const SigninForm = () => {
   const history = useHistory();
