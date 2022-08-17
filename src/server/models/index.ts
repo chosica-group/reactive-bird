@@ -25,6 +25,11 @@ Comments.belongsTo(Topics, { as: 'topic' });
 
 export async function dbConnect() {
   try {
+    await Topics.sync();
+    await Comments.sync();
+    await UserTheme.sync();
+    await SiteTheme.sync();
+
     await sequelize.authenticate(); // Проверка аутентификации в БД
     await sequelize.sync(); // Синхронизация базы данных
     console.log('Connection has been established successfully.');
