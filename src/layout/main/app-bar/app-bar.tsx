@@ -63,7 +63,7 @@ export const AppBar = () => {
       await updateUserTheme(newUserData)
         .then((res) => {
           console.log(res);
-          if ('reason' in res) {
+          if ('error' in res) {
             // eslint-disable-next-line @typescript-eslint/no-floating-promises
             addNewUser(newUserData);
           }
