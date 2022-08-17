@@ -43,7 +43,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   cors({
-    origin: 'http://localhost:3000', // поставить хероку при выкладке
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? 'https://chosica-reactive-bird-14.ya-praktikum.tech'
+        : 'http://localhost:3000',
     credentials: true,
   }),
 );
