@@ -7,6 +7,10 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
     try {
       await fetch('https://ya-praktikum.tech/api/v2/auth/user', {
         credentials: 'include',
+        headers: {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          Cookie: req.headers.cookie || req.cookies || '',
+        },
       })
         .then((data) => {
           if ('id' in data) {

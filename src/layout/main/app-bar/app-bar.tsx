@@ -5,7 +5,11 @@ import { FullscreenBtn } from 'components/fullscreen-btn';
 import { SiteThemeBtn } from 'components/site-theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'services/auth/auth-api';
-import { useGetThemeQuery, useUpdateUserThemeMutation } from 'services/theme/theme-api';
+import {
+  useAddUserThemeMutation,
+  useGetThemeQuery,
+  useUpdateUserThemeMutation,
+} from 'services/theme/theme-api';
 import { userInfoSelector } from 'store/auth-reducer';
 import { setUserTheme, setUserThemeName, themeInfoSelector } from 'store/theme-reduser';
 import { DesktopLogo, DesktopMenu, MobileLogo, MobileMenu, User } from './components';
@@ -27,6 +31,7 @@ export const AppBar = () => {
   // const [themeName, setThemeName] = useState<string>(userData.userTheme || 'light');
   const dispatch = useDispatch();
   const [updateUserTheme] = useUpdateUserThemeMutation();
+  const [addNewUser] = useAddUserThemeMutation();
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -54,7 +59,18 @@ export const AppBar = () => {
     // setThemeName((prevState) => (prevState === 'light' ? 'dark' : 'light'));
     if (userData.userId && userTheme.userTheme) {
       const newTheme = userTheme.userTheme === 'light' ? 'dark' : 'light';
-      await updateUserTheme({ user_id: userData.userId, theme_name: newTheme });
+      const newUserData = { user_id: userData.userId, theme_name: newTheme };
+      await updateUserTheme(newUserData)
+        .then((res) => {
+          console.log(res);
+          if ('reason' in res) {
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
+            addNewUser(newUserData);
+          }
+        })
+        .catch((err) => {
+          console.log(err, 'error');
+        });
       dispatch(setUserThemeName(newTheme));
       setSkip(false);
     }

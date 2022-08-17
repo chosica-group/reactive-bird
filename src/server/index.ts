@@ -50,13 +50,13 @@ app.use(
     credentials: true,
   }),
 );
-// app.use(
-//   '/api',
-//   createProxyMiddleware({
-//     target: 'http://localhost:3000',
-//     cookieDomainRewrite: 'localhost',
-//   }),
-// );
+app.use(
+  '/api',
+  createProxyMiddleware({
+    target: 'http://localhost:3000',
+    cookieDomainRewrite: 'localhost',
+  }),
+);
 // app.use(router);
 app.use(themeRouter);
 app.use(userThemeRouter);
