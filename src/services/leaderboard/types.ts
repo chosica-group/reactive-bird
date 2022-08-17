@@ -1,3 +1,5 @@
+import type { TSiteTheme } from 'server/models/types';
+
 type TDataObject = Record<string, unknown>;
 
 export type TUserLeaderboardRequest = {
@@ -25,4 +27,5 @@ export type TUserDataScoreLeaderboard = {
   id: number;
   userAvatar: string;
   userName: string;
+  themeData?: TSiteTheme;
 };

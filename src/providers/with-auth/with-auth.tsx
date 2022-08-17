@@ -2,19 +2,31 @@ import type { ComponentType } from 'react';
 import { useEffect } from 'react';
 import { PlugComponent } from 'pages/plug';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useGetThemeQuery, useGetUserThemeQuery } from 'services/theme/theme-api';
 import { useGetUserQuery } from 'services/user';
-import { setUserLoggedIn } from 'store/auth-reducer';
+import { setUserId, setUserLoggedIn } from 'store/auth-reducer';
+import { setUserTheme, setUserThemeName } from 'store/theme-reduser';
 
 export const withAuth = (Component: ComponentType) => () => {
-  const { data, error, isLoading } = useGetUserQuery();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const { data: user, isLoading, isSuccess } = useGetUserQuery();
+  const { data, isSuccess: isSuccessUserTheme } = useGetUserThemeQuery(user?.id || 1, {
+    skip: !isSuccess && !user?.id,
+  });
+  const { data: theme, isSuccess: isSuccessTheme } = useGetThemeQuery(data?.theme_name || 'light', {
+    skip: !isSuccessUserTheme,
+  });
+  if (isSuccessUserTheme) {
+    dispatch(setUserThemeName(data.theme_name));
+  }
+  if (isSuccessTheme) {
+    dispatch(setUserTheme(theme));
+  }
   useEffect(() => {
-    if (data && Number.isInteger(data.id)) {
+    if (user && Number.isInteger(user.id)) {
+      dispatch(setUserId(user.id));
       dispatch(setUserLoggedIn(true));
     }
-  }, [data, error, isLoading, dispatch, history]);
-
+  });
   return isLoading ? <PlugComponent /> : <Component />;
 };

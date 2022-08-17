@@ -4,14 +4,23 @@ import { Form } from 'components/form';
 import type { TFormInputs } from 'components/form';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import type { TUserTheme } from 'server/models/types';
 import { getServiceIdOauth, signin } from 'services/auth/auth-api';
-import type { SignUpRes, SigninParams, TClientId } from 'services/auth/types';
-import { setUserLoggedIn } from 'store/auth-reducer';
+import type { SignUpRes, SigninParams, TClientId, UserModel } from 'services/auth/types';
+import { useAddUserThemeMutation } from 'services/theme/theme-api';
+import { setUserId, setUserLoggedIn } from 'store/auth-reducer';
+import { setUserThemeName } from 'store/theme-reduser';
 
 const inputs: TFormInputs<SigninParams> = [
   { name: 'login', label: 'Логин', type: 'text', required: true },
   { name: 'password', label: 'Пароль', type: 'password', required: true },
 ];
+
+type TAnswer = {
+  reason?: string;
+  id?: number;
+  theme_name?: string;
+};
 
 export const REDIRECT_URI =
   process.env.NODE_ENV === 'production'
@@ -21,15 +30,28 @@ export const REDIRECT_URI =
 export const SigninForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [setUserTheme] = useAddUserThemeMutation();
   const [apiError, setApiError] = useState<string | undefined>();
 
   const onSubmit = (data: SigninParams) => {
     signin(data)
-      .then((res) => {
-        if (res.reason && res.reason !== 'User already in system') {
+      .then((res: TAnswer) => {
+        if (res.reason && res.reason !== '') {
           setApiError(res.reason);
-        } else {
+        }
+        if (res.reason === '' || res.id) {
           dispatch(setUserLoggedIn(true));
+          dispatch(setUserId(res.id || 1));
+          const userThemeData: TUserTheme = {
+            user_id: res.id || 1,
+            theme_name: 'light',
+          };
+          setUserTheme(userThemeData)
+            .then((theme) => {
+              const themeData = theme as TAnswer;
+              dispatch(setUserThemeName(themeData.theme_name || 'light'));
+            })
+            .catch((err) => console.log(err, 'error theme'));
           history.push('/game');
         }
       })
@@ -51,7 +73,6 @@ export const SigninForm = () => {
     getServiceIdOauth(REDIRECT_URI)
       .then((res: TClientId | SignUpRes) => {
         if ('service_id' in res) {
-          // setClientId(res.service_id);
           redirect(res.service_id);
         }
       })

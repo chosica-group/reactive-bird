@@ -14,6 +14,7 @@ module.exports = {
   resolve: {
     alias: {
       components: path.join(srcPath, 'components'),
+      server: path.join(srcPath, 'server'),
       layout: path.join(srcPath, 'layout'),
       providers: path.join(srcPath, 'providers'),
       pages: path.join(srcPath, 'pages'),
