@@ -1,7 +1,7 @@
 # Игра Flappy Bird
 https://chosica-reactive-bird-14.ya-praktikum.tech/
 
-**Механика игры:** 
+**Механика игры:**
 > Игрок клавишей пробел контролирует полет птицы между рядами препятствий в виде труб
 
 **Что кроме игры:**
@@ -52,3 +52,6 @@ https://chosica-reactive-bird-14.ya-praktikum.tech/
 - docker build -t flappy .
 - docker run -p 3000:3000 -d flappy
 - docker stop -t 0 12 (12 - начало CONTAINER ID)
+
+### Производительность
+![performance.png](performance.png)
