@@ -52,3 +52,7 @@ https://chosica-reactive-bird-14.ya-praktikum.tech/
 - docker build -t flappy .
 - docker run -p 3000:3000 -d flappy
 - docker stop -t 0 12 (12 - начало CONTAINER ID)
+
+### Производительность
+![image](https://user-images.githubusercontent.com/27898870/185431375-b822c9ab-9e3b-4388-af64-0e1641cc0718.png)
+
